@@ -43,6 +43,7 @@ CREATE TABLE `contest` (
   `tags` varchar(1025) DEFAULT NULL,
   `status` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `cause_id` int(10) unsigned DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
   `featured` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `featured_start_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `featured_end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -59,7 +60,7 @@ CREATE TABLE `contest` (
   UNIQUE KEY `contest_status` (`status`),
   UNIQUE KEY `contest_featured` (`featured`),
   UNIQUE KEY `contest_createdbyid` (`created_by_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,4 +257,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-11-25  5:32:31
+-- Dump completed on 2011-11-27  2:30:43
