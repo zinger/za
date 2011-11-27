@@ -66,17 +66,20 @@
     
     $finishbutton.bind('click', function() {
        var jsonobject = {}; 
+       jsonobject['op'] = 'create_contest';
        $.each(attrs, function(idx, attr) {
         if (idx === 'entrytype') { jsonobject[attr]=$('input[name=groupa]:checked').val(); }
         else if (idx === 'iscaption') { jsonobject[attr] = $( za.jq(attr)).is(':checked'); }
         else { jsonobject[attr] = $( za.jq(attr)).val(); }     
        });
+       $.post( 'http://184.72.35.49/sangeeta/za/backend/index.php', jsonobject,
+          function(data) { alert('response recieved'); } );
        var $uploadcaptiondiv = $('<div id="uploadcaptiondiv"></div>');
        var $uploadcaptionpic = $('<input id="uploadcaptionbutton" type="button" />') ;
        $uploadcaptionpic.button({label: 'Upload Picture for Caption'});
-       $uploadcaptiondiv.append($uploadcaptionpic);
-       $("#iscaptiondiv").append($uploadcaptiondiv);
-       $("#uploadcaptionbutton").button('refresh');
+    //   $uploadcaptiondiv.append($uploadcaptionpic);
+    //   $("#iscaptiondiv").append($uploadcaptiondiv);
+    //   $("#uploadcaptionbutton").button('refresh');
        //$("#uplaodcaptionbutton").show();
     });
     $createcontestform.append($finishbutton);
