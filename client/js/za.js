@@ -28,14 +28,14 @@
   
   za.contestattrs = {
     title: 'name',
-    tagline: 'tag_line',
-    startdate: 'start_date',
-    enddate: 'end_date',
-    entrydeadline: 'submission_end_date',
-    iscaption: 'contest_type',
+    tagline: 'tagl',
+    startdate: 'sd',
+    enddate: 'ed',
+    entrydeadline: 'sed',
+    iscaption: 'ctype',
     pictureurl: 'url',
-    entrytype: 'entry_type',
-    details: 'description',
+    entrytype: 'etype',
+    details: 'desc',
     tags: 'tags'
   };
 }(jQuery));

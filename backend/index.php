@@ -2,14 +2,14 @@
 
 require_once('logger.php');
 require_once('serverfunctions.php');
+require_once('ContestService.php');
 
 $op = $_REQUEST['op'];
-
 $logger->info("op = $op");
 
 switch($op) {
   case "create_contest":
-    $result = createContest($_REQUEST);
+    $result = ContestService::instance()->createContest();
     break;
   default:
     $logger->info("Invalid Operator");
