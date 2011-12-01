@@ -3,14 +3,8 @@
 (function($){
   var Gallery = function(args) {
     var parentid = args.id;
-    var $parentdiv = $( za.jq(parentid) );
-    
-    $parentdiv.append($('<p>HaHa Gallery</p>'));
-    
-    alert("Parent id is " + parentid);
-    
-    za.GalleryCollection({id: parentid});
-
+    var $parentdiv = $( za.jq(parentid) );    
+    za.PictureContestDetail({id: parentid, galleryid: "mygallery"});
   };
   za.Gallery = Gallery;
 }(jQuery));
