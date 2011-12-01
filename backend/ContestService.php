@@ -30,7 +30,6 @@ class ContestService {
   }
 
   public function createContest() { 
-    global $logger;
     $dbc = DbUtil::getDbConnection();
     $contest = $this->populate();
 
@@ -40,15 +39,100 @@ class ContestService {
     $sql .= "'$contest->contest_type', '$contest->entry_type', '$contest->description', '$contest->tags', '$contest->status', ";
     $sql .= "'$contest->cause_id', '$contest->featured', '$contest->featured_start_date', '$contest->featured_end_date')"; 
 
-    $logger->debug($sql);
-
-    if (($rslt = mysql_query($sql, $dbc)) === FALSE) {
-      $logger->error("createContest: Failed to insert contest " . mysql_error());
-    }
-   
-    $result['status'] = $rslt; 
+    $result = $this->queryDB($sql, $dbc, "createContest");
     return $result;
   }
+
+  //range is on creation date
+  public function getContestsByCreationDate($sd, $ed, $limit) {
+
+    //todo: return specific columns
+    $sql = "SELECT * FROM contest ";
+    $sql .= ((!empty($sd) === TRUE) || (!empty($ed) === TRUE)) ? " WHERE " : "";
+    if (!empty($sd) === TRUE) {
+      $sql .= "date_created >= " . $sd;
+      $sql .= (!empty($ed) === TRUE) ? " AND " : "";
+    }
+    $sql .= (!empty($ed) === TRUE) ? "date_created <= " . $ed : "";
+    $sql .= " ORDER BY date_created DESC";
+    $sql .= (!empty($limit) === TRUE) ? " LIMIT " . $limit : ""; 
+    
+    $result = $this->queryDB($sql, $dbc = null, "getContestByCreationDate");
+    return $result;
+  }
+
+  //range is on submission date
+  public function getContestsBySubmissionEndDate($sd, $ed, $limit) {
+    $sql = "SELECT * FROM contest ";
+    $sql .= ((!empty($sd) === TRUE) || (!empty($ed) === TRUE)) ? " WHERE " : "";
+    if (!empty($sd) === TRUE) {
+      $sql .= "submission_end_date >= " . $sd;
+      $sql .= (!empty($ed) === TRUE) ? " AND " : "";
+    }
+    $sql .= (!empty($ed) === TRUE) ? "submission_end_date <= " . $ed : "";
+    $sql .= " ORDER BY submission_end_date DESC";
+    $sql .= (!empty($limit) === TRUE) ? " LIMIT " . $limit : ""; 
+    
+    $result = $this->queryDB($sql, $dbc = null, "getContestBySubmissionEndDate");
+    return $result;
+  }
+
+  public function getContestById($id) {
+    if (empty($id) === TRUE) {
+      $result['result'] = FALSE;
+      return result;
+    }
+    $sql = "SELECT * FROM contest WHERE id = " . $id;
+    $result = $this->queryDB($sql, $dbc = null, "getContestById");
+
+    return $result;
+  }
+
+  public function getContestsByCause($id) {
+    if (empty($id) === TRUE) {
+      $result['result'] = FALSE;
+      return result;
+    }
+    $sql = "SELECT * FROM contest WHERE cause_id = " . $id;
+    $result = $this->queryDB($sql, $dbc = null, "getContestByCauseId");
+
+    return $result;
+  }
+
+  public function getContestsByCreator($id) {
+    if (empty($id) === TRUE) {
+      $result['result'] = FALSE;
+      return result;
+    }
+    $sql = "SELECT * FROM contest WHERE created_by = " . $id;
+    $result = $this->queryDB($sql, $dbc = null, "getContestsByCreator");
+
+    return $result;
+  }
+
+  private function queryDB($sql, $dbc, $msg) {
+    global $logger;
+    $conn = (!empty($dbc) === TRUE) ? $dbc : DbUtil::getDbConnection();
+
+    $logger->debug($sql);
+    $rslt = mysql_query($sql, $conn);
+    if ($rslt === FALSE) {
+      $logger->error($msg . " : " . mysql_error());
+    }
+    $result['result'] = $this->asArray($rslt);
+    return $result;
+  }
+
+  private function asArray($rslt) {
+    $results = array();
+    // Indexed rows
+    //while($row = mysql_fetch_row($rslt)) {
+    while($row = mysql_fetch_assoc($rslt)) {
+      $results[] = $row;
+    }
+    return $results;
+  }
+
 }
 
 ?>
