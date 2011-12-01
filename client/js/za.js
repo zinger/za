@@ -19,23 +19,30 @@
     return '#' + myid.replace(/(:|\.)/g,'\\$1');
   };
   
-  za.createcontestlabel = 'Create Contest';
-  za.finishcontestlabel = 'Finish';
-  za.savecontestlabel = 'Save Draft';
-  
-  za.entrytypes = { picture: '0', video: '1', text: '2'};
-
-  
-  za.contestattrs = {
-    title: 'name',
-    tagline: 'tagl',
-    startdate: 'sd',
-    enddate: 'ed',
-    entrydeadline: 'sed',
-    iscaption: 'ctype',
-    pictureurl: 'url',
-    entrytype: 'etype',
-    details: 'desc',
-    tags: 'tags'
+  za.buttons = {
+    createcontest: {id: 'createcontest', label: 'Create Contest'},
+    finishcontest: {id: 'finishcontest', label: 'Finish'},
+    savecontest: {id: 'savecontest', label: 'Save Draft'},
+    submitentry: {id: 'submitentry', label: 'Submit Entry'}
   };
+  
+  za.entrytypes = {
+    picture: {id: 'pictureentry', label: 'Picture', value: '0'},
+    video: {id: 'videoentry', label: 'Video', value: '1'},
+    text: {id: 'textentry', label: 'Text', value: '2'}
+  };
+ 
+  za.contestattrs = {
+    title: {id: 'name', label: 'Title', type: 'input'},
+    tagline: {id: 'tagl', label: 'Tag Line', type: 'input'},
+    startdate: {id: 'sd', label: 'Start Date', type: 'input'},
+    enddate: {id: 'ed', label: 'End Date', type: 'date'},
+    entrydeadline: {id: 'sed', label: 'Entry Deadline', type: 'date'},
+    iscaption: {id: 'ctype', label: 'Caption Contest', type: 'checkbox'},
+    pictureurl: {id: 'url', label: 'Picture', type: 'input'},
+    entrytype: {id: 'etype', label: 'Entry Type', type: 'radio'},
+    details: {id: 'desc', label: 'Details', type: 'textarea'},
+    tags: {id: 'tags', label: 'Tags', type: 'input'}
+  };
+  
 }(jQuery));

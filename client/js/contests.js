@@ -6,9 +6,9 @@
     var $parentdiv = $( za.jq(parentid) );
     $parentdiv.append($('<p>HaHa Contests</p>'));
     
-    var $createContestButton = $('<input id="createcontest" type="button" />') ;
+    var $createContestButton = $('<input id="'+za.buttons['createcontest'].id+'" type="button" />') ;
     
-    $createContestButton.button({label: za.createcontestlabel});
+    $createContestButton.button({label: za.buttons['createcontest'].label});
     
     $parentdiv.append($createContestButton);
     
