@@ -55,6 +55,50 @@
     $uploadcaptionpic.button({label: 'Upload Picture for Caption'});
     */
 
+    var $uploadcaptiondiv = $('<div id="uploadcaptiondiv"></div>');
+    var $uploadcaptionpic = $('<input id="uploadcaptionbutton" type="file" name="files[]" multiple/>') ;
+    //$uploadcaptionpic.button({label: 'Upload Picture for Caption'});
+    $uploadcaptiondiv.append($uploadcaptionpic);
+    $createcontestform.append($uploadcaptiondiv);
+    //$(za.jq(attrs['iscaption'].id)).parent().append($uploadcaptiondiv);
+    //$("#uploadcaptionbutton").button('refresh');
+       //$("#uplaodcaptionbutton").show();
+    
+    var $dialog = $('<div id="dialog1"></div>').html('This dialog will show every time!').dialog({
+			autoOpen: false,
+			title: 'Basic Dialog'
+		});
+    
+    var handleFileSelect = function(evt) {
+      $dialog.dialog('open');
+            return false;
+    };
+    
+                
+    $('#uploadcaptionbutton').fileupload({
+        dataType: 'json',
+        url: 'upload.php',
+        done: function (e, data) {/*
+            $.each(data.result, function (index, file) {
+                $('<p/>').text(file.name).appendTo("#createcontestform");
+            });*/
+            $dialog.dialog('open');
+            return false;
+        },
+        drop: function(e, data) {
+          $dialog.dialog('open');
+            return false;
+        },
+        add: function(e, data) {
+          $dialog.dialog('open');
+            return false;
+        },
+        change: function(e, data) {
+          $dialog.dialog('open');
+            return false;
+        },
+        
+    });
     var $finishbutton = $('<button id="'+za.buttons['finishcontest'].id+'" />') ;
     $finishbutton.button({label: za.buttons['finishcontest'].label});
     
@@ -70,14 +114,8 @@
        $.post( 'http://184.72.35.49/sangeeta/za/backend/index.php', jsonobject,
           function(data) { alert('response received'); } );
 
-       /*
-       var $uploadcaptiondiv = $('<div id="uploadcaptiondiv"></div>');
-       var $uploadcaptionpic = $('<input id="uploadcaptionbutton" type="button" />') ;
-       $uploadcaptionpic.button({label: 'Upload Picture for Caption'});
-       $uploadcaptiondiv.append($uploadcaptionpic);
-       $(za.jq(attrs['iscaption'].id)).parent().append($uploadcaptiondiv);
-       $("#uploadcaptionbutton").button('refresh');*/
-       //$("#uplaodcaptionbutton").show();
+       
+       
     });
     $createcontestform.append($finishbutton);
     
@@ -86,6 +124,7 @@
     $createcontestform.append($savebutton);
     
     $parentdiv.append($createcontestform);
+    document.getElementById("uploadcaptionbutton").addEventListener('change', handleFileSelect, false);
     
     $(za.jq(attrs['startdate'].id)).datepicker();
     $(za.jq(attrs['enddate'].id)).datepicker();

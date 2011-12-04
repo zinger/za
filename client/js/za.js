@@ -45,4 +45,67 @@
     tags: {id: 'tags', label: 'Tags', type: 'input'}
   };
   
+  za.entryattrs = {
+    id: {id: 'eid'},
+    url: {id: 'url'},
+    thumbnail: {id: 'thumb'},
+    title: {id: 'title'},
+    fbpartid: {id: 'fbpid'},
+    partname: {id: 'fbpname'},
+    parturl: {id: 'fbpurl'}
+  };
+
+  za.entrystats = {
+    votes: {id: 'votes'},
+    likes: {id: 'likes'},
+    comments: {id: 'comments'},
+    gifts: {id: 'gifts'},
+    boos: {id: 'boos'},
+    rank: {id: 'rank'},
+    trend: {id: 'trend'}
+  };
+  
+  za.galleryTypes = {
+    entrydetail: {id: '0'},
+    hthumb: {id: '1'},
+    vthumb: {id: '2'},
+    contests: {id: '3'}
+  };
+  
+  za.buildAnythingSliderGallery = function(galleryid, galleryType, entries) {
+    var className = 'bigGallery';
+    if (galleryType === za.galleryTypes['vthumb'].id) className = 'vThumbGallery';
+    else if (galleryType === za.galleryTypes['hthumb'].id) className = 'hThumbGallery';
+    else if (galleryType === za.galleryTypes['contests'].id) className = 'medGallery';
+    var $ul = $('<ul id="'+galleryid+'" class="'+className+'"></ul>');
+    //$ul.css({height: 265, width: 200});
+
+    var attrs = za.entryattrs;
+    $.each(entries, function(idx, entry){
+      var $li = $('<li></li>');
+      var $div = $('<div class="galleryDiv"></div>');
+      /*
+      if (galleryType === za.galleryTypes['vthumb'].id || galleryType === za.galleryTypes['hthumb'].id)
+        $div.css({height: 40, width: 40});
+      */
+      var imgId;
+      imgId = 'gimg' + galleryType + idx;
+      $div.append($('<img class="mainImg" id="'+imgId+'" src="'+entry[attrs.url.id]+'" />'));
+      $div.append($('<input class="entryid" type="hidden" value="'+entry[attrs.id.id]+'" />'));
+      $div.append($('<input class="fbuserid" type="hidden" value="'+entry[attrs.fbpartid.id]+'" />'));
+      
+      if (galleryType !== za.galleryTypes['vthumb'].id && galleryType !== za.galleryTypes['hthumb'].id) {
+        var $divinfo = $('<div style="width:200px; height:50px; z-index: 99999;"></div>');
+        $divinfo.append($('<img src="'+entry[attrs.parturl.id]+'" style="width:40px; height:40px; z-index: 99999;"/>'));
+        $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.partname.id]+'</span>'));
+        $div.append($divinfo);
+      } ;
+
+      $li.append($div);
+      $ul.append($li);     
+    });
+    
+    return $ul;
+  };
+  
 }(jQuery));

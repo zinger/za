@@ -1,0 +1,35 @@
+.bigGallery {
+    height: 400px;
+    width: 600px;
+}
+
+.bigGallery .mainImg {
+    width: 600px; height: 365px;
+}
+
+.medGallery {
+    height: 200px;
+    width: 200px;
+}
+.medGallery .mainImg {
+    width:200px; height:160px;
+}
+
+.vThumbGallery {
+    height: 40px;
+    width: 40px;
+}
+
+.hThumbGallery {
+    height: 40px;
+    width: 300px;
+}
+
+.hThumbGallery .galleryDiv, .hThumbGallery li {
+    width: 40px;
+}
+
+.vThumbGallery .mainImg, .hThumbGallery .mainImg{
+    width: 40px;
+    height: 40px;
+}
