@@ -6,6 +6,7 @@
 <meta property="og:title" content="Create Competitions, Showcase your Talent, Get Discovered" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://whatsyourzing.com/za/client/html/" />
+
 <meta property="og:image" content="http://whatsyourzing.com/client/images/stage.png" />
 <meta property="og:description" content="ZingArena lets you create competitions, gives you an avenue to showcase your talent, discover, and get discovered. All this just for fun or as competitive as you would like it...use your stage and audience the way you like!" />
 <meta property="og:site_name" content="ZingArena"/>
@@ -63,7 +64,10 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=188092504602584";
+  js.src = "//connect.facebook.net/en_US/all.js";
+  FB.init({
+    appId  : '188092504602584'
+  });
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
