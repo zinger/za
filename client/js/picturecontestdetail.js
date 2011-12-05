@@ -45,21 +45,36 @@
     $(za.jq(galleryid)).anythingSlider({
       showMultiple: false, buildStartStop: false, buildArrows: true, buildNavigation: false, 
     });
+
+    
     
     $parentdiv.append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'].id, thumbnailEntries));
     $(za.jq("thumbnail1")).anythingSlider({
-      showMultiple: 6, buildNavigation: false, buildStartStop: false, changeBy: 6//, vertical: true
+      showMultiple: 3, buildNavigation: false, buildStartStop: false, changeBy: 3//, vertical: true
     });
     
     $(".galleryDiv").click(function() {
       var idx = $(this).children('img.mainImg').first().attr('id').substring(5);
       idx = parseInt(idx) + 1;
-      //alert(idx);
-      //alert($(this).children('img.mainImg').first().attr('id'));
       $('#mygallery').anythingSlider(idx);
       return false;
     });
+    $pagination = $('<div class="pagination"></div>');
+    $first = $('<a href="#" class="first" data-action="first">&laquo;</a>');
+    $previous = $('<a href="#" class="previous" data-action="previous">&lsaquo;</a>');
+    $pagetext = $('<input type="text" readonly="readonly" data-max-page="40" />');
+    $next = $('<a href="#" class="next" data-action="next">&rsaquo;</a>');
+    $last = $('<a href="#" class="last" data-action="last">&raquo;</a>');
     
+    $pagination.append($first).append($previous).append($pagetext).append($next).append($last);
+    $parentdiv.append($pagination);
+    
+    $('.pagination').jqPagination({
+      paged: function(page) {
+	var idx = parseInt(page) * 3;
+	  $("#thumbnail1").anythingSlider(idx);
+      }
+    });
   };
   za.PictureContestDetail = PictureContestDetail;
 }(jQuery));
