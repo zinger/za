@@ -136,6 +136,27 @@
     $(za.jq(entrytypes['picture'].id)).attr('checked','checked');
     $(za.jq(entrytypes['picture'].id)).button('refresh');
     
+    //$(za.jq(attrs[details].id)).init()
+
+    tinyMCE.init({
+            mode : "textareas",
+            theme : "advanced",   //(n.b. no trailing comma, this will be critical as you experiment later)
+            plugins : "spellchecker,emotions,iespell,inlinepopups,preview,print,directionality,visualchars",
+            theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect,|,bullist,numlist,|,outdent,indent",
+        theme_advanced_buttons2 : "undo,redo,|,forecolor,backcolor,|,hr,charmap,emotions,image,|,iespell,|,ltr,rtl,|,spellchecker,|,preview,|,print",
+        theme_advanced_buttons3 : "",
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+        theme_advanced_statusbar_location : "bottom",
+        theme_advanced_resizing : true,
+
+        // Skin options
+        skin : "o2k7",
+        skin_variant : "silver"
+
+    });
+    
+    
     //$("#uploadcaptionbutton").hide(); 
   };
   za.CreateContest = CreateContest;
