@@ -3,61 +3,47 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <!--<html>-->
 <head>
-<meta property="og:title" content="Create Competitions, Showcase your Talent, Get Discovered" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://www.whatsyourzing.com/sangeeta/za/client/html/" />
+  <meta property="og:title" content="Create Competitions, Showcase your Talent, Get Discovered" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://www.whatsyourzing.com/sangeeta/za/client/html/" />
 
-<meta property="og:image" content="http://www.whatsyourzing.com/sangeeta/za/client/images/stage.png" />
-<meta property="og:description" content="ZingArena lets you create competitions, gives you an avenue to showcase your talent, discover, and get discovered. All this just for fun or as competitive as you would like it...use your stage and audience the way you like!" />
-<meta property="og:site_name" content="ZingArena"/>
-<meta property="fb:app_id" content="188092504602584" />
+  <meta property="og:image" content="http://www.whatsyourzing.com/sangeeta/za/client/images/stage.png" />
+  <meta property="og:description" content="ZingArena lets you create competitions, gives you an avenue to showcase your talent, discover, and get discovered. All this just for fun or as competitive as you would like it...use your stage and audience the way you like!" />
+  <meta property="og:site_name" content="ZingArena"/>
+  <meta property="fb:app_id" content="188092504602584" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
-<title>Zing Arena</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<!--
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0" />
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-
-<link rel="stylesheet" href="style.css" />
-<link rel="apple-touch-icon" href="apple-touch-icon.png" />
--->
-
-
-
+  <title>Zing Arena</title>
 
   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-    
-
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 
-<link rel="stylesheet" href="../plugins/royalslider/royalslider.css">
-<link rel="stylesheet" href="../plugins/royalslider/royalslider-skins/default/default.css">
+  <link rel="stylesheet" href="../plugins/royalslider/royalslider.css">
+  <link rel="stylesheet" href="../plugins/royalslider/royalslider-skins/default/default.css">
   <link rel="stylesheet" href="../plugins/royalslider/royalslider-skins/iskin/iskin.css" />
-    <!-- <script src='js/jquery-1.6.2.min.js'></script> -->
-<script src="../plugins/royalslider/jquery.easing.1.3.min.js"></script>
-<script src="../plugins/royalslider/royal-slider-7.9.js"></script>
+  <!-- <script src='js/jquery-1.6.2.min.js'></script> -->
+  <script src="../plugins/royalslider/jquery.easing.1.3.min.js"></script>
+  <script src="../plugins/royalslider/royal-slider-7.9.js"></script>
 
-<!-- anything slider -->
-	<link rel="stylesheet" href="../plugins/anythingslider/css/anythingslider.css">
-	<script src="../plugins/anythingslider/js/jquery.anythingslider.js"></script>
+  <!-- anything slider -->
+  <link rel="stylesheet" href="../plugins/anythingslider/css/anythingslider.css">
+  <script src="../plugins/anythingslider/js/jquery.anythingslider.js"></script>
   <link rel="stylesheet" href="../css/nav.css" />
   
-<!-- file upload -->
+  <!-- file upload -->
   <script src="../plugins/blueimp/jquery.iframe-transport.js"></script>
-<script src="../plugins/blueimp/jquery.fileupload.js"></script>
+  <script src="../plugins/blueimp/jquery.fileupload.js"></script>
 
-<!-- pagination -->
-<link rel="stylesheet" href="../plugins/jqpagination/css/jqpagination.css" />
-<script src="../plugins/jqpagination/js/jquery.jqpagination.js"></script>
-<script src="../plugins/jqpagination/js/scripts.js"></script>
+  <!-- pagination -->
+  <link rel="stylesheet" href="../plugins/jqpagination/css/jqpagination.css" />
+  <script src="../plugins/jqpagination/js/jquery.jqpagination.js"></script>
+  <script src="../plugins/jqpagination/js/scripts.js"></script>
 
-<!-- tinymce -->
-<script type="text/javascript" src="../plugins/tinymce/jscripts/tiny_mce/tiny_mce.js" ></script >
+  <!-- tinymce -->
+  <script type="text/javascript" src="../plugins/tinymce/jscripts/tiny_mce/tiny_mce.js" ></script >
 
-<script type="text/javascript" src="/Users/sunilmasand/Downloads/spellchecker/editor_plugin.js" ></script >
+  <script type="text/javascript" src="/Users/sunilmasand/Downloads/spellchecker/editor_plugin.js" ></script >
 
   <script src="../js/za.js"></script>
   <script src="../js/showmenus.js"></script>
@@ -71,60 +57,50 @@
 
 </head>
 <body>
-<div id="fb-root"></div>
-<script type="text/javascript">
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '188092504602584', // App ID
-     // channelUrl : '//www.whatsyourzing.com/sangeeta/za/client/html/channel.html', // Channel File
-      status     : true, // check login status
-      cookie     : true, // enable cookies to allow the server to access the session
-      oauth      : true, // enable OAuth 2.0
-      xfbml      : true  // parse XFBML
-    });
-    FB.getLoginStatus(function(response) {
-      if (response.authResponse) {
-        alert('I KNOW U!! ');
-        $.post( 'http://www.whatsyourzing.com/sangeeta/za/backend/fb.php', response.authResponse, 
-                 function(data) { alert('fb login response received'); } );
+  <div id="fb-root"></div>
+  <script type="text/javascript">
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '188092504602584', // App ID
+       // channelUrl : '//www.whatsyourzing.com/sangeeta/za/client/html/channel.html', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        oauth      : true, // enable OAuth 2.0
+        xfbml      : true  // parse XFBML
+      });
+      FB.getLoginStatus(function(response) {
+        if (response.authResponse) {
+          alert('I KNOW U!! ');
+          $.post( 'http://www.whatsyourzing.com/sangeeta/za/backend/fb.php', response.authResponse, 
+                   function(data) { alert('fb login response received'); } );
 
-      } else {
-        window.location.href='http://www.facebook.com/dialog/oauth?client_id=188092504602584&redirect_uri=http://www.whatsyourzing.com/sangeeta/za/client/html/&scope=email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
-       // window.location.href= "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=188092504602584&status=1&cookie=1&oauth=1&scope=email";
-     }
-    });
-    FB.Event.subscribe('edge.create', function(response) { alert('Yeah! Liked ' + response); });
-  };
+        } else {
+          window.location.href='http://www.facebook.com/dialog/oauth?client_id=188092504602584&redirect_uri=http://www.whatsyourzing.com/sangeeta/za/client/html/&scope=email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
+         // window.location.href= "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=188092504602584&status=1&cookie=1&oauth=1&scope=email";
+       }
+      });
+      FB.Event.subscribe('edge.create', function(response) { alert('Yeah! Liked ' + response); });
+    };
 
-// Load the SDK Asynchronously
-  (function(d){
-    var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-    js = d.createElement('script'); js.id = id; js.async = true;
-    js.src = "//connect.facebook.net/en_US/all.js";
-    d.getElementsByTagName('head')[0].appendChild(js);
-  }(document));
-</script>
-<!--
-<script type="text/javascript">
-  FB.login(function(response) {
-    if (response.session) {
-      console.log("User is connected to the application.");
-      var accessToken = response.session.access_token;
-    }
-  }, {scope:'read_stream,publish_stream,offline_access'});
+    // Load the SDK Asynchronously
+    (function(d){
+      var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/en_US/all.js";
+      d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
   </script>
--->
-<script type="text/javascript">
-  $(document).ready(function() {
-    za.MenuTabs();
-  });
-</script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      za.MenuTabs();
+    });
+  </script>
 
-<div id="header">
-  <div class="fb-like" data-send="true" data-layout="standard" data-width="450" data-show-faces="true" data-font="tahoma" ref="za_home"></div>
-</div>
+  <div id="header">
+    <div class="fb-like" data-send="true" data-layout="standard" data-width="450" data-show-faces="true" data-font="tahoma" ref="za_home"></div>
+  </div>
 
-<div id="content"></div>
-<div id="footer">I am the footer</div>
+  <div id="content"></div>
+  <div id="footer">I am the footer</div>
 </body>
 </html>
