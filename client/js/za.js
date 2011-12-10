@@ -10,9 +10,9 @@
   };
   
   za.showPanel = function(menuid) {
-    if (menuid === 'home') { za.Home({id: menuid});};
-    if (menuid === 'contests') { za.Contests({id: menuid});};
-    if (menuid === 'gallery') { za.Gallery({id: menuid}); };
+    if (menuid === 'home') { za.Home({parentid: menuid});};
+    if (menuid === 'contests') { za.Contests({parentid: menuid});};
+    if (menuid === 'gallery') { za.Gallery({parentid: menuid}); };
   };
   
   za.jq = function jq(myid) { 
@@ -20,16 +20,17 @@
   };
   
   za.buttons = {
-    createcontest: {id: 'createcontest', label: 'Create Contest'},
-    finishcontest: {id: 'finishcontest', label: 'Finish'},
-    savecontest: {id: 'savecontest', label: 'Save Draft'},
-    submitentry: {id: 'submitentry', label: 'Submit Entry'}
+    createcontest: {id: 'create-contest', label: 'Create Contest'},
+    finishcontest: {id: 'finish-contest', label: 'Finish'},
+    savecontest: {id: 'save-contest', label: 'Save Draft'},
+    submitentry: {id: 'submit-entry', label: 'Submit Entry'},
+    finishentrysubmit: {id: 'fin-submit-entry', label: 'Finish'}
   };
   
   za.entrytypes = {
-    picture: {id: 'pictureentry', label: 'Picture', value: '0'},
-    video: {id: 'videoentry', label: 'Video', value: '1'},
-    text: {id: 'textentry', label: 'Text', value: '2'}
+    picture: {id: 'picture-entry', label: 'Picture', value: '0'},
+    video: {id: 'video-entry', label: 'Video', value: '1'},
+    text: {id: 'text-entry', label: 'Text', value: '2'}
   };
  
   za.contestattrs = {
@@ -45,14 +46,16 @@
     tags: {id: 'tags', label: 'Tags', type: 'input'}
   };
   
-  za.entryattrs = {
-    id: {id: 'eid'},
-    url: {id: 'url'},
-    thumbnail: {id: 'thumb'},
+  za.entryattrs = { //used for contests gallery as well as contest details gallery
+    id: {id: 'eid'}, 
+    url: {id: 'url'}, //url of entry
+    thumbnail: {id: 'thumb'}, //thumbnail of entry
     title: {id: 'title'},
     fbpartid: {id: 'fbpid'},
     partname: {id: 'fbpname'},
-    parturl: {id: 'fbpurl'}
+    parturl: {id: 'fbpurl'}, //url of participant
+    contesttitle: {id: 'ctitle'},
+    numparts: {id: 'numparts'}
   };
 
   za.entrystats = {
@@ -66,39 +69,57 @@
   };
   
   za.galleryTypes = {
-    entrydetail: {id: '0'},
-    hthumb: {id: '1'},
-    vthumb: {id: '2'},
-    contests: {id: '3'}
+    entrydetail: {id: 'a'},
+    hthumb: {id: 'b'},
+    vthumb: {id: 'c'},
+    contests: {id: 'd'}
+  };
+  
+  za.addGalleryInfo = function(entry, galleryType) {
+    var attrs = za.entryattrs;
+    var $divinfo = $('<div style="width:200px; height:50px; z-index: 99999;"></div>');
+    if (galleryType === za.galleryTypes['entrydetail'].id) {
+      $divinfo.append($('<img src="'+entry[attrs.parturl.id]+'" style="width:40px; height:40px; z-index: 99999;"/>'));
+      $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.partname.id]+'</span>'));
+    } else if (galleryType === za.galleryTypes['contests'].id) {
+      $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.contesttitle.id]+'</span>'));
+      $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.numparts.id]+'</span>'));
+      $divinfo.append($('<a href="#">Submit Entry</a>'));
+    }
+    $divinfo.append($('<input class="entry-id" type="hidden" value="'+entry[attrs.id.id]+'" />'));
+    $divinfo.append($('<input class="fbuser-id" type="hidden" value="'+entry[attrs.fbpartid.id]+'" />'));
+    return $divinfo;
   };
   
   za.buildAnythingSliderGallery = function(galleryid, galleryType, entries) {
-    var className = 'bigGallery';
-    if (galleryType === za.galleryTypes['vthumb'].id) className = 'vThumbGallery';
-    else if (galleryType === za.galleryTypes['hthumb'].id) className = 'hThumbGallery';
-    else if (galleryType === za.galleryTypes['contests'].id) className = 'medGallery';
+    var className = 'big-gallery';
+    if (galleryType === za.galleryTypes['vthumb'].id) className = 'v-thumb-gallery';
+    else if (galleryType === za.galleryTypes['hthumb'].id) className = 'h-thumb-gallery';
+    else if (galleryType === za.galleryTypes['contests'].id) className = 'med-gallery';
     var $ul = $('<ul id="'+galleryid+'" class="'+className+'"></ul>');
     //$ul.css({height: 265, width: 200});
 
     var attrs = za.entryattrs;
     $.each(entries, function(idx, entry){
       var $li = $('<li></li>');
-      var $div = $('<div class="galleryDiv"></div>');
+      var $div = $('<div class="gallery-div"></div>');
       /*
       if (galleryType === za.galleryTypes['vthumb'].id || galleryType === za.galleryTypes['hthumb'].id)
         $div.css({height: 40, width: 40});
       */
       var imgId;
       imgId = 'gimg' + galleryType + idx;
-      $div.append($('<img class="mainImg" id="'+imgId+'" src="'+entry[attrs.url.id]+'" />'));
-      $div.append($('<input class="entryid" type="hidden" value="'+entry[attrs.id.id]+'" />'));
-      $div.append($('<input class="fbuserid" type="hidden" value="'+entry[attrs.fbpartid.id]+'" />'));
-      
+      $div.append($('<img class="main-img" id="'+imgId+'" src="'+entry[attrs.url.id]+'" />'));
+
       if (galleryType !== za.galleryTypes['vthumb'].id && galleryType !== za.galleryTypes['hthumb'].id) {
+        /*
         var $divinfo = $('<div style="width:200px; height:50px; z-index: 99999;"></div>');
         $divinfo.append($('<img src="'+entry[attrs.parturl.id]+'" style="width:40px; height:40px; z-index: 99999;"/>'));
         $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.partname.id]+'</span>'));
-        $div.append($divinfo);
+
+        $div.append($divinfo);*/
+        $div.append(za.addGalleryInfo(entry, galleryType));
+        
       } ;
 
       $li.append($div);
@@ -106,6 +127,64 @@
     });
     
     return $ul;
+  };
+  
+  za.buildRatingPanel = function(args) {
+    var entryId = args.entryId;
+    var partName = args.partName;
+    var $rateRoot = $('<div id="rate-root"></div>');
+    $rateRoot.append($('<div class="rate-panel-title">Vote For '+partName+'</div>'));
+    $rateRoot.append($('<span class="no">No Zing</span>'));
+    
+    for (i=1; i<=10; i++) {
+      var id = "rating-rating-"+i;
+      var label = i;
+      $rateRoot.append($('<label for="'+id+'">'+label+'</label>'));
+      $input = $('<input type="radio" name="rating" value="1" id="'+id+'" value="'+i+'" class="radio" />');
+      $rateRoot.append($input);
+      //$rateRoot.append($('<label class="rate-label" id="rating-label-"'+i+'">'));
+    }
+    $rateRoot.append($('<span class="yes">Sizzling</span>'));
+    return $rateRoot;
+  };
+  
+  za.addSrc = function(element) {
+    if (element.attr('src') === '') {
+      var newsrc = element.attr('data-src');
+      if (newsrc !== '') element.attr('src', newsrc);
+      // show loading message
+      $('.message').html('loading: ' + newsrc).stop(true,true).fadeIn().delay(2000).fadeOut();
+    };
+  };
+    
+  za.removeSrc = function(element) {
+    var newsrc = element.attr('src');
+    if (newsrc !== '') { element.attr('data-src', newsrc); element.attr('src', ''); }
+  };
+    
+  za.removeSrcOnSliderInit = function(slider) {
+    var start = slider.options.startPanel;
+      slider.$el.find('.panel').eq(start).siblings(':not(.activePage)').find('img').each(function(){ za.removeSrc($(this)); });
+      if (slider.options.showMultiple === 3) {
+        slider.$el.find('.activePage').next().find('img').each(function(){ za.addSrc($(this));});
+        slider.$el.find('.activePage').next().next().find('img').each(function(){ za.addSrc($(this));});
+      };
+  };
+    
+  za.addSrcOnSlideInit = function(slider) {
+    slider.$targetPage.find('img').each(function(){ za.addSrc($(this)); });
+    if (slider.options.showMultiple === 3) {
+      slider.$targetPage.next().find('img').each(function(){ za.addSrc($(this)); });
+      slider.$targetPage.next().next().find('img').each(function(){ za.addSrc($(this)); });
+    };
+  };
+    
+  za.removeSrcOnSlideComplete = function(slider) {
+    slider.$currentPage.find('img').each(function() { za.removeSrc($(this)); });
+    if (slider.options.showMultiple === 3) {
+      slider.$currentPage.next().find('img').each(function() { za.removeSrc($(this)); });
+      slider.$currentPage.next().next().find('img').each(function() { za.removeSrc($(this)); });
+    };
   };
   
 }(jQuery));

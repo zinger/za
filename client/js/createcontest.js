@@ -2,23 +2,24 @@
   
 (function($){
   var CreateContest = function(args) {
-    var $parentdiv = $( za.jq(args.id) );
+    var parentid = args.parentid;
+    var $parentdiv = $( za.jq(args.parentid) );
     var attrs = za.contestattrs;
     var entrytypes = za.entrytypes;
     
     $parentdiv.append($('<div class="pageTitle">Create Contest</div>'));
     
-    var $createcontestform = $('<div id="createcontestform"></div>');
+    var $createcontestform = $('<div id="create-contest-form"></div>');
     
     var buildCheckboxDiv = function (attr) {
-      var $div = $('<div class="checkboxDiv"></div>');
+      var $div = $('<div class="checkbox-div"></div>');
       $div.append($('<label for="'+attr.id+'">'+attr.label+'</label>'));
       $div.append($('<input id="'+attr.id+'" type="checkbox" />')) ;
       return $div;
     };
     
     var buildRadioDiv = function(attr, options) {
-      var $div = $('<div class="radioDiv">'+attr.label+'</div>');
+      var $div = $('<div class="radio-div">'+attr.label+'</div>');
       $.each(options, function(i, option) {
         $div.append($('<label for="'+option.id+'">'+option.label+'</label>'));
         $div.append($('<input type="radio" name = "groupa" id = "'+option.id+'" value="'+option.value+'" />'));
@@ -27,14 +28,14 @@
     };
     
     var buildInputDiv = function(attr) {
-      var $div = $('<div class="fieldDiv"></div>');
+      var $div = $('<div class="field-div"></div>');
           $div.append($('<label for="'+attr.id+'">'+attr.label+'</label>'));
           $div.append($('<div><input type="text" id="'+attr.id+'"></input></div>'));
           return $div;
     }
     
     var buildTextareaDiv = function(attr) {
-      var $div = $('<div class="textareaDiv"></div>');
+      var $div = $('<div class="textarea-iv"></div>');
           $div.append($('<label for="'+attr.id+'">'+attr.label+'</label>'));
           $div.append($('<div><textarea rows="5" cols="50" id="'+attr.id+'"></textarea></div>'));
           return $div;
@@ -55,8 +56,8 @@
     $uploadcaptionpic.button({label: 'Upload Picture for Caption'});
     */
 
-    var $uploadcaptiondiv = $('<div id="uploadcaptiondiv"></div>');
-    var $uploadcaptionpic = $('<input id="uploadcaptionbutton" type="file" name="files[]" multiple/>') ;
+    var $uploadcaptiondiv = $('<div id="upload-caption-div"></div>');
+    var $uploadcaptionpic = $('<input id="upload-caption-button" type="file" name="files[]" multiple/>') ;
     //$uploadcaptionpic.button({label: 'Upload Picture for Caption'});
     $uploadcaptiondiv.append($uploadcaptionpic);
     $createcontestform.append($uploadcaptiondiv);
@@ -124,7 +125,7 @@
     $createcontestform.append($savebutton);
     
     $parentdiv.append($createcontestform);
-    document.getElementById("uploadcaptionbutton").addEventListener('change', handleFileSelect, false);
+    document.getElementById("upload-caption-button").addEventListener('change', handleFileSelect, false);
     
     $(za.jq(attrs['startdate'].id)).datepicker();
     $(za.jq(attrs['enddate'].id)).datepicker();

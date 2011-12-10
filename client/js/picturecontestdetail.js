@@ -2,7 +2,8 @@
   
 (function($){
   var PictureContestDetail = function(args) {
-    var $parentdiv = $( za.jq(args.id) );
+    var parentid = args.parentid;
+    var $parentdiv = $( za.jq(parentid));
     var galleryid = args.galleryid;
     var contestid = args.contestid;
     
@@ -15,6 +16,8 @@
     pictureEntries.push({id: '6', url: '../../samplecontent/images/6.jpg', thumb: '../../samplecontent/images/thumbnails/6.jpg', title: 'Title1', fbpid: 'User6', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg' });
     pictureEntries.push({id: '7', url: '../../samplecontent/images/7.jpg', thumb: '../../samplecontent/images/thumbnails/7.jpg', title: 'Title1', fbpid: 'User7', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg' });
     pictureEntries.push({id: '8', url: '../../samplecontent/images/8.jpg', thumb: '../../samplecontent/images/thumbnails/8.jpg', title: 'Title1', fbpid: 'User8', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg' });
+    pictureEntries.push({id: '9', url: '../../samplecontent/images/8.jpg', thumb: '../../samplecontent/images/thumbnails/8.jpg', title: 'Title1', fbpid: 'User8', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg' });
+
     var contestTitle = 'Zing of the month';
     var voteCount = 20;
     var likeCount = 20;
@@ -35,26 +38,44 @@
     thumbnailEntries.push({id: '7', url: '../../samplecontent/images/thumbnails/7.jpg', thumb: '../../samplecontent/images/thumbnails/7.jpg', title: 'Title1', fbpid: 'User7', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg' });
     thumbnailEntries.push({id: '8', url: '../../samplecontent/images/thumbnails/8.jpg', thumb: '../../samplecontent/images/thumbnails/8.jpg', title: 'Title1', fbpid: 'User8', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg' });
     $parentdiv.append('<div class="contestTitle">'+contestTitle+'</div>');
-
-    $submitEntry = $('<button class="submitEntryButton" id="'+za.buttons['submitentry'].id+'"/>');
+    
+    var handleFileSelect = function(evt) {
+      $dialog.dialog('open');
+            return false;
+    };
+    $submitEntry = $('<button class="submit-entry-button" id="'+za.buttons['submitentry'].id+'"/>');
     $submitEntry.button({label: za.buttons['submitentry'].label});
-    $submitEntry.bind('click', function() { alert("Submit Entry Button Clicked");});
+    $submitEntry.bind('click', function() { 
+      $parentdiv.empty();
+      za.SubmitEntry({parentid: parentid});
+    });
     $parentdiv.append($submitEntry);
 
+    $parentdiv.append(za.buildRatingPanel({entryId: '123', partName: 'Lucky'}));
+    
+    $("#rate-root").children('.radio').each(function(i, element){
+      $(this).button();
+    });
+    
     $parentdiv.append(za.buildAnythingSliderGallery(galleryid, za.galleryTypes['entrydetail'].id, pictureEntries));
     $(za.jq(galleryid)).anythingSlider({
-      showMultiple: false, buildStartStop: false, buildArrows: true, buildNavigation: false, 
+      showMultiple: false, buildStartStop: false, buildArrows: true, buildNavigation: false, infiniteSlides: false,
+                onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
+                onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
+	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
     });
 
-    
-    
     $parentdiv.append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'].id, thumbnailEntries));
+
     $(za.jq("thumbnail1")).anythingSlider({
-      showMultiple: 3, buildNavigation: false, buildStartStop: false, changeBy: 3//, vertical: true
+      showMultiple: 3, buildNavigation: false, buildStartStop: false, changeBy: 3, infiniteSlides: false,//, vertical: true
+                      onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
+                onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
+	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
     });
     
-    $(".galleryDiv").click(function() {
-      var idx = $(this).children('img.mainImg').first().attr('id').substring(5);
+    $(".gallery-div").click(function() {
+      var idx = $(this).children('img.main-img').first().attr('id').substring(5);
       idx = parseInt(idx) + 1;
       $('#mygallery').anythingSlider(idx);
       return false;
