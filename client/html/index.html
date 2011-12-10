@@ -5,9 +5,9 @@
 <head>
 <meta property="og:title" content="Create Competitions, Showcase your Talent, Get Discovered" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://whatsyourzing.com/za/client/html/" />
+<meta property="og:url" content="http://www.whatsyourzing.com/sangeeta/za/client/html/" />
 
-<meta property="og:image" content="http://whatsyourzing.com/client/images/stage.png" />
+<meta property="og:image" content="http://www.whatsyourzing.com/sangeeta/za/client/images/stage.png" />
 <meta property="og:description" content="ZingArena lets you create competitions, gives you an avenue to showcase your talent, discover, and get discovered. All this just for fun or as competitive as you would like it...use your stage and audience the way you like!" />
 <meta property="og:site_name" content="ZingArena"/>
 <meta property="fb:app_id" content="188092504602584" />
@@ -70,16 +70,53 @@
 </head>
 <body>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js";
-  FB.init({
-    appId  : '188092504602584'
+<script type="text/javascript">
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '188092504602584', // App ID
+     // channelUrl : '//www.whatsyourzing.com/sangeeta/za/client/html/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      oauth      : true, // enable OAuth 2.0
+      xfbml      : true  // parse XFBML
+    });
+    FB.getLoginStatus(function(response) {
+      if (response.authResponse) {
+        alert('I KNOW U!! ');
+        $.post( 'http://www.whatsyourzing.com/sangeeta/za/backend/fb.php', response.authResponse, 
+                 function(data) { alert('fb login response received'); } );
+
+      } else {
+        window.location.href='http://www.facebook.com/dialog/oauth?client_id=188092504602584&redirect_uri=http://www.whatsyourzing.com/sangeeta/za/client/html/&scope=email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
+       // window.location.href= "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=188092504602584&status=1&cookie=1&oauth=1&scope=email";
+     }
+    });
+    FB.Event.subscribe('edge.create', function(response) { alert('Yeah! Liked ' + response); });
+  };
+
+// Load the SDK Asynchronously
+  (function(d){
+    var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    d.getElementsByTagName('head')[0].appendChild(js);
+  }(document));
+</script>
+<!--
+<script type="text/javascript">
+  FB.login(function(response) {
+    if (response.session) {
+      console.log("User is connected to the application.");
+      var accessToken = response.session.access_token;
+    }
+  }, {scope:'read_stream,publish_stream,offline_access'});
+  </script>
+-->
+<script type="text/javascript">
+  $(document).ready(function() {
+    za.MenuTabs();
   });
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+</script>
 
 <div id="header">
   <div class="fb-like" data-send="true" data-layout="standard" data-width="450" data-show-faces="true" data-font="tahoma" ref="za_home"></div>
@@ -87,15 +124,5 @@
 
 <div id="content"></div>
 <div id="footer">I am the footer</div>
-<script type="text/javascript">
-  $(document).ready(function() {
-    za.MenuTabs();
-  });
-  FB.Event.subscribe('edge.create', 
-    function(response) {
-      alert('Yeah! Liked ' + response);
-    }
-  );
- </script>
 </body>
 </html>
