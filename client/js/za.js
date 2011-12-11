@@ -3,6 +3,15 @@
 (function($){
   var za;
   if (typeof(za) === 'undefined') {window.za = za = {};}
+  
+  za.userFbId = '';
+  
+  za.getUser = function () {
+    if (za.userFbId === 'undefined' || za.userFbId === '') {
+       
+    }
+    return za.userFbId;
+  }
   za.menus = {
     home: {display: 'Home', href: '#home'},
     contests: {display: 'Contests', href: '#contests'},
@@ -54,6 +63,7 @@
     fbpartid: {id: 'fbpid'},
     partname: {id: 'fbpname'},
     parturl: {id: 'fbpurl'}, //url of participant
+    cid: {id: 'cid'}, //contest id
     contesttitle: {id: 'ctitle'},
     numparts: {id: 'numparts'}
   };
@@ -69,21 +79,22 @@
   };
   
   za.galleryTypes = {
-    entrydetail: {id: 'a'},
-    hthumb: {id: 'b'},
-    vthumb: {id: 'c'},
-    contests: {id: 'd'}
+    entrydetail: {id: 'a', cName: 'big-gallery'},
+    hthumb: {id: 'b', cName: 'h-thumb-gallery'},
+    vthumb: {id: 'c', cName: 'v-thumb-gallery'},
+    contests: {id: 'd', cName: 'med-gallery'}
   };
   
   za.addGalleryInfo = function(entry, galleryType) {
     var attrs = za.entryattrs;
     var $divinfo = $('<div style="width:200px; height:50px; z-index: 99999;"></div>');
-    if (galleryType === za.galleryTypes['entrydetail'].id) {
+    if (galleryType === za.galleryTypes['entrydetail']) {
       $divinfo.append($('<img src="'+entry[attrs.parturl.id]+'" style="width:40px; height:40px; z-index: 99999;"/>'));
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.partname.id]+'</span>'));
-    } else if (galleryType === za.galleryTypes['contests'].id) {
+    } else if (galleryType === za.galleryTypes['contests']) {
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.contesttitle.id]+'</span>'));
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.numparts.id]+'</span>'));
+      $divinfo.append($('<input class="contest-id" type="hidden" value="'+entry[attrs.cid.id]+'" />'));
       $divinfo.append($('<a href="#">Submit Entry</a>'));
     }
     $divinfo.append($('<input class="entry-id" type="hidden" value="'+entry[attrs.id.id]+'" />'));
@@ -91,35 +102,19 @@
     return $divinfo;
   };
   
-  za.buildAnythingSliderGallery = function(galleryid, galleryType, entries) {
-    var className = 'big-gallery';
-    if (galleryType === za.galleryTypes['vthumb'].id) className = 'v-thumb-gallery';
-    else if (galleryType === za.galleryTypes['hthumb'].id) className = 'h-thumb-gallery';
-    else if (galleryType === za.galleryTypes['contests'].id) className = 'med-gallery';
-    var $ul = $('<ul id="'+galleryid+'" class="'+className+'"></ul>');
-    //$ul.css({height: 265, width: 200});
+  za.buildAnythingSliderGallery = function(galleryid, galleryType, entries) {    
+    var $ul = $('<ul id="'+galleryid+'" class="'+galleryType.cName+'"></ul>');
 
     var attrs = za.entryattrs;
     $.each(entries, function(idx, entry){
       var $li = $('<li></li>');
       var $div = $('<div class="gallery-div"></div>');
-      /*
-      if (galleryType === za.galleryTypes['vthumb'].id || galleryType === za.galleryTypes['hthumb'].id)
-        $div.css({height: 40, width: 40});
-      */
-      var imgId;
-      imgId = 'gimg' + galleryType + idx;
+
+      var imgId = 'gimg' + galleryType.id + idx;
       $div.append($('<img class="main-img" id="'+imgId+'" src="'+entry[attrs.url.id]+'" />'));
 
-      if (galleryType !== za.galleryTypes['vthumb'].id && galleryType !== za.galleryTypes['hthumb'].id) {
-        /*
-        var $divinfo = $('<div style="width:200px; height:50px; z-index: 99999;"></div>');
-        $divinfo.append($('<img src="'+entry[attrs.parturl.id]+'" style="width:40px; height:40px; z-index: 99999;"/>'));
-        $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.partname.id]+'</span>'));
-
-        $div.append($divinfo);*/
+      if (galleryType !== za.galleryTypes['vthumb'] && galleryType !== za.galleryTypes['hthumb']) {
         $div.append(za.addGalleryInfo(entry, galleryType));
-        
       } ;
 
       $li.append($div);
@@ -186,5 +181,4 @@
       slider.$currentPage.next().next().find('img').each(function() { za.removeSrc($(this)); });
     };
   };
-  
 }(jQuery));
