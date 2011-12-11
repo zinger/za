@@ -8,7 +8,7 @@
   
   za.getUser = function () {
     if (za.userFbId === 'undefined' || za.userFbId === '') {
-       
+       //TODO Make server call and get userid
     }
     return za.userFbId;
   }
@@ -180,5 +180,10 @@
       slider.$currentPage.next().find('img').each(function() { za.removeSrc($(this)); });
       slider.$currentPage.next().next().find('img').each(function() { za.removeSrc($(this)); });
     };
+  };
+  
+  za.tempvars = {
+    entryid: '',
+    contestsub: 'browse'
   };
 }(jQuery));

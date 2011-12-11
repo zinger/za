@@ -6,8 +6,8 @@
     var $parentdiv = $( za.jq(parentid));
     var entryid = args.entryid;
     var contestid = args.contestid;
-    
-    alert ("Contest id is " + contestid + " entry id is " + entryid);
+    var invokedBy = args.invokedBy;
+
     // TODO: Using the contestid we need to get all entries for the contest
     // TODO: We need to set the active page of the slider using the entry id
     
@@ -47,14 +47,16 @@
       $dialog.dialog('open');
             return false;
     };
-    $submitEntry = $('<button class="submit-entry-button" id="'+za.buttons['submitentry'].id+'"/>');
-    $submitEntry.button({label: za.buttons['submitentry'].label});
-    $submitEntry.bind('click', function() { 
-      $parentdiv.empty();
-      za.SubmitEntry({parentid: parentid});
-    });
-    $parentdiv.append($submitEntry);
-
+    if (invokedBy !== 'home') {
+      $submitEntry = $('<button class="submit-entry-button" id="'+za.buttons['submitentry'].id+'"/>');
+      $submitEntry.button({label: za.buttons['submitentry'].label});
+      $submitEntry.bind('click', function() { 
+	$parentdiv.empty();
+	za.SubmitEntry({parentid: parentid});
+      });
+      $parentdiv.append($submitEntry);
+    };
+    
     $parentdiv.append(za.buildRatingPanel({entryId: '123', partName: 'Lucky'}));
     
     $("#rate-root").children('.radio').each(function(i, element){

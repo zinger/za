@@ -49,21 +49,6 @@
       else { if (idx !== 'pictureurl') $attrdiv = buildInputDiv(attr); }
       $createcontestform.append($attrdiv);
     });
-
-    //$iscaption.button();
-    /*
-    var $uploadcaptionpic = $('<input id="uploadcaptionbutton" type="button" />') ;
-    $uploadcaptionpic.button({label: 'Upload Picture for Caption'});
-    */
-
-    var $uploadcaptiondiv = $('<div id="upload-caption-div"></div>');
-    var $uploadcaptionpic = $('<input id="upload-caption-button" type="file" name="files[]" multiple/>') ;
-    //$uploadcaptionpic.button({label: 'Upload Picture for Caption'});
-    $uploadcaptiondiv.append($uploadcaptionpic);
-    $createcontestform.append($uploadcaptiondiv);
-    //$(za.jq(attrs['iscaption'].id)).parent().append($uploadcaptiondiv);
-    //$("#uploadcaptionbutton").button('refresh');
-       //$("#uplaodcaptionbutton").show();
     
     var $dialog = $('<div id="dialog1"></div>').html('This dialog will show every time!').dialog({
 			autoOpen: false,
@@ -113,10 +98,10 @@
        });
 
        $.post( 'http://184.72.35.49/sangeeta/za/backend/index.php', jsonobject,
-          function(data) { alert('response received'); } );
-
-       
-       
+          function(data) { /*$.each(data, function(i, entry) {*/
+              alert('response received ' + data);
+          //});
+          } ); 
     });
     $createcontestform.append($finishbutton);
     
@@ -124,8 +109,19 @@
     $savebutton.button({label: za.buttons['savecontest'].label});
     $createcontestform.append($savebutton);
     
-    $parentdiv.append($createcontestform);
-    document.getElementById("upload-caption-button").addEventListener('change', handleFileSelect, false);
+    $parentdiv.append($createcontestform);    
+    
+    $( za.jq(attrs['iscaption'].id)).change(function() {
+      if ($( za.jq(attrs['iscaption'].id)).is(':checked')) {
+        var $uploadcaptiondiv = $('<div id="upload-caption-div"></div>');
+        var $uploadcaptionpic = $('<input id="upload-caption-button" type="file" name="files[]" multiple/>') ;
+        //$uploadcaptionpic.button({label: 'Upload Picture for Caption'});
+        $uploadcaptiondiv.append($uploadcaptionpic);
+        $(".checkbox-div").append($uploadcaptiondiv);
+      } else {
+        $("#upload-caption-div").remove();
+      }     
+    });
     
     $(za.jq(attrs['startdate'].id)).datepicker();
     $(za.jq(attrs['enddate'].id)).datepicker();
@@ -136,8 +132,7 @@
     $(za.jq(entrytypes['text'].id)).button();
     $(za.jq(entrytypes['picture'].id)).attr('checked','checked');
     $(za.jq(entrytypes['picture'].id)).button('refresh');
-    
-    //$(za.jq(attrs[details].id)).init()
+
 
     tinyMCE.init({
             mode : "textareas",
@@ -157,8 +152,6 @@
 
     });
     
-    
-    //$("#uploadcaptionbutton").hide(); 
   };
   za.CreateContest = CreateContest;
 }(jQuery));
