@@ -51,6 +51,9 @@
     iscaption: {id: 'ctype', label: 'Caption Contest', type: 'checkbox'},
     pictureurl: {id: 'url', label: 'Picture', type: 'input'},
     entrytype: {id: 'etype', label: 'Entry Type', type: 'radio'},
+    whocanpart: {id: 'whocan', label: 'Who Can Participate?', type: 'button'},
+    opentoall: {id: 'opentoall', label: 'Anyone Can Participate', type: 'checkbox'},
+    inviteothers: {id: 'inviteothers', label: 'Participants can invite other participants', type: 'checkbox'},
     details: {id: 'desc', label: 'Details', type: 'textarea'},
     tags: {id: 'tags', label: 'Tags', type: 'input'}
   };

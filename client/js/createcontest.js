@@ -35,19 +35,36 @@
     }
     
     var buildTextareaDiv = function(attr) {
-      var $div = $('<div class="textarea-iv"></div>');
+      var $div = $('<div class="textarea-div"></div>');
           $div.append($('<label for="'+attr.id+'">'+attr.label+'</label>'));
           $div.append($('<div><textarea rows="5" cols="50" id="'+attr.id+'"></textarea></div>'));
           return $div;
     }
     
+    var buildButtonDiv = function(attr) {
+      var $div = $('<div class="button-div"></div>')
+      if (attr.label !== 'undefined') $div.append($('<label for="'+attr.id+'">'+attr.label+'</label>'));
+      $div.append($('<input id="'+attr.id+'" type="button" />'));
+      return $div;
+    }
+    
     $.each(attrs, function(idx, attr) {
-      var $attrdiv;
-      if (attr.type === 'checkbox') $attrdiv = buildCheckboxDiv(attr);
-      else if (attr.type === 'radio') $attrdiv = buildRadioDiv(attr, entrytypes);
-      else if (attr.type === 'textarea') $attrdiv = buildTextareaDiv(attr);
-      else { if (idx !== 'pictureurl') $attrdiv = buildInputDiv(attr); }
-      $createcontestform.append($attrdiv);
+      switch (attr.type) {
+      case 'checkbox':
+        if (idx !== 'inviteothers') $createcontestform.append(buildCheckboxDiv(attr));
+        break;
+      case 'radio':
+        $attrdiv = $createcontestform.append(buildRadioDiv(attr, entrytypes));
+        break;
+      case 'textarea': $attrdiv = $createcontestform.append(buildTextareaDiv(attr));
+        break;
+      case 'button':
+        $attrdiv = $createcontestform.append(buildButtonDiv(attr));
+        break;
+      default:
+        if (idx !== 'pictureurl') $attrdiv = $createcontestform.append(buildInputDiv(attr));
+        break;
+      }
     });
     
     var $dialog = $('<div id="dialog1"></div>').html('This dialog will show every time!').dialog({
@@ -59,7 +76,6 @@
       $dialog.dialog('open');
             return false;
     };
-    
                 
     $('#uploadcaptionbutton').fileupload({
         dataType: 'json',
@@ -109,17 +125,33 @@
     $savebutton.button({label: za.buttons['savecontest'].label});
     $createcontestform.append($savebutton);
     
-    $parentdiv.append($createcontestform);    
+    $parentdiv.append($createcontestform);
+    
+    var whoCanPart = $(za.jq(attrs['whocanpart'].id));
+    whoCanPart.button({label: 'Invite'});
+    whoCanPart.bind('click', function() {
+      sendRequestViaMultiFriendSelector(); return false;
+    });
     
     $( za.jq(attrs['iscaption'].id)).change(function() {
       if ($( za.jq(attrs['iscaption'].id)).is(':checked')) {
         var $uploadcaptiondiv = $('<div id="upload-caption-div"></div>');
         var $uploadcaptionpic = $('<input id="upload-caption-button" type="file" name="files[]" multiple/>') ;
-        //$uploadcaptionpic.button({label: 'Upload Picture for Caption'});
         $uploadcaptiondiv.append($uploadcaptionpic);
-        $(".checkbox-div").append($uploadcaptiondiv);
+        $uploadcaptiondiv.insertAfter($(this));
       } else {
         $("#upload-caption-div").remove();
+      }     
+    });
+    
+    $( za.jq(attrs['opentoall'].id)).attr('checked', 'checked');
+    $( za.jq(attrs['opentoall'].id)).change(function() {
+      if ($( za.jq(attrs['opentoall'].id)).is(':checked')) {
+        $(za.jq(attrs['inviteothers'].id)).parent().remove();
+      } else {
+        var $canInviteOthers = buildCheckboxDiv(attrs['inviteothers']);
+        $canInviteOthers.insertAfter($(this));
+        
       }     
     });
     
