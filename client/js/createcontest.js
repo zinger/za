@@ -130,7 +130,8 @@
     var whoCanPart = $(za.jq(attrs['whocanpart'].id));
     whoCanPart.button({label: 'Invite'});
     whoCanPart.bind('click', function() {
-      sendRequestViaMultiFriendSelector(); return false;
+      za.tempvars.contestid = '1';
+      sendContestRequest(); return false;
     });
     
     $( za.jq(attrs['iscaption'].id)).change(function() {

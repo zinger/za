@@ -187,6 +187,7 @@
   
   za.tempvars = {
     entryid: '',
-    contestsub: 'browse'
+    contestsub: 'browse',
+    contestid: ''
   };
 }(jQuery));
