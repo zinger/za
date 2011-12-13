@@ -30,7 +30,7 @@
   
   za.buttons = {
     createcontest: {id: 'create-contest', label: 'Create Contest'},
-    finishcontest: {id: 'finish-contest', label: 'Finish'},
+    finishcontest: {id: 'finish-contest', label: 'Finish and Invite'},
     savecontest: {id: 'save-contest', label: 'Save Draft'},
     submitentry: {id: 'submit-entry', label: 'Submit Entry'},
     finishentrysubmit: {id: 'fin-submit-entry', label: 'Finish'}
@@ -40,6 +40,11 @@
     picture: {id: 'picture-entry', label: 'Picture', value: '0'},
     video: {id: 'video-entry', label: 'Video', value: '1'},
     text: {id: 'text-entry', label: 'Text', value: '2'}
+  };
+  
+  za.whocanpart = {
+    everyone: {id: 'part-all', label: 'Everyone', value: '0'},
+    restricted: {id: 'par-rest', label: 'Invitees Only', value: '1'},
   };
  
   za.contestattrs = {
@@ -51,8 +56,7 @@
     iscaption: {id: 'ctype', label: 'Caption Contest', type: 'checkbox'},
     pictureurl: {id: 'url', label: 'Picture', type: 'input'},
     entrytype: {id: 'etype', label: 'Entry Type', type: 'radio'},
-    whocanpart: {id: 'whocan', label: 'Who Can Participate?', type: 'button'},
-    opentoall: {id: 'opentoall', label: 'Anyone Can Participate', type: 'checkbox'},
+    whocanpart: {id: 'whocan', label: 'Who Can Participate?', type: 'radio'},
     inviteothers: {id: 'inviteothers', label: 'Participants can invite other participants', type: 'checkbox'},
     details: {id: 'desc', label: 'Details', type: 'textarea'},
     tags: {id: 'tags', label: 'Tags', type: 'input'}
