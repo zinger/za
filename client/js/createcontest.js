@@ -93,6 +93,7 @@
           default:
             jsonobject[attr] = $( za.jq(attr.id)).val();
         }
+       });
 
        $.post( 'http://184.72.35.49/sangeeta/za/backend/index.php', jsonobject,
           function(data) { 
