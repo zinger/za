@@ -59,6 +59,7 @@
 </head>
 <body>
   <div id="fb-root"></div>
+  
   <script type="text/javascript">
     window.fbAsyncInit = function() {
       FB.init({
@@ -71,9 +72,9 @@
       });
       FB.getLoginStatus(function(response) {
         if (response.authResponse) {
-          alert('I KNOW U!! ');
-          $.post( 'http://www.whatsyourzing.com/sangeeta/za/backend/fb.php', response.authResponse, 
-                   function(data) { alert('fb login response received'); } );
+          alert('user ' + response.authResponse.userID + ' accessToken ' + response.authResponse.accessToken);
+//          $.post( 'http://www.whatsyourzing.com/sangeeta/za/backend/fb.php', response.authResponse, 
+  //                 function(data) { alert('fb login response received'); } );
 //TODO get user id and set locally
         } else {
           window.location.href='http://www.facebook.com/dialog/oauth?client_id=188092504602584&redirect_uri=http://www.whatsyourzing.com/sangeeta/za/client/html/&scope=email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
