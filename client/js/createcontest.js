@@ -69,40 +69,7 @@
         break;
       }
     });
-    
-    var $dialog = $('<div id="dialog1"></div>').html('This dialog will show every time!').dialog({
-			autoOpen: false,
-			title: 'Basic Dialog'
-		});
-    
-    var handleFileSelect = function(evt) {
-      $dialog.dialog('open');
-            return false;
-    };
                 
-    $('#uploadcaptionbutton').fileupload({
-        dataType: 'json',
-        url: 'upload.php',
-        done: function (e, data) {/*
-            $.each(data.result, function (index, file) {
-                $('<p/>').text(file.name).appendTo("#createcontestform");
-            });*/
-            $dialog.dialog('open');
-            return false;
-        },
-        drop: function(e, data) {
-          $dialog.dialog('open');
-            return false;
-        },
-        add: function(e, data) {
-          $dialog.dialog('open');
-            return false;
-        },
-        change: function(e, data) {
-          $dialog.dialog('open');
-            return false;
-        },
-    });
     var $finishbutton = $('<button id="'+za.buttons['finishcontest'].id+'" />') ;
     $finishbutton.button({label: za.buttons['finishcontest'].label});
     
@@ -110,16 +77,27 @@
        var jsonobject = {};
        jsonobject['op'] = 'create_contest';
        $.each(attrs, function(idx, attr) {
-        if (idx === 'entrytype') { jsonobject[attr]=$('input[name="'+attr.id+'"]:checked').val(); }
-        else if (idx === 'iscaption') { jsonobject[attr] = $( za.jq(attr.id)).is(':checked'); }
-        else { jsonobject[attr] = $( za.jq(attr.id)).val(); }     
-       });
+        switch (idx) {
+          case 'entrytype':
+            jsonobject[attr]=$('input[name="'+attr.id+'"]:checked').val();
+            break;
+          case 'iscaption':
+            jsonobject[attr] = $( za.jq(attr.id)).is(':checked');
+            break;
+          case 'whocanpart':
+            jsonobject[attr] = $('input[name="'+attr.id+'"]:checked').val();
+            break;
+          case 'inviteothers':
+            jsonobject[attr] = $( za.jq(attr.id)).is(':checked');
+            break;
+          default:
+            jsonobject[attr] = $( za.jq(attr.id)).val();
+        }
 
        $.post( 'http://184.72.35.49/sangeeta/za/backend/index.php', jsonobject,
-          function(data) { /*$.each(data, function(i, entry) {*/
-              alert('response received ' + data);
+          function(data) { 
+              alert('response received ' + JSON.stringify(data));
               sendContestRequest(); return false;
-          //});
           } );
     });
     $createcontestform.append($finishbutton);
