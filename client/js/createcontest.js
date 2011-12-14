@@ -79,21 +79,24 @@
        $.each(attrs, function(idx, attr) {
         switch (idx) {
           case 'entrytype':
-            jsonobject[attr]=$('input[name="'+attr.id+'"]:checked').val();
+            jsonobject[attr.id]=$('input[name="'+attr.id+'"]:checked').val();
             break;
           case 'iscaption':
-            jsonobject[attr] = $( za.jq(attr.id)).is(':checked');
+            jsonobject[attr.id] = $( za.jq(attr.id)).is(':checked');
             break;
           case 'whocanpart':
-            jsonobject[attr] = $('input[name="'+attr.id+'"]:checked').val();
+            jsonobject[attr.id] = $('input[name="'+attr.id+'"]:checked').val();
             break;
           case 'inviteothers':
-            jsonobject[attr] = $( za.jq(attr.id)).is(':checked');
+            jsonobject[attr.id] = $( za.jq(attr.id)).is(':checked');
             break;
           default:
-            jsonobject[attr] = $( za.jq(attr.id)).val();
+            jsonobject[attr.id] = $( za.jq(attr.id)).val();
+            break;
         }
        });
+
+       alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
 
        $.post( 'http://184.72.35.49/sangeeta/za/backend/index.php', jsonobject,
           function(data) { 
