@@ -22,7 +22,7 @@
       var $div = $('<div class="radio-div">'+attr.label+'</div>');
       $.each(options, function(i, option) {
         $div.append($('<label for="'+option.id+'">'+option.label+'</label>'));
-        $div.append($('<input type="radio" name = "groupa" id = "'+option.id+'" value="'+option.value+'" />'));
+        $div.append($('<input type="radio" name = "'+attr.id+'" id = "'+option.id+'" value="'+option.value+'" />'));
       });
       return $div;
     };
@@ -54,7 +54,10 @@
         if (idx !== 'inviteothers') $createcontestform.append(buildCheckboxDiv(attr));
         break;
       case 'radio':
-        $attrdiv = $createcontestform.append(buildRadioDiv(attr, entrytypes));
+        if (idx === 'entrytype')
+          $attrdiv = $createcontestform.append(buildRadioDiv(attr, entrytypes));
+        else
+          $attrdiv = $createcontestform.append(buildRadioDiv(attr, za.whocanpart));
         break;
       case 'textarea': $attrdiv = $createcontestform.append(buildTextareaDiv(attr));
         break;
@@ -66,41 +69,7 @@
         break;
       }
     });
-    
-    var $dialog = $('<div id="dialog1"></div>').html('This dialog will show every time!').dialog({
-			autoOpen: false,
-			title: 'Basic Dialog'
-		});
-    
-    var handleFileSelect = function(evt) {
-      $dialog.dialog('open');
-            return false;
-    };
                 
-    $('#uploadcaptionbutton').fileupload({
-        dataType: 'json',
-        url: 'upload.php',
-        done: function (e, data) {/*
-            $.each(data.result, function (index, file) {
-                $('<p/>').text(file.name).appendTo("#createcontestform");
-            });*/
-            $dialog.dialog('open');
-            return false;
-        },
-        drop: function(e, data) {
-          $dialog.dialog('open');
-            return false;
-        },
-        add: function(e, data) {
-          $dialog.dialog('open');
-            return false;
-        },
-        change: function(e, data) {
-          $dialog.dialog('open');
-            return false;
-        },
-        
-    });
     var $finishbutton = $('<button id="'+za.buttons['finishcontest'].id+'" />') ;
     $finishbutton.button({label: za.buttons['finishcontest'].label});
     
@@ -108,16 +77,32 @@
        var jsonobject = {};
        jsonobject['op'] = 'create_contest';
        $.each(attrs, function(idx, attr) {
-        if (idx === 'entrytype') { jsonobject[attr]=$('input[name=groupa]:checked').val(); }
-        else if (idx === 'iscaption') { jsonobject[attr] = $( za.jq(attr.id)).is(':checked'); }
-        else { jsonobject[attr] = $( za.jq(attr.id)).val(); }     
+        switch (idx) {
+          case 'entrytype':
+            jsonobject[attr.id]=$('input[name="'+attr.id+'"]:checked').val();
+            break;
+          case 'iscaption':
+            jsonobject[attr.id] = $( za.jq(attr.id)).is(':checked');
+            break;
+          case 'whocanpart':
+            jsonobject[attr.id] = $('input[name="'+attr.id+'"]:checked').val();
+            break;
+          case 'inviteothers':
+            jsonobject[attr.id] = $( za.jq(attr.id)).is(':checked');
+            break;
+          default:
+            jsonobject[attr.id] = $( za.jq(attr.id)).val();
+            break;
+        }
        });
 
+       alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
+
        $.post( 'http://184.72.35.49/sangeeta/za/backend/index.php', jsonobject,
-          function(data) { /*$.each(data, function(i, entry) {*/
-              alert('response received ' + data);
-          //});
-          } ); 
+          function(data) { 
+              alert('response received ' + JSON.stringify(data));
+              sendContestRequest(); return false;
+          } );
     });
     $createcontestform.append($finishbutton);
     
@@ -126,13 +111,6 @@
     $createcontestform.append($savebutton);
     
     $parentdiv.append($createcontestform);
-    
-    var whoCanPart = $(za.jq(attrs['whocanpart'].id));
-    whoCanPart.button({label: 'Invite'});
-    whoCanPart.bind('click', function() {
-      za.tempvars.contestid = '1';
-      sendContestRequest(); return false;
-    });
     
     $( za.jq(attrs['iscaption'].id)).change(function() {
       if ($( za.jq(attrs['iscaption'].id)).is(':checked')) {
@@ -145,17 +123,6 @@
       }     
     });
     
-    $( za.jq(attrs['opentoall'].id)).attr('checked', 'checked');
-    $( za.jq(attrs['opentoall'].id)).change(function() {
-      if ($( za.jq(attrs['opentoall'].id)).is(':checked')) {
-        $(za.jq(attrs['inviteothers'].id)).parent().remove();
-      } else {
-        var $canInviteOthers = buildCheckboxDiv(attrs['inviteothers']);
-        $canInviteOthers.insertAfter($(this));
-        
-      }     
-    });
-    
     $(za.jq(attrs['startdate'].id)).datepicker();
     $(za.jq(attrs['enddate'].id)).datepicker();
     $(za.jq(attrs['entrydeadline'].id)).datepicker();
@@ -165,7 +132,21 @@
     $(za.jq(entrytypes['text'].id)).button();
     $(za.jq(entrytypes['picture'].id)).attr('checked','checked');
     $(za.jq(entrytypes['picture'].id)).button('refresh');
-
+    
+    $(za.jq(za.whocanpart['everyone'].id)).button();
+    $(za.jq(za.whocanpart['everyone'].id)).attr('checked','checked');
+    $(za.jq(za.whocanpart['everyone'].id)).button('refresh');
+    $(za.jq(za.whocanpart['restricted'].id)).button();
+    
+    $('input[name="'+za.contestattrs['whocanpart'].id+'"]').change(function() {
+ //     if ($(za.whocanpart['everyone'].id).is(':checked')) {
+      if ($('input[name="'+za.contestattrs['whocanpart'].id+'"]:checked').val() === za.whocanpart['everyone'].value) {
+        $(za.jq(attrs['inviteothers'].id)).parent().remove();
+      } else {
+        var $canInviteOthers = buildCheckboxDiv(attrs['inviteothers']);
+        $canInviteOthers.insertAfter($('input[name="'+za.contestattrs['whocanpart'].id+'"]').parent());
+      }     
+    });
 
     tinyMCE.init({
             mode : "textareas",

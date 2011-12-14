@@ -109,7 +109,7 @@
       function requestCallbackForContestInvite(response) {
         // Handle callback here
         var contestRequest = [];
-        contestRequest.push(cid: za.tempvars.contestid, request: response.request, to: response.to);
+        contestRequest.push({cid: za.tempvars.contestid, request: response[request], to: response[to]});
         $.each(response.to, function(i, entry) {
           alert("response is " + entry);
         });
