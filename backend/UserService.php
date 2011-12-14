@@ -33,6 +33,16 @@ class UserService {
     return $result;
   }
 
+  /** @returns User object populted with data. If input json is empty, empty User is returned */
+  public function populateUser($jsonStr) {
+    $user = new User();
+
+    if (!empty($jsonStr)) {
+      $user->populate($jsonStr);
+    } 
+    return $user;
+  }
+
   private function queryDB($sql, $dbc, $msg) {
     global $logger;
     $conn = (!empty($dbc) === TRUE) ? $dbc : DbUtil::getDbConnection();
@@ -59,6 +69,5 @@ class UserService {
     }
     return $results;
   }
-  
 }
 ?>
