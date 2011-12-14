@@ -127,8 +127,12 @@ class ContestService {
     $results = array();
     // Indexed rows
     //while($row = mysql_fetch_row($rslt)) {
-    while($row = mysql_fetch_assoc($rslt)) {
-      $results[] = $row;
+    if (is_bool($rslt)) {
+      $results[] = $rslt;
+    } else {
+      while($row = mysql_fetch_assoc($rslt)) {
+        $results[] = $row;
+      }
     }
     return $results;
   }
