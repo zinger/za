@@ -98,7 +98,7 @@
 
        alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
 
-       $.post( 'http://184.72.35.49/sangeeta/za/backend/index.php', jsonobject,
+       $.post( 'http://www.whatsyourzing.com/sunil/zaroot/za/backend/index.php', jsonobject,
           function(data) { 
               alert('response received ' + JSON.stringify(data));
               sendContestRequest(); return false;

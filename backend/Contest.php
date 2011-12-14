@@ -10,6 +10,8 @@ class Contest {
   public $entry_type;
   public $description;
   public $tags;
+  public $who_can_participate;
+  public $invite_others;
   public $status;
   public $cause_id;
   public $featured;
@@ -28,6 +30,8 @@ class Contest {
     'entry_type'          => array ('etype' , false),
     'description'         => array ('desc'  , true),
     'tags'                => array ('tags'  , true),
+    'who_can_participate' => array ('whocan', true),
+    'invite_others'       => array ('invothers', false),
     'status'              => array ('status', false),
     'cause_id'            => array ('cause' , false), 
     'url'                 => array ('url'   , true),
