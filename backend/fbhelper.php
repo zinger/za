@@ -49,22 +49,30 @@ class FBHelper {
     return $data;
   }
 
+  /** @returns Photo fb object. Use photo['picture'] to get the profile pic url */
   public static function getUserPicture($fb = null, $uid = null) {
     global $logger;
 
     if (is_null($fb)) {
       $fb = self::getFacebook();
     }
-    $token = $fb->getAccessToken(); 
+    $token = $fb->getAccessToken(); //token optional
     $user = (!empty($uid)) ? $uid : "me";
     try {
-      $url = "/" . $user . "/picture?access_token=" . $token;
-      $logger->info("FBHelper::getUserPicture:Url: " . $url);
+      $url = "/" . $user . "?fields=picture&access_token=" . $token;
       $ph = $fb->api($url);
     } catch (Exception $e) {
       $logger->info("FBHelper::getUserPicture:Exception: " . $e->getTraceAsString());
     }
     return $ph;
+  }
+
+  /** @returns String with photo url. Can be used in client html 
+   * as image src '<img src="' . $s . '" alt="Profile Pic" />' 
+   */
+  public static function getUserPictureSrc($userid) {
+    $src = "https://graph.facebook.com/" . $userid . "/picture/";
+    return $src; 
   }
 
   public static function getPictureById($fb =null, $id = null) {
@@ -85,6 +93,32 @@ class FBHelper {
     return $ph;
   }
 
+  public static function uploadPhoto($img, $caption = null, $fb = null) {
+    global $logger;
+
+    if (($path = realpath($img)) === FALSE) {
+      return false;
+    }
+
+    if (is_null($fb)) {
+      $fb = self::getFacebook();
+    }
+    $msg = ((!empty($caption)) && (is_string($caption))) ? $caption : "Zing photo";
+
+    try {
+      $photo = $fb->api('/me/photos', 'POST',
+                        array('source' => '@' . $path,
+                              'message'=> $msg
+                        )); 
+      $id = $photo['id'];
+      $logger->info("FBHelper::uploadPhoto:ImagePath: " . $path . " | Caption: " . $msg . " | PhotoID: " . $id);
+    } catch (Exception $e) {
+      $logger->info("FBHelper::uploadPhoto:Exception: " . $e->getMessage());
+      $logger->info("ExceptionTrace: " . $e->getTraceAsString());
+    }
+    return $photo;
+  }
+  
 }
 
 ?>
