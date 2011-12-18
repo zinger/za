@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: red;
+}
+#content {
+  position: relative;
+  margin:0;
+  padding:0;
+  top: 0;
+  left: 0;
+}
+.imgDiv {
+  position: absolute;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}

@@ -10,7 +10,6 @@
     $searchform = $('<form action="" id="search-form"></form>');
     $fieldset = $('<fieldset><input type="text" id="search" name="search" /><input type="submit" id="search-submit" value="" /></fieldset>');
     $searchform.append($fieldset);
-    
     $parentdiv.append($searchform);
     
     $("#search").val("Search...").addClass("empty");

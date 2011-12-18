@@ -77,8 +77,9 @@
   //                 function(data) { alert('fb login response received'); } );
 //TODO get user id and set locally
         } else {
-          window.location.href='http://www.facebook.com/dialog/oauth?client_id=188092504602584&redirect_uri=http://www.whatsyourzing.com/sangeeta/za/client/html/&scope=email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
-         // window.location.href= "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=188092504602584&status=1&cookie=1&oauth=1&scope=email";
+          //window.location.href='http://www.facebook.com/dialog/oauth?client_id=188092504602584&redirect_uri=http://www.whatsyourzing.com/sangeeta/za/client/html/&scope=email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
+          window.location.href='http://www.facebook.com/dialog/oauth?client_id=188092504602584&redirect_uri=http://localhost:8888/client/html/&scope=email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
+          // window.location.href= "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=188092504602584&status=1&cookie=1&oauth=1&scope=email";
        }
       });
       FB.Event.subscribe('edge.create', function(response) { alert('Yeah! Liked ' + response); });
