@@ -10,14 +10,12 @@
     var height=baseHeight;
     var top=0;
     var left=0;
-    for (i=0; i<10; i++) {
-      var id = 'div' + i;
-      $div = $('<div id="'+id+'" class="imgDiv"></div>');
-      var images = [];
+    var color;
+    var images = [];
              images.push({src: 'images/avant-garde-2-by-3.png'}); //2 by 3
      
      
- images.push({src: 'images/vintage-sing-2-by-2.png'}); // 2 by 2
+      images.push({src: 'images/vintage-sing-2-by-2.png'}); // 2 by 2
       images.push({src: 'images/young-artists-4-by-2.png'}); // 4 by 2
       images.push({src: 'images/canine-education-4-by-1.png'}); // 4 by 1
 
@@ -36,8 +34,9 @@
        //     images.push({src: 'images/indian-girls-2-by-2.png'});
       images.push({src: 'images/turkey-2-by-2.png'});
             images.push({src: 'images/mountainbike-4-by-1.png'}); // 4 by 1
-
-
+    for (var i=0; i<10; i++) {
+      var id = 'div' + i;
+      var $div = $('<div id="'+id+'" class="imgDiv"></div>');
       switch (i) {
         case 0:
           width=baseWidth*2;
@@ -49,18 +48,16 @@
         case 1:
           width=baseWidth*2;
           height=baseHeight*2;
-          left=(baseWidth*2);
+          left=baseWidth*2;
           color ='blue';
           top = 0;
-          $div.css({backgroundColor: 'blue', top: 0, left:left, width:width, height:height});
           break;
         case 2:
           width=baseWidth*4;
           height=baseHeight*2;
-          left=(baseWidth*4);
+          left=baseWidth*4;
           color ='teal';
           top = 0;
-          $div.css({backgroundColor: 'teal', top: 0, left:left, width:width, height:height});
           break;
         case 3:
           width=baseWidth*4;
@@ -116,7 +113,7 @@
       }
       $div.css({backgroundColor:color, top: top, left:left, width:width, height:height});
       $div.append($('<img src="'+images[i].src+'" />'));
-      $('#content').append($div);
+      $("#content").append($div);
     };
   };
   za.ShowPage = ShowPage;
