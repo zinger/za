@@ -160,8 +160,8 @@
   };
     
   za.removeSrc = function(element) {
-    var newsrc = element.attr('src');
-    if (newsrc !== '') { element.attr('data-src', newsrc); element.attr('src', ''); }
+    var newsrc = element.attr('data-src');
+    if (newsrc !== '') { element.attr('src', newsrc); element.attr('data-src', ''); }
   };
     
   za.removeSrcOnSliderInit = function(slider) {
