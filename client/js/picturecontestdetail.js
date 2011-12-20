@@ -48,7 +48,7 @@
             return false;
     };
     if (invokedBy !== 'home') {
-      $submitEntry = $('<button class="submit-entry-button" id="'+za.buttons['submitentry'].id+'"/>');
+      var $submitEntry = $('<button class="submit-entry-button" id="'+za.buttons['submitentry'].id+'"/>');
       $submitEntry.button({label: za.buttons['submitentry'].label});
       $submitEntry.bind('click', function() { 
 	$parentdiv.empty();
@@ -86,12 +86,12 @@
       $('#gallery1').anythingSlider(idx);
       return false;
     });
-    $pagination = $('<div class="pagination"></div>');
-    $first = $('<a href="#" class="first" data-action="first">&laquo;</a>');
-    $previous = $('<a href="#" class="previous" data-action="previous">&lsaquo;</a>');
-    $pagetext = $('<input type="text" readonly="readonly" data-max-page="40" />');
-    $next = $('<a href="#" class="next" data-action="next">&rsaquo;</a>');
-    $last = $('<a href="#" class="last" data-action="last">&raquo;</a>');
+    var $pagination = $('<div class="pagination"></div>');
+    var $first = $('<a href="#" class="first" data-action="first">&laquo;</a>');
+    var $previous = $('<a href="#" class="previous" data-action="previous">&lsaquo;</a>');
+    var $pagetext = $('<input type="text" readonly="readonly" data-max-page="40" />');
+    var $next = $('<a href="#" class="next" data-action="next">&rsaquo;</a>');
+    var $last = $('<a href="#" class="last" data-action="last">&raquo;</a>');
     
     $pagination.append($first).append($previous).append($pagetext).append($next).append($last);
     $parentdiv.append($pagination);

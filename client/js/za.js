@@ -138,11 +138,11 @@
     $rateRoot.append($('<div class="rate-panel-title">Vote For '+partName+'</div>'));
     $rateRoot.append($('<span class="no">No Zing</span>'));
     
-    for (i=1; i<=10; i++) {
+    for (var i=1; i<=10; i++) {
       var id = "rating-rating-"+i;
       var label = i;
       $rateRoot.append($('<label for="'+id+'">'+label+'</label>'));
-      $input = $('<input type="radio" name="rating" value="1" id="'+id+'" value="'+i+'" class="radio" />');
+      var $input = $('<input type="radio" name="rating" value="1" id="'+id+'" value="'+i+'" class="radio" />');
       $rateRoot.append($input);
       //$rateRoot.append($('<label class="rate-label" id="rating-label-"'+i+'">'));
     }

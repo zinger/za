@@ -14,7 +14,7 @@
     currentEntries.push({id: '2', url: '../../samplecontent/images/thumbnails/2.jpg', thumb: '../../samplecontent/images/thumbnails/2.jpg', title: 'Title1', fbpid: 'User2', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg' });
     currentEntries.push({id: '3', url: '../../samplecontent/images/thumbnails/3.jpg', thumb: '../../samplecontent/images/thumbnails/3.jpg', title: 'Title1', fbpid: 'User3', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg' });
     
-      $div = $('<div class="submit-entry-form"></div>');
+      var $div = $('<div class="submit-entry-form"></div>');
       $div.append($('<div>Current Entries</div>'));
       var $currentEntries = $('<ul id="current-entries"></ul>');
       $.each(currentEntries, function(i, entry) {

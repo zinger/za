@@ -7,8 +7,8 @@
     
     $parentdiv.append($('<div class="page-title">Browse Contests</div>'));
     
-    $searchform = $('<form action="" id="search-form"></form>');
-    $fieldset = $('<fieldset><input type="text" id="search" name="search" /><input type="submit" id="search-submit" value="" /></fieldset>');
+    var $searchform = $('<form action="" id="search-form"></form>');
+    var $fieldset = $('<fieldset><input type="text" id="search" name="search" /><input type="submit" id="search-submit" value="" /></fieldset>');
     $searchform.append($fieldset);
     $parentdiv.append($searchform);
     

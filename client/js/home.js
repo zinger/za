@@ -35,7 +35,7 @@
     var $div = $('<div class="featured-contests"></div>');
     
     $.each (featuredContests, function(i, entry) {
-      $featured = $('<div class="featured-contest" ><img src="'+entry.url+'" width="150" height="75"></img></div>');
+      var $featured = $('<div class="featured-contest" ><img src="'+entry.url+'" width="150" height="75"></img></div>');
       $featured.bind('click', function() {
         $parentdiv.empty();
         za.tempvars.entryid = '1';

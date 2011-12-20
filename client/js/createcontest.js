@@ -65,7 +65,7 @@
         $attrdiv = $createcontestform.append(buildButtonDiv(attr));
         break;
       default:
-        if (idx !== 'pictureurl') $attrdiv = $createcontestform.append(buildInputDiv(attr));
+        if (idx !== 'pictureurl') var $attrdiv = $createcontestform.append(buildInputDiv(attr));
         break;
       }
     });
