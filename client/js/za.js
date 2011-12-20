@@ -1,5 +1,5 @@
 'use strict';
-  
+
 (function($){
   var za;
   if (typeof(za) === 'undefined') {window.za = za = {};}
