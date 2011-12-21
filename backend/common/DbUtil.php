@@ -1,6 +1,7 @@
 <?php
 
 require_once('dbconstants.php');
+require_once('constants.php');
 
 class DbUtil {
 
