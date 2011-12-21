@@ -9,6 +9,7 @@
     
     var margin;
     var contentWidth;
+    var marginV;
     if ($(window).width() > 1200) {
       baseWidth=128;
       baseHeight=96;
