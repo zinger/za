@@ -50,6 +50,9 @@ div.anythingSlider .start-stop:hover, div.anythingSlider .start-stop.hover {
 
 /**** Active State (slider has keyboard focus) ****/
 /* slider window - top & bottom borders, active state */
+div.anythingSlider{
+	width:601px !important;
+}
 div.anythingSlider.activeSlider .anythingWindow {
 	border-color: #7C9127;
 }
@@ -201,4 +204,23 @@ div.anythingSlider, div.anythingSlider .anythingWindow, div.anythingSlider .anyt
 	-o-transition-duration: 0;
 	-moz-transition-duration: 0;
 	-webkit-transition-duration: 0;
+}
+
+.thumbWidth{
+	width:91px !important;
+	height: 68px !important;
+	
+}
+
+#thumbnail1.h-thumb-gallery,
+#thumbnail1 .main-img{
+	height: 68px !important;
+}
+#thumbnail1 .main-img{
+	width:91px !important;
+}
+
+.anythingWindow{top:13px;}
+.infoHeight{
+	height:414px !important;
 }

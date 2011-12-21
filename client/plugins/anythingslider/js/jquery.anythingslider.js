@@ -23,7 +23,12 @@
 
 		// Wraps the ul in the necessary divs and then gives Access to jQuery element
 		base.el = el;
-		base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider"><div class="anythingWindow" /></div>');
+		
+		if($(el).attr("id") == "gallery1"){
+			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider infoHeight"><div class="anythingWindow" /></div>');
+		}else{
+			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider"><div class="anythingWindow" /></div>');
+		}
 
 		// Add a reverse reference to the DOM object
 		base.$el.data("AnythingSlider", base);
@@ -411,7 +416,7 @@
 					// resize panel
 					w = base.width;
 					h = base.height;
-					$(this).css({ width: w, height: h });
+					$(this).css({ width: w, height: h});
 					if (c.length) {
 						if (c[0].tagName === "EMBED") { c.attr(fullsize); } // needed for IE7; also c.length > 1 in IE7
 						if (c[0].tagName === "OBJECT") { c.find('embed').attr(fullsize); }

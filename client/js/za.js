@@ -24,7 +24,8 @@
     if (menuid === 'gallery') { za.Gallery({parentid: menuid}); };
   };
   
-  za.jq = function jq(myid) {
+
+  za.jq = function jq(myid) { 
     return '#' + myid.replace(/(:|\.)/g,'\\$1');
   };
   
@@ -63,7 +64,7 @@
   };
   
   za.entryattrs = { //used for contests gallery as well as contest details gallery
-    id: {id: 'eid'},
+    id: {id: 'eid'}, 
     url: {id: 'url'}, //url of entry
     thumbnail: {id: 'thumb'}, //thumbnail of entry
     title: {id: 'title'},
@@ -109,12 +110,17 @@
     return $divinfo;
   };
   
-  za.buildAnythingSliderGallery = function(galleryid, galleryType, entries) {
+  za.buildAnythingSliderGallery = function(galleryid, galleryType, entries) {    
     var $ul = $('<ul id="'+galleryid+'" class="'+galleryType.cName+'"></ul>');
 
     var attrs = za.entryattrs;
     $.each(entries, function(idx, entry){
-      var $li = $('<li></li>');
+			 
+	  if(galleryid == "thumbnail1")
+	      var $li = $('<li class="thumbWidth"></li>');
+	  else
+   	  	  var $li = $('<li></li>');
+		  
       var $div = $('<div class="gallery-div"></div>');
 
       var imgId = 'gimg' + galleryType.id + idx;
@@ -125,7 +131,7 @@
       } ;
 
       $li.append($div);
-      $ul.append($li);
+      $ul.append($li);     
     });
     
     return $ul;
