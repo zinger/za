@@ -51,7 +51,7 @@ div.anythingSlider .start-stop:hover, div.anythingSlider .start-stop.hover {
 /**** Active State (slider has keyboard focus) ****/
 /* slider window - top & bottom borders, active state */
 div.anythingSlider{
-	width:601px !important;
+	width:600px !important;
 }
 div.anythingSlider.activeSlider .anythingWindow {
 	border-color: #7C9127;
@@ -206,21 +206,35 @@ div.anythingSlider, div.anythingSlider .anythingWindow, div.anythingSlider .anyt
 	-webkit-transition-duration: 0;
 }
 
-.thumbWidth{
-	width:91px !important;
-	height: 68px !important;
-	
-}
-
-#thumbnail1.h-thumb-gallery,
-#thumbnail1 .main-img{
-	height: 68px !important;
+#thumbnail1 .main-img,
+.thumbDim{
+	width:82px !important;
 }
 #thumbnail1 .main-img{
-	width:91px !important;
+	height: 62px !important;
 }
 
-.anythingWindow{top:13px;}
-.infoHeight{
+#thumbnail1.h-thumb-gallery{
+	height: 64px !important;
+}
+
+.thumbDim{
+	margin-right:2px !important;
+	height: 62px !important;
+	border:1px solid #000;
+}
+
+.anythingWindow{
+	top:13px;
+}
+#gallery1 .previewHeight, .infoHeight{
 	height:414px !important;
+}
+
+.thumbWdith{
+	width:800px;
+}
+
+.pagination{
+	float:right;
 }

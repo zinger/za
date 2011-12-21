@@ -26,7 +26,7 @@
       za.showPanel(ui.panel.id);
     });
     
-    $("#tabs").tabs( "option", "selected", 0 );
+    $("#tabs").tabs("option", "selected", 0);
   };
   za.MenuTabs = MenuTabs;
 }(jQuery));

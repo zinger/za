@@ -27,7 +27,7 @@
 		if($(el).attr("id") == "gallery1"){
 			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider infoHeight"><div class="anythingWindow" /></div>');
 		}else{
-			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider"><div class="anythingWindow" /></div>');
+			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider thumbWdith"><div class="anythingWindow" /></div>');
 		}
 
 		// Add a reverse reference to the DOM object

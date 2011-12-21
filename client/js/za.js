@@ -98,7 +98,7 @@
     var $divinfo = $('<div style="width:200px; height:50px; z-index: 99999;"></div>');
     if (galleryType === za.galleryTypes['entrydetail']) {
       $divinfo.append($('<img src="'+entry[attrs.parturl.id]+'" style="width:40px; height:40px; z-index: 99999;"/>'));
-      $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.partname.id]+'</span>'));
+      $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;padding-left: 4px;">'+entry[attrs.partname.id]+'</span>'));
     } else if (galleryType === za.galleryTypes['contests']) {
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.contesttitle.id]+'</span>'));
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.numparts.id]+'</span>'));
@@ -117,9 +117,9 @@
     $.each(entries, function(idx, entry){
 			 
 	  if(galleryid == "thumbnail1")
-	      var $li = $('<li class="thumbWidth"></li>');
-	  else
-   	  	  var $li = $('<li></li>');
+	      var $li = $('<li class="thumbDim"></li>');
+	  else if(galleryid == "gallery1")
+   	  	  var $li = $('<li class="previewHeight"></li>');
 		  
       var $div = $('<div class="gallery-div"></div>');
 
