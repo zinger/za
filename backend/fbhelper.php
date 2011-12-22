@@ -118,6 +118,11 @@ class FBHelper {
     }
     return $photo;
   }
+
+  public static function getScope() {
+    $scope = implode(",", Config::$FB_APP_SCOPE);
+    return $scope;
+  }
   
 }
 

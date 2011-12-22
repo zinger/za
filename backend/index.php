@@ -9,6 +9,8 @@ $logger->info("op = $op");
 
 switch($op) {
   case "create_contest":
+    $files = $_FILES['capFile'];
+    echo $files;
     $result = ContestService::instance()->createContest();
     break;
   case "get_contests_by_creation_date":
