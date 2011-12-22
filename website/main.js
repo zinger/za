@@ -54,7 +54,7 @@
     var left=0;
     var color;
     var images = [];
-             images.push({src: 'images/avant-garde-2-by-3.png'}); //2 by 3
+             images.push({src: 'images/glamour-party-girl-2-by-3.png'}); //2 by 3
      
      
       images.push({src: 'images/vintage-sing-2-by-2.png'}); // 2 by 2
@@ -62,7 +62,7 @@
       images.push({src: 'images/canine-education-4-by-1.png'}); // 4 by 1
 
       
-      images.push({src: 'images/naked-woman-2-by-2.png'}); // 4 by 1
+      images.push({src: 'images/masked-girl-2-by-2.png'}); // 4 by 1
           //  images.push({src: 'images/mother-and-son-photograph-2-by-2.png'}); // 4 by 1
       images.push({src: 'images/classical-dancer-2-by-5.png'}); // 4 by 1
 

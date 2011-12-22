@@ -6,7 +6,31 @@
     var $parentdiv = $( za.jq(args.parentid) );
     var attrs = za.contestattrs;
     var entrytypes = za.entrytypes;
+    /*
+    za.contestattrs = {
+    title: {id: 'name', label: 'Title', type: 'input'},
+    tagline: {id: 'tagl', label: 'Tag Line', type: 'input'},
+    startdate: {id: 'sd', label: 'Start Date', type: 'input'},
+    enddate: {id: 'ed', label: 'End Date', type: 'date'},
+    entrydeadline: {id: 'sed', label: 'Entry Deadline', type: 'date'},
+    iscaption: {id: 'ctype', label: 'Caption Contest', type: 'checkbox'},
+    pictureurl: {id: 'url', label: 'Picture', type: 'input'},
+    entrytype: {id: 'etype', label: 'Entry Type', type: 'radio'},
+    whocanpart: {id: 'whocan', label: 'Who Can Participate?', type: 'radio'},
+    inviteothers: {id: 'inviteothers', label: 'Participants can invite other participants', type: 'checkbox'},
+    details: {id: 'desc', label: 'Details', type: 'textarea'},
+    tags: {id: 'tags', label: 'Tags', type: 'input'}
+  };
+    */
+    var contestData = {name: 'Crazy Fools', tagl:'Craziest Zing Ever', sd:'1/12/2012',
+                       ed:'2/18/2012', sed:'1/30/2012', ctype: '1', etype:'1', whocan: '1',
+                       inviteothers: '1',
+                       desc: 'This is the description',
+                       //'<div style=\"color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; background-image: initial; background-repeat: initial; background-attachment: initial; -webkit-background-clip: initial; -webkit-background-origin: initial; background-color: #ffffff; outline-width: 0px; outline-style: initial; outline-color: initial; background-position: initial initial; margin: 8px;\">\n<p>&nbsp;</p>\n<div style=\"color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; background-image: initial; background-repeat: initial; background-attachment: initial; -webkit-background-clip: initial; -webkit-background-origin: initial; background-color: #ffffff; outline-width: 0px; outline-style: initial; outline-color: initial; margin: 8px;\">\n<div style=\"color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; background-image: initial; background-repeat: initial; background-attachment: initial; -webkit-background-clip: initial; -webkit-background-origin: initial; background-color: #ffffff; outline-width: 0px; outline-style: initial; outline-color: initial; margin: 8px;\">\n<div style=\"color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; background-image: initial; background-repeat: initial; background-attachment: initial; -webkit-background-clip: initial; -webkit-background-origin: initial; background-color: #ffffff; outline-width: 0px; outline-style: initial; outline-color: initial; margin: 8px;\">\n<p>this is not the description</p>\n<hr style=\"cursor: default;\" />\n<p><img style=\"border-style: initial; border-color: initial; cursor: default; border-width: 0px;\" title=\"Embarassed\" src=\"file:///Users/sunilmasand/za/za/client/plugins/tinymce/jscripts/tiny_mce/plugins/emotions/img/smiley-embarassed.gif\" alt=\"Embarassed\" border=\"0\" />&nbsp;Must join this contest!!!! Its a lot of fun</p>\n<h1 style=\"font-size: 2em;\">BOOOOOOO.... Join Because</h1>\n<ol>\n<li><span class=\"Apple-style-span\" style=\"font-size: xx-small;\">You will love it</span></li>\n<li><span class=\"Apple-style-span\" style=\"font-size: xx-small;\">You are insane</span></li>\n<li><span class=\"Apple-style-span\" style=\"font-size: xx-small;\">You are stupid</span></li>\n</ol>\n<div><hr style=\"cursor: default;\" /><span class=\"Apple-style-span\" style=\"font-size: xx-small;\">&radic; this is a special character</span></div>\n</div>\n</div>\n</div>\n<p>&nbsp;</p>\n</div>',
+                       tags: 'these are tags'
+                       };
     
+    $('#name').attr('value', contestData.name);
     $parentdiv.append($('<div class="pageTitle">Create Contest</div>'));
     
     var $createcontestform = $('<div id="create-contest-form"></div>');
@@ -37,7 +61,7 @@
     var buildTextareaDiv = function(attr) {
       var $div = $('<div class="textarea-div"></div>');
           $div.append($('<label for="'+attr.id+'">'+attr.label+'</label>'));
-          $div.append($('<div><textarea rows="5" cols="50" id="'+attr.id+'"></textarea></div>'));
+          $div.append($('<div><textarea rows="5" cols="50" name="'+attr.id+'" id="'+attr.id+'"></textarea></div>'));
           return $div;
     }
     
@@ -90,13 +114,16 @@
           case 'inviteothers':
             jsonobject[attr.id] = $( za.jq(attr.id)).is(':checked');
             break;
+          case 'details':
+            jsonobject[attr.id] = tinyMCE.get(attr.id).getContent();
+            break;
           default:
             jsonobject[attr.id] = $( za.jq(attr.id)).val();
             break;
         }
        });
 
-       alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
+       //alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
 
        $.post( 'http://www.whatsyourzing.com/sunil/zaroot/za/backend/index.php', jsonobject,
           function(data) { 
@@ -115,7 +142,7 @@
     $( za.jq(attrs['iscaption'].id)).change(function() {
       if ($( za.jq(attrs['iscaption'].id)).is(':checked')) {
         var $uploadcaptiondiv = $('<div id="upload-caption-div"></div>');
-        var $uploadcaptionpic = $('<input id="upload-caption-button" type="file" name="files[]" multiple/>') ;
+        var $uploadcaptionpic = $('<input id="upload-caption-button" type="file" name="capFile" multiple/>') ;
         $uploadcaptiondiv.append($uploadcaptionpic);
         $uploadcaptiondiv.insertAfter($(this));
       } else {
@@ -166,6 +193,49 @@
 
     });
     
+    $.each(attrs, function(idx, attr) {
+        switch (idx) {
+          case 'entrytype':
+            if (contestData[attr.id] === za.entrytypes['picture'].value) {
+              $(za.jq(entrytypes['picture'].id)).attr('checked','checked');
+              $(za.jq(entrytypes['picture'].id)).button('refresh');
+            }
+            else if (contestData[attr.id] === za.entrytypes['video'].value) {
+              $(za.jq(entrytypes['video'].id)).attr('checked','checked');
+              $(za.jq(entrytypes['video'].id)).button('refresh');
+            }
+            else if (contestData[attr.id] === za.entrytypes['text'].value) {
+              $(za.jq(entrytypes['text'].id)).attr('checked','checked');
+              $(za.jq(entrytypes['text'].id)).button('refresh');
+            }
+            break;
+          case 'iscaption':
+            if (contestData[attr.id] === '1') 
+              $( za.jq(attr.id)).attr('checked','checked');
+            break;
+          case 'whocanpart':
+            if (contestData[attr.id] === za.whocanpart['everyone'].value) {
+              $(za.jq(za.whocanpart['everyone'].id)).attr('checked','checked');
+              $(za.jq(za.whocanpart['everyone'].id)).button('refresh');
+            } else {
+              $(za.jq(za.whocanpart['restricted'].id)).attr('checked','checked');
+              $(za.jq(za.whocanpart['restricted'].id)).button('refresh');
+            }
+            break;
+          case 'inviteothers':
+            if (contestData[attr.id] === '1') {
+              //$( za.jq(attr.id)).attr('checked','checked');
+              var $invOthers = buildCheckboxDiv(attrs['inviteothers']);
+              $invOthers.insertAfter($('input[name="'+za.contestattrs['whocanpart'].id+'"]').parent());
+              $( za.jq(attr.id)).attr('checked','checked');
+            }
+            break;
+          default:
+            $(za.jq(attr.id)).attr('value', contestData[attr.id]);
+            //jsonobject[attr.id] = $( za.jq(attr.id)).val();
+            break;
+        };
+    });
   };
   za.CreateContest = CreateContest;
 }(jQuery));
