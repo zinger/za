@@ -4,7 +4,48 @@
   var za;
   if (typeof(za) === 'undefined') {window.za = za = {};}
   
+  za.configType = 'DEV';
+  //za.configType = 'STAGE';
+  
+  za.redirectUri = '';
+  za.appId = '';
+  za.fbScope = 'email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
   za.userFbId = '';
+  
+  za.configDev = {
+    appId : '318117531546857',
+   // redirectUri : 'http://localhost:8888/client/html/'
+    redirectUri : 'http://localhost:8888/za/' 
+  };
+  
+  za.configStage = {
+    appId : '188092504602584',
+    //redirectUri : 'http://www.whatsyourzing.com/sangeeta/za/client/html/'
+    redirectUri : 'http://www.whatsyourzing.com/sangeeta/za/'
+  }
+  
+  za.getConfig = function() {
+    return ((za.configType === 'DEV') ? za.configDev : za.configStage);
+  }
+  
+  za.getAppId = function() {
+    if (za.appId === 'undefined' || za.appId === '') {
+      za.appId = za.getConfig().appId;
+    }
+    return za.appId;
+  }
+  
+  za.getRedirectUri = function() {
+    if (za.redirectUri === 'undefined' || za.redirectUri === '') {
+      var config = za.getConfig();
+      za.redirectUri = za.getConfig().redirectUri;
+    }
+    return za.redirectUri;
+  }
+  
+  za.getFbScope = function () {
+    return fbScope;
+  }
   
   za.getUser = function () {
     if (za.userFbId === 'undefined' || za.userFbId === '') {

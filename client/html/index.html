@@ -5,17 +5,23 @@
 <head>
   <meta property="og:title" content="Create Competitions, Showcase your Talent, Get Discovered" />
   <meta property="og:type" content="website" />
+  <!-- STAGE 
   <meta property="og:url" content="http://www.whatsyourzing.com/sangeeta/za/client/html/" />
+  <meta property="og:image" content="http://www.whatsyourzing.com/sangeeta/za/client/images/stage.png" /> 
+  <meta property="fb:app_id" content="188092504602584" /> 
+  -->
 
-  <meta property="og:image" content="http://www.whatsyourzing.com/sangeeta/za/client/images/stage.png" />
+  <!-- DEV -->
+  <meta property="og:url" content="http://localhost:8888/za/client/html/" />
+  <meta property="og:image" content="http://localhost:8888/za/client/images/stage.png" />
+  <meta property="fb:app_id" content="318117531546857" />
+
   <meta property="og:description" content="ZingArena lets you create competitions, gives you an avenue to showcase your talent, discover, and get discovered. All this just for fun or as competitive as you would like it...use your stage and audience the way you like!" />
   <meta property="og:site_name" content="ZingArena"/>
-  <meta property="fb:app_id" content="188092504602584" />
+
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
-  <title>
-		Zing Arena
-  </title>
+  <title>Zing Arena</title>
 
   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -65,7 +71,9 @@
   <script type="text/javascript">
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : '188092504602584', // App ID
+        //appId      : '188092504602584', // App ID
+        //appId      : '318117531546857', // App ID
+        appId      : za.getAppId(), // App ID
        // channelUrl : '//www.whatsyourzing.com/sangeeta/za/client/html/channel.html', // Channel File
         status     : true, // check login status
         cookie     : true, // enable cookies to allow the server to access the session
@@ -74,14 +82,10 @@
       });
       FB.getLoginStatus(function(response) {
         if (response.authResponse) {
-          alert('user ' + response.authResponse.userID + ' accessToken ' + response.authResponse.accessToken);
-//          $.post( 'http://www.whatsyourzing.com/sangeeta/za/backend/fb.php', response.authResponse, 
-  //                 function(data) { alert('fb login response received'); } );
-//TODO get user id and set locally
+          //alert('user ' + response.authResponse.userID + ' accessToken ' + response.authResponse.accessToken);
+          //TODO : Logged in. Now what?
         } else {
-          //window.location.href='http://www.facebook.com/dialog/oauth?client_id=188092504602584&redirect_uri=http://www.whatsyourzing.com/sangeeta/za/client/html/&scope=email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
-          window.location.href='http://www.facebook.com/dialog/oauth?client_id=188092504602584&redirect_uri=http://localhost:8888/client/html/&scope=email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
-          // window.location.href= "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=188092504602584&status=1&cookie=1&oauth=1&scope=email";
+          window.location.href='http://www.facebook.com/dialog/oauth?client_id=za.getAppId()&redirect_uri=za.getRedirectUri()&scope=za.getFbScope()';
        }
       });
       FB.Event.subscribe('edge.create', function(response) { alert('Yeah! Liked ' + response); });
@@ -122,6 +126,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       za.MenuTabs();
+      alert(" appId " + za.getAppId() + " redirectUri " + za.getRedirectUri() + " configType ");
     });
   </script>
 

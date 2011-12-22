@@ -12,17 +12,19 @@ $fb = FBHelper::getFacebook();
 $user = $fb->getUser();
 
 $sr = $fb->getSignedRequest();
-
 //var_dump($sr);
-//var_dump($_RESPONSE);
+
 if ($user) {
+    $logger->info("index.php:found User!");
     $url = 'client/html/index.html';
 } 
 
 if (!$user) {
+  $logger->info("index.php: no User found. Redirect to login url");
   $url = FBHelper::getFBLoginUrl(); 
 } 
 
+$logger->info("index.php: url: " . $url);
 echo "<script type='text/javascript'>window.location.href='$url'</script>";
 
 ?>
