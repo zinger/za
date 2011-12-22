@@ -24,10 +24,10 @@
 		// Wraps the ul in the necessary divs and then gives Access to jQuery element
 		base.el = el;
 		
-		if($(el).attr("id") == "gallery1"){
+		if($(el).attr("id") == "gallery1"){	// Added class infoHeight to adjust height of preview image information
 			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider infoHeight"><div class="anythingWindow" /></div>');
-		}else{
-			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider thumbWdith"><div class="anythingWindow" /></div>');
+		}else if($(el).attr("id") == "thumbnail1"){	// Added class thumbWidth to adjust width of thumbnails
+			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider thumbWidth"><div class="anythingWindow" /></div>');
 		}
 
 		// Add a reverse reference to the DOM object
@@ -66,6 +66,13 @@
 			base.currentPage = o.startPanel = parseInt(o.startPanel,10) || 1; // make sure this isn't a string
 			o.changeBy = parseInt(o.changeBy,10) || 1;
 			base.adj = (o.infiniteSlides) ? 0 : 1; // adjust page limits for infinite or limited modes
+			
+			/*
+			if(base.$el.attr("id") == "thumbnail1")
+				base.width = 82;
+			else
+				base.width = base.$el.width();
+			*/
 			base.width = base.$el.width();
 			base.height = base.$el.height();
 			base.outerPad = [ base.$wrapper.innerWidth() - base.$wrapper.width(), base.$wrapper.innerHeight() - base.$wrapper.height() ];
@@ -416,6 +423,7 @@
 					// resize panel
 					w = base.width;
 					h = base.height;
+					//console.log(i + " : " + w + ", " + h);
 					$(this).css({ width: w, height: h});
 					if (c.length) {
 						if (c[0].tagName === "EMBED") { c.attr(fullsize); } // needed for IE7; also c.length > 1 in IE7
@@ -438,7 +446,15 @@
 				base.panelSize[i] = [w,h,edge];
 				edge += (o.vertical) ? h : w;
 			});
+			
 			// Set total width of slider, Note that this is limited to 32766 by Opera - option removed
+			if(base.$el.attr("id") == "thumbnail1"){
+				var num 	= base.$items.length;
+				var screen 	= parseInt(num/7);
+				
+				screen = (num%7 > 0) ? screen + 1 : screen;
+				edge = 600 * screen
+			}
 			base.$el.css((o.vertical ? 'height' : 'width'), edge);
 		};
 

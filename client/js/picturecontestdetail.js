@@ -94,21 +94,24 @@
       $('#gallery1').anythingSlider(idx);
       return false;
     });
+	var $paginationContianer = $('<div class="paginationContianer"></div>');	// Created pagination container to right align pagination between preview and thumbnail images
     var $pagination = $('<div class="pagination"></div>');
     var $first = $('<a href="#" class="first" data-action="first">&laquo;</a>');
     var $previous = $('<a href="#" class="previous" data-action="previous">&lsaquo;</a>');
     var $pagetext = $('<input type="text" readonly="readonly" data-max-page="40" />');
     var $next = $('<a href="#" class="next" data-action="next">&rsaquo;</a>');
     var $last = $('<a href="#" class="last" data-action="last">&raquo;</a>');
+	var $clr = $('<div class="clr"></div>');	// Created to clear the float effect
     
     $pagination.append($first).append($previous).append($pagetext).append($next).append($last);
+	$paginationContianer.append($pagination).append($clr);	// Wrapped pagination to pagination contianer
 	
-	//$(".anythingSlider:eq(0)").next().append($pagination);
-    $parentdiv.append($pagination);
+	$(".anythingSlider:eq(0)").after($paginationContianer); // Added pagination between preview and thumbnail images
+    //$parentdiv.append($pagination);
     
     $('.pagination').jqPagination({
 		paged: function(page) {
-			var idx = parseInt(page) * 3;
+			var idx = parseInt(page);
 			$("#thumbnail1").anythingSlider(idx);
 		}
     });

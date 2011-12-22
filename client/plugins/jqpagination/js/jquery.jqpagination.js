@@ -52,7 +52,7 @@
 				} else {
 					base.options.max_page = 1;
 				}
-				
+
 			}
 			
 			// if the current-page data attribute is specified this takes priority

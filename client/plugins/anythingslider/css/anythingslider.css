@@ -231,10 +231,15 @@ div.anythingSlider, div.anythingSlider .anythingWindow, div.anythingSlider .anyt
 	height:414px !important;
 }
 
-.thumbWdith{
+.thumbWidth{
 	width:800px;
 }
-
-.pagination{
-	float:right;
+.paginationContianer{
+	margin:10px auto;
+	width:600px;
 }
+.pagination{
+	float:right !important;
+}
+.clr{clear:both;}
+
