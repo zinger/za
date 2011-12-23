@@ -73,6 +73,7 @@
 			else
 				base.width = base.$el.width();
 			*/
+			
 			base.width = base.$el.width();
 			base.height = base.$el.height();
 			base.outerPad = [ base.$wrapper.innerWidth() - base.$wrapper.width(), base.$wrapper.innerHeight() - base.$wrapper.height() ];
@@ -423,7 +424,6 @@
 					// resize panel
 					w = base.width;
 					h = base.height;
-					//console.log(i + " : " + w + ", " + h);
 					$(this).css({ width: w, height: h});
 					if (c.length) {
 						if (c[0].tagName === "EMBED") { c.attr(fullsize); } // needed for IE7; also c.length > 1 in IE7
@@ -443,8 +443,10 @@
 					if (h <= base.outerPad[1]) { h = base.height; } // if height less than the outside padding, then set it to the preset height
 					$(this).css('height', h);
 				}
+				
 				base.panelSize[i] = [w,h,edge];
 				edge += (o.vertical) ? h : w;
+				
 			});
 			
 			// Set total width of slider, Note that this is limited to 32766 by Opera - option removed
