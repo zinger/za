@@ -86,7 +86,7 @@
   
   za.whocanpart = {
     everyone: {id: 'part-all', label: 'Everyone', value: '0'},
-    restricted: {id: 'par-rest', label: 'Invitees Only', value: '1'},
+    restricted: {id: 'par-rest', label: 'Invitees Only', value: '1'}
   };
  
   za.contestattrs = {

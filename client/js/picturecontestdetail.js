@@ -49,8 +49,14 @@
 	thumbnailEntries.push({id: '11', url: '../../samplecontent/images/thumbnails/11.jpg', thumb: '../../samplecontent/images/thumbnails/11.jpg', title: 'Title11', fbpid: 'User11', fbpname: 'fbpname 11', fbpurl: '../../samplecontent/images/thumbnails/11.jpg' });
 	thumbnailEntries.push({id: '12', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
 
-    $parentdiv.append('<div class="contestTitle">'+contestTitle+'</div>');
+    $contestTitle = $('<div class="contestTitle">'+contestTitle+'</div>');
+    $contestTitle.bind('click', function () {
+      $parentdiv.empty();
+      za.ViewContest({parentid: parentid});
+    });
+    $parentdiv.append($contestTitle);
     
+
     var handleFileSelect = function(evt) {
       $dialog.dialog('open');
             return false;
