@@ -102,9 +102,10 @@
     });
 
     $parentdiv.append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'], thumbnailEntries));
+	$parentdiv.append(za.buildAnythingSliderGallery("thumbnail2", za.galleryTypes['vthumb'], thumbnailEntries));
 
     $("#thumbnail1").anythingSlider({
-      showMultiple: 7, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false,//, vertical: true
+      showMultiple: 3, buildNavigation: false, buildStartStop: false, changeBy: 3, infiniteSlides: false,//,vertical: true,
                       onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
                 onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
 	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
@@ -116,7 +117,23 @@
       $('#gallery1').anythingSlider(idx);
       return false;
     });
+	
+	
+	
+	$("#thumbnail2").anythingSlider({
+      showMultiple: 3, buildNavigation: false, buildStartStop: false, changeBy: 3, infiniteSlides: false, vertical: true,
+                      onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
+                onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
+	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
+    });
     
+    $("#thumbnail2 .gallery-div").click(function() {
+      var idx = $(this).children('img.main-img').first().attr('id').substring(5);
+      idx = parseInt(idx) + 1;
+      $('#gallery1').anythingSlider(idx);
+      return false;
+    });
+	   
     var $paginationContianer = $('<div class="paginationContianer"></div>');	// Created pagination container to right align pagination between preview and thumbnail images
     var $pagination = $('<div class="pagination"></div>');
     var $first = $('<a href="#" class="first" data-action="first">&laquo;</a>');
@@ -138,6 +155,8 @@
 			$("#thumbnail1").anythingSlider(idx);
 		}
     });
+	
+	
 	
   };
   za.PictureContestDetail = PictureContestDetail;

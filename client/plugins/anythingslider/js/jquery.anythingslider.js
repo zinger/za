@@ -26,7 +26,7 @@
 		
 		if($(el).attr("id") == "gallery1"){	// Added class infoHeight to adjust height of preview image information
 			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider infoHeight"><div class="anythingWindow" /></div>');
-		}else if($(el).attr("id") == "thumbnail1"){	// Added class thumbWidth to adjust width of thumbnails
+		}else if($(el).attr("id") == "thumbnail1" || $(el).attr("id") == "thumbnail2"){	// Added class thumbWidth to adjust width of thumbnails
 			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider thumbWidth"><div class="anythingWindow" /></div>');
 		}
 
@@ -461,7 +461,7 @@
 			});
 			
 			// Set total width of slider, Note that this is limited to 32766 by Opera - option removed
-			if(base.$el.attr("id") == "thumbnail1"){
+			if(base.$el.attr("id") == "thumbnail1" || base.$el.attr("id") == "thumbnail2"){
 				var num 	= base.$items.length;
 				var screen 	= parseInt(num/7);
 				
