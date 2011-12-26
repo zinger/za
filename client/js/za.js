@@ -165,9 +165,9 @@
     var attrs = za.entryattrs;
     $.each(entries, function(idx, entry){
 
-	  if(galleryid == "thumbnail1" || galleryid == "thumbnail2"){		// Added class thumbDim to set dimension of thumbnail
+	  if(galleryType == za.galleryTypes['hthumb'] || galleryType == za.galleryTypes['vthumb']){		// Added class thumbDim to set dimension of thumbnail
 	      var $li = $('<li class="thumbDim"></li>');
-	  }else if(galleryid == "gallery1"){	// Added class previewHeight to set height of preview image
+	  }else if(galleryType == za.galleryTypes['entrydetail']){	// Added class previewHeight to set height of preview image
    	  	  var $li = $('<li class="previewHeight"></li>');
 	  }
 		  

@@ -146,3 +146,63 @@ fieldset { border: none }
     border-width: 1px;
     background-color: white;
 }
+
+/* clear float effect */
+.clr{clear:both;}
+
+/* shift anythingWindow from top to adjust pagination */
+.anythingWindow{
+	top:13px;
+}
+
+/* set preview and information height */
+.previewHeight, 
+.infoHeight{
+	height:414px !important;
+}
+
+/* thumb container and thumb image dimension */
+.thumbDim .main-img,
+.thumbDim{
+	width:82px !important;
+}
+
+.thumbDim .main-img{
+	height: 62px !important;
+}
+
+.thumbDim{
+	height: 62px !important;
+	margin-right:2px !important;
+	border:1px solid #000;
+}
+
+/* hor thumb gallery height */
+.h-thumb-gallery{
+	height: 64px !important;
+}
+
+/* hor thumb container gallery width */
+.horThumb{
+	width:600px !important;
+}
+
+/* ver thumb container gallery dimension */
+.verThumb{
+	height:460px !important;
+	width:84px !important;
+}
+.verThumb .thumbDim{
+	margin-right:0 !important;
+	margin-bottom:2px !important;
+}
+
+
+/* pagination alignment */
+.paginationContianer{
+	margin:10px auto;
+	width:600px;
+}
+.pagination{
+	float:right !important;
+}

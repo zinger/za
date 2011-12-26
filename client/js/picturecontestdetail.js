@@ -50,13 +50,6 @@
 	thumbnailEntries.push({id: '10', url: '../../samplecontent/images/thumbnails/10.jpg', thumb: '../../samplecontent/images/thumbnails/10.jpg', title: 'Title10', fbpid: 'User10', fbpname: 'fbpname 10', fbpurl: '../../samplecontent/images/thumbnails/10.jpg' });
 	thumbnailEntries.push({id: '11', url: '../../samplecontent/images/thumbnails/11.jpg', thumb: '../../samplecontent/images/thumbnails/11.jpg', title: 'Title11', fbpid: 'User11', fbpname: 'fbpname 11', fbpurl: '../../samplecontent/images/thumbnails/11.jpg' });
 	thumbnailEntries.push({id: '12', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
-		thumbnailEntries.push({id: '13', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
-	thumbnailEntries.push({id: '14', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
-	thumbnailEntries.push({id: '15', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
-	thumbnailEntries.push({id: '16', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
-	thumbnailEntries.push({id: '17', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
-	thumbnailEntries.push({id: '18', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
-
 
    var $contestTitle = $('<div class="contestTitle">'+contestTitle+'</div>');
     $contestTitle.bind('click', function () {
@@ -99,25 +92,27 @@
 	};
     };
     
+	// Preview Gallery
     $parentdiv.append(za.buildAnythingSliderGallery('gallery1', za.galleryTypes['entrydetail'], pictureEntries));
     $("#gallery1").anythingSlider({
       showMultiple: false, buildStartStop: false, buildArrows: true, buildNavigation: false,
       infiniteSlides: false, startPanel: goToSlide,
       onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); toggleRatingPanel(slider, true); },
       onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); toggleRatingPanel(slider, false); },
-      onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
+      onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider);}
     });
-
+	$("#gallery1").parent().parent().addClass("infoHeight");	// Added infoHeight class to adjust information shown under preview image
+	
+	// Horizontal thumbnail
     $parentdiv.append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'], thumbnailEntries));
-	$parentdiv.append(za.buildAnythingSliderGallery("thumbnail2", za.galleryTypes['vthumb'], thumbnailEntries));
-
     $("#thumbnail1").anythingSlider({
-      showMultiple: 7, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false,//, vertical: true
+      showMultiple: false, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false,//,vertical: true,
                       onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
                 onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
 	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
     });
-    
+    $("#thumbnail1").parent().parent().addClass("horThumb");	// Added horThumb class to relevant properties
+	
     $("#thumbnail1 .gallery-div").click(function() {
       var idx = $(this).children('img.main-img').first().attr('id').substring(5);
       idx = parseInt(idx) + 1;
@@ -125,22 +120,24 @@
       return false;
     });
 	
-	
-	
+	// Vertical thumbnail
+	$parentdiv.append(za.buildAnythingSliderGallery("thumbnail2", za.galleryTypes['vthumb'], thumbnailEntries));
 	$("#thumbnail2").anythingSlider({
-      showMultiple: 3, buildNavigation: false, buildStartStop: false, changeBy: 3, infiniteSlides: false, vertical: true,
+      showMultiple: false, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false, vertical: true,
                       onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
                 onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
 	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
     });
-    
+    $("#thumbnail2").parent().parent().addClass("verThumb");	// Added verThumb class to relevant properties
+	
     $("#thumbnail2 .gallery-div").click(function() {
       var idx = $(this).children('img.main-img').first().attr('id').substring(5);
       idx = parseInt(idx) + 1;
       $('#gallery1').anythingSlider(idx);
       return false;
     });
-	   
+	
+	// Pagination
     var $paginationContianer = $('<div class="paginationContianer"></div>');	// Created pagination container to right align pagination between preview and thumbnail images
     var $pagination = $('<div class="pagination"></div>');
     var $first = $('<a href="#" class="first" data-action="first">&laquo;</a>');
@@ -154,20 +151,13 @@
     $paginationContianer.append($pagination).append($clr);	// Wrapped pagination to pagination contianer
 	
     $(".anythingSlider:eq(0)").after($paginationContianer); // Added pagination between preview and thumbnail images
-    $parentdiv.append($pagination);
     
     $('.pagination').jqPagination({
 		paged: function(page) {
-			alert("page is " + page);
-			var idx = parseInt(page) * 7;
-			var idxString = '"'+idx+'"';
-			$("#thumbnail1").data('AnythingSlider').goForward();
-			//$("#thumbnail1").anythingSlider(14);
-			return false;
+			var idx = parseInt(page) * 3;
+			$("#thumbnail1").anythingSlider(idx);
 		}
     });
-	
-	
 	
   };
   za.PictureContestDetail = PictureContestDetail;

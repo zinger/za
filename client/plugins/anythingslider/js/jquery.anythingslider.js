@@ -26,7 +26,6 @@
 
 		base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider"><div class="anythingWindow" /></div>');
 
-
 		// Add a reverse reference to the DOM object
 		base.$el.data("AnythingSlider", base);
 
