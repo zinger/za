@@ -111,7 +111,7 @@
     
     $('.pagination').jqPagination({
 		paged: function(page) {
-			var idx = parseInt(page);
+			var idx = parseInt(page) * 3;
 			$("#thumbnail1").anythingSlider(idx);
 		}
     });

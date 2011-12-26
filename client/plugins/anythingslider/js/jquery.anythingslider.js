@@ -37,7 +37,7 @@
 
 			// Added "o" to be used in the code instead of "base.options" which doesn't get modifed by the compiler - reduces size by ~1k
 			base.options = o = $.extend({}, $.anythingSlider.defaults, options);
-
+			
 			base.initialized = false;
 			if ($.isFunction(o.onBeforeInitialize)) { base.$el.bind('before_initialize', o.onBeforeInitialize); }
 			base.$el.trigger('before_initialize', base);
@@ -195,7 +195,7 @@
 			base.dir = (o.vertical) ? 'top' : 'left';
 			o.showMultiple = (o.vertical) ? 1 : parseInt(o.showMultiple,10) || 1; // only integers allowed
 			o.navigationSize = (o.navigationSize === false) ? 0 : parseInt(o.navigationSize,10) || 0;
-
+		
 			if (o.showMultiple > 1) {
 				if (o.showMultiple > base.pages) { o.showMultiple = base.pages; }
 				base.adjustMultiple = (o.infiniteSlides && base.pages > 1) ? 0 : o.showMultiple - 1;
@@ -407,7 +407,7 @@
 
 		// Set panel dimensions to either resize content or adjust panel to content
 		base.setDimensions = function(){
-			var w, h, c, edge = 0,
+			var w, h, c, edge = 0, edge2 = 0,
 				fullsize = { width: '100%', height: '100%' },
 				// determine panel width
 				pw = (o.showMultiple > 1) ? base.width || base.$window.width()/o.showMultiple : base.$window.width(),
@@ -443,6 +443,17 @@
 					if (h <= base.outerPad[1]) { h = base.height; } // if height less than the outside padding, then set it to the preset height
 					$(this).css('height', h);
 				}
+				
+				/*
+				if(base.$el.attr("id") == "thumbnail1"){
+					base.panelSize[i] = [w,h,edge2];
+					edge2 += (o.vertical) ? h : 82;
+					console.log(edge2);
+				}else{
+					base.panelSize[i] = [w,h,edge];
+					edge += (o.vertical) ? h : w;
+				}
+				*/
 				
 				base.panelSize[i] = [w,h,edge];
 				edge += (o.vertical) ? h : w;
@@ -584,7 +595,9 @@
 			if (base.pages < 1 || page === 0 || isNaN(page)) { return; }
 			if (page > base.pages + 1 - base.adj) { page = base.pages - base.adj; }
 			if (page < base.adj ) { page = 1; }
-
+			
+			console.log("page: " + page);
+			
 			// Set visual
 			if (o.buildNavigation){
 				base.$nav
