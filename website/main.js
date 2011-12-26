@@ -64,7 +64,7 @@
             images.push({src: 'images/indian-girls-smiling-2-by-2.png'});
 
           //  images.push({src: 'images/mother-and-son-photograph-2-by-2.png'}); // 4 by 1
-      images.push({src: 'images/classical-dancer-2-by-5.png'}); // 4 by 1
+      images.push({src: 'images/pair-of-dancers-2-by-5.png'}); // 4 by 1
 
 //images.push({src: 'images/photographer-2-by-2.png'}); // 2 by 2
        images.push({src: 'images/juggling-blind-2-by-3.png'}); // 2 by 3
@@ -72,7 +72,7 @@
 
  //images.push({src: 'images/ball-dance-2-by-3.png'}); // 2 by 3
 
-           images.push({src: 'images/masked-girl-2-by-2.png'}); // 4 by 1
+           images.push({src: 'images/Bigstock_10656812-2-by-2.png'}); // 4 by 1
 
        //     images.push({src: 'images/indian-girls-2-by-2.png'});
             images.push({src: 'images/canine-education-4-by-1.png'}); // 4 by 1

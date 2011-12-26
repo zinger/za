@@ -23,12 +23,7 @@
 
 		// Wraps the ul in the necessary divs and then gives Access to jQuery element
 		base.el = el;
-		
-		if($(el).attr("id") == "gallery1"){	// Added class infoHeight to adjust height of preview image information
-			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider infoHeight"><div class="anythingWindow" /></div>');
-		}else if($(el).attr("id") == "thumbnail1"){	// Added class thumbWidth to adjust width of thumbnails
-			base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider thumbWidth"><div class="anythingWindow" /></div>');
-		}
+		base.$el = $(el).addClass('anythingBase').wrap('<div class="anythingSlider"><div class="anythingWindow" /></div>');
 
 		// Add a reverse reference to the DOM object
 		base.$el.data("AnythingSlider", base);
@@ -37,7 +32,7 @@
 
 			// Added "o" to be used in the code instead of "base.options" which doesn't get modifed by the compiler - reduces size by ~1k
 			base.options = o = $.extend({}, $.anythingSlider.defaults, options);
-			
+
 			base.initialized = false;
 			if ($.isFunction(o.onBeforeInitialize)) { base.$el.bind('before_initialize', o.onBeforeInitialize); }
 			base.$el.trigger('before_initialize', base);
@@ -66,14 +61,6 @@
 			base.currentPage = o.startPanel = parseInt(o.startPanel,10) || 1; // make sure this isn't a string
 			o.changeBy = parseInt(o.changeBy,10) || 1;
 			base.adj = (o.infiniteSlides) ? 0 : 1; // adjust page limits for infinite or limited modes
-			
-			/*
-			if(base.$el.attr("id") == "thumbnail1")
-				base.width = 82;
-			else
-				base.width = base.$el.width();
-			*/
-			
 			base.width = base.$el.width();
 			base.height = base.$el.height();
 			base.outerPad = [ base.$wrapper.innerWidth() - base.$wrapper.width(), base.$wrapper.innerHeight() - base.$wrapper.height() ];
@@ -195,7 +182,7 @@
 			base.dir = (o.vertical) ? 'top' : 'left';
 			o.showMultiple = (o.vertical) ? 1 : parseInt(o.showMultiple,10) || 1; // only integers allowed
 			o.navigationSize = (o.navigationSize === false) ? 0 : parseInt(o.navigationSize,10) || 0;
-		
+
 			if (o.showMultiple > 1) {
 				if (o.showMultiple > base.pages) { o.showMultiple = base.pages; }
 				base.adjustMultiple = (o.infiniteSlides && base.pages > 1) ? 0 : o.showMultiple - 1;
@@ -407,7 +394,7 @@
 
 		// Set panel dimensions to either resize content or adjust panel to content
 		base.setDimensions = function(){
-			var w, h, c, edge = 0, edge2 = 0,
+			var w, h, c, edge = 0,
 				fullsize = { width: '100%', height: '100%' },
 				// determine panel width
 				pw = (o.showMultiple > 1) ? base.width || base.$window.width()/o.showMultiple : base.$window.width(),
@@ -424,7 +411,7 @@
 					// resize panel
 					w = base.width;
 					h = base.height;
-					$(this).css({ width: w, height: h});
+					$(this).css({ width: w, height: h });
 					if (c.length) {
 						if (c[0].tagName === "EMBED") { c.attr(fullsize); } // needed for IE7; also c.length > 1 in IE7
 						if (c[0].tagName === "OBJECT") { c.find('embed').attr(fullsize); }
@@ -443,31 +430,10 @@
 					if (h <= base.outerPad[1]) { h = base.height; } // if height less than the outside padding, then set it to the preset height
 					$(this).css('height', h);
 				}
-				
-				/*
-				if(base.$el.attr("id") == "thumbnail1"){
-					base.panelSize[i] = [w,h,edge2];
-					edge2 += (o.vertical) ? h : 82;
-					console.log(edge2);
-				}else{
-					base.panelSize[i] = [w,h,edge];
-					edge += (o.vertical) ? h : w;
-				}
-				*/
-				
 				base.panelSize[i] = [w,h,edge];
 				edge += (o.vertical) ? h : w;
-				
 			});
-			
 			// Set total width of slider, Note that this is limited to 32766 by Opera - option removed
-			if(base.$el.attr("id") == "thumbnail1"){
-				var num 	= base.$items.length;
-				var screen 	= parseInt(num/7);
-				
-				screen = (num%7 > 0) ? screen + 1 : screen;
-				edge = 600 * screen
-			}
 			base.$el.css((o.vertical ? 'height' : 'width'), edge);
 		};
 
@@ -595,9 +561,7 @@
 			if (base.pages < 1 || page === 0 || isNaN(page)) { return; }
 			if (page > base.pages + 1 - base.adj) { page = base.pages - base.adj; }
 			if (page < base.adj ) { page = 1; }
-			
-			console.log("page: " + page);
-			
+
 			// Set visual
 			if (o.buildNavigation){
 				base.$nav

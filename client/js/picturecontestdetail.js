@@ -50,6 +50,13 @@
 	thumbnailEntries.push({id: '10', url: '../../samplecontent/images/thumbnails/10.jpg', thumb: '../../samplecontent/images/thumbnails/10.jpg', title: 'Title10', fbpid: 'User10', fbpname: 'fbpname 10', fbpurl: '../../samplecontent/images/thumbnails/10.jpg' });
 	thumbnailEntries.push({id: '11', url: '../../samplecontent/images/thumbnails/11.jpg', thumb: '../../samplecontent/images/thumbnails/11.jpg', title: 'Title11', fbpid: 'User11', fbpname: 'fbpname 11', fbpurl: '../../samplecontent/images/thumbnails/11.jpg' });
 	thumbnailEntries.push({id: '12', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
+		thumbnailEntries.push({id: '13', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
+	thumbnailEntries.push({id: '14', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
+	thumbnailEntries.push({id: '15', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
+	thumbnailEntries.push({id: '16', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
+	thumbnailEntries.push({id: '17', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
+	thumbnailEntries.push({id: '18', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
+
 
    var $contestTitle = $('<div class="contestTitle">'+contestTitle+'</div>');
     $contestTitle.bind('click', function () {
@@ -104,7 +111,7 @@
     $parentdiv.append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'], thumbnailEntries));
 
     $("#thumbnail1").anythingSlider({
-      showMultiple: 3, buildNavigation: false, buildStartStop: false, changeBy: 3, infiniteSlides: false,//, vertical: true
+      showMultiple: 7, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false,//, vertical: true
                       onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
                 onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
 	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
@@ -130,12 +137,16 @@
     $paginationContianer.append($pagination).append($clr);	// Wrapped pagination to pagination contianer
 	
     $(".anythingSlider:eq(0)").after($paginationContianer); // Added pagination between preview and thumbnail images
-    //$parentdiv.append($pagination);
+    $parentdiv.append($pagination);
     
     $('.pagination').jqPagination({
 		paged: function(page) {
-			var idx = parseInt(page) * 3;
-			$("#thumbnail1").anythingSlider(idx);
+			alert("page is " + page);
+			var idx = parseInt(page) * 7;
+			var idxString = '"'+idx+'"';
+			$("#thumbnail1").data('AnythingSlider').goForward();
+			//$("#thumbnail1").anythingSlider(14);
+			return false;
 		}
     });
 	

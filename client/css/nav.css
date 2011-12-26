@@ -22,7 +22,7 @@
 
 .h-thumb-gallery {
     height: 40px;
-    width: 200px;
+    width: 82px;
 }
 
 .h-thumb-gallery .gallery-div, .h-thumb-gallery li {
@@ -110,4 +110,39 @@ fieldset { border: none }
     background-image: none !important;
     background: red !important;
     color: white;
+}
+.rating-info {
+    position: absolute; 
+    top: 4px;
+    right: 2px;
+    width: 150px;
+    height: 40px;
+    z-index: 10 !important;
+    background-color: white;
+}
+
+.avg-score {
+    border: solid;
+    border-width: 1px;
+    border-color: blue;
+    padding: 0 2px 0 2px;
+    font-size: 11pt;
+}
+
+.vote-count {
+    font-size: 8pt;
+    top: 40px;
+}
+
+.rank {
+    float: right;
+}
+
+.send-gift {
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    border: solid;
+    border-width: 1px;
+    background-color: white;
 }
