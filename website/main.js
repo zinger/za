@@ -59,10 +59,10 @@
      
       images.push({src: 'images/vintage-sing-2-by-2.png'}); // 2 by 2
       images.push({src: 'images/young-artists-4-by-2.png'}); // 4 by 2
-      images.push({src: 'images/canine-education-4-by-1.png'}); // 4 by 1
+      images.push({src: 'images/beautiful-black-4-by-1.png'}); // 4 by 1
 
-      
-      images.push({src: 'images/masked-girl-2-by-2.png'}); // 4 by 1
+            images.push({src: 'images/indian-girls-smiling-2-by-2.png'});
+
           //  images.push({src: 'images/mother-and-son-photograph-2-by-2.png'}); // 4 by 1
       images.push({src: 'images/classical-dancer-2-by-5.png'}); // 4 by 1
 
@@ -72,11 +72,11 @@
 
  //images.push({src: 'images/ball-dance-2-by-3.png'}); // 2 by 3
 
-     
+           images.push({src: 'images/masked-girl-2-by-2.png'}); // 4 by 1
+
        //     images.push({src: 'images/indian-girls-2-by-2.png'});
-      images.push({src: 'images/turkey-2-by-2.png'});
-            images.push({src: 'images/mountainbike-4-by-1.png'}); // 4 by 1
-                        images.push({src: 'images/title3.png'}); // 4 by 1
+            images.push({src: 'images/canine-education-4-by-1.png'}); // 4 by 1
+                        images.push({src: 'images/title.png'}); // 4 by 1
 
     for (var i=0; i<11; i++) {
       var id = 'div' + i;

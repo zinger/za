@@ -54,15 +54,21 @@
     return za.userFbId;
   }
   za.menus = {
-    home: {display: 'Home', href: '#home'},
-    contests: {display: 'Contests', href: '#contests'},
-    gallery: {display: 'Gallery', href: '#gallery'}
+    home: {display: 'Home', href: '#za-home'},
+    contests: {display: 'Contests', href: '#za-contests'},
+    gallery: {display: 'Gallery', href: '#za-gallery'},
+    hall: {display: 'Hall of Fame', href: '#za-hall'},
+    coins: {display: 'Get Zing Coins', href: '#za-coins'},
+    invite: {display: 'Invite', href: '#za-invite'}
   };
   
   za.showPanel = function(menuid) {
     if (menuid === 'home') { za.Home({parentid: menuid});};
     if (menuid === 'contests') { za.Contests({parentid: menuid});};
     if (menuid === 'gallery') { za.Gallery({parentid: menuid}); };
+    if (menuid === 'hall') { za.Hall({parentid: menuid}); };
+    if (menuid === 'coins') { za.Coins({parentid: menuid}); };
+    if (menuid === 'invite') { za.Invite({parentid: menuid}); };
   };
   
 
@@ -86,7 +92,7 @@
   
   za.whocanpart = {
     everyone: {id: 'part-all', label: 'Everyone', value: '0'},
-    restricted: {id: 'par-rest', label: 'Invitees Only', value: '1'},
+    restricted: {id: 'par-rest', label: 'Invitees Only', value: '1'}
   };
  
   za.contestattrs = {
@@ -114,7 +120,8 @@
     parturl: {id: 'fbpurl'}, //url of participant
     cid: {id: 'cid'}, //contest id
     contesttitle: {id: 'ctitle'},
-    numparts: {id: 'numparts'}
+    numparts: {id: 'numparts'},
+    myvote: {id: 'myvote'}
   };
 
   za.entrystats = {
@@ -148,6 +155,7 @@
     }
     $divinfo.append($('<input class="entry-id" type="hidden" value="'+entry[attrs.id.id]+'" />'));
     $divinfo.append($('<input class="fbuser-id" type="hidden" value="'+entry[attrs.fbpartid.id]+'" />'));
+    $divinfo.append($('<input id="myvote" type="hidden" value="'+entry[attrs.myvote.id]+'" />'));
     return $divinfo;
   };
   
@@ -184,17 +192,35 @@
     var partName = args.partName;
     var $rateRoot = $('<div id="rate-root"></div>');
     $rateRoot.append($('<div class="rate-panel-title">Vote For '+partName+'</div>'));
-    $rateRoot.append($('<span class="no">No Zing</span>'));
+    //$rateRoot.append($('<span class="no">No Zing</span>'));
     
-    for (var i=1; i<=10; i++) {
+    for (var i=0; i<=11; i++) {
       var id = "rating-rating-"+i;
       var label = i;
-      $rateRoot.append($('<label for="'+id+'">'+label+'</label>'));
-      var $input = $('<input type="radio" name="rating" value="1" id="'+id+'" value="'+i+'" class="radio" />');
+      if (i === 0) {
+        $rateRoot.append($('<label for="'+id+'" class="rating-button">No Zing</label>'));
+      } else if (i === 11) {
+        $rateRoot.append($('<label for="'+id+'" class="rating-button">Sizzling</label>'));
+      } else {
+        $rateRoot.append($('<label for="'+id+'" class="rating-button">'+label+'</label>'));
+      }
+      var $input = $('<input type="radio" name="rating" value="'+i+'" id="'+id+'" value="'+i+'" />');
+      $input.bind('click', function() {
+      if ($('input[name="rating"]:checked').val() === '0') {
+	$("#rating-rating-1").attr('checked','checked');
+	$("#rating-rating-1").button('refresh');
+	alert("No Zing was clicked");
+      } else if ($('input[name="rating"]:checked').val() === '11') {
+	$("#rating-rating-10").attr('checked','checked');
+	$("#rating-rating-10").button('refresh');
+	alert("Sizzling was clicked");
+      } else {
+        alert($('input[name="rating"]:checked').val() + " was clicked");
+      }     
+    });
       $rateRoot.append($input);
-      //$rateRoot.append($('<label class="rate-label" id="rating-label-"'+i+'">'));
     }
-    $rateRoot.append($('<span class="yes">Sizzling</span>'));
+    
     return $rateRoot;
   };
   

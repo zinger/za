@@ -106,3 +106,8 @@ fieldset { border: none }
 .entry-li {
     float: left;
 }
+.rating-button {
+    background-image: none !important;
+    background: red !important;
+    color: white;
+}

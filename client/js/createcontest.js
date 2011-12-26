@@ -30,7 +30,6 @@
                        tags: 'these are tags'
                        };
     
-    $('#name').attr('value', contestData.name);
     $parentdiv.append($('<div class="pageTitle">Create Contest</div>'));
     
     var $createcontestform = $('<div id="create-contest-form"></div>');
