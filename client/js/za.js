@@ -165,7 +165,7 @@
     var attrs = za.entryattrs;
     $.each(entries, function(idx, entry){
 
-	  if(galleryid == "thumbnail1"){		// Added class thumbDim to set dimension of thumbnail
+	  if(galleryid == "thumbnail1" || galleryid == "thumbnail2"){		// Added class thumbDim to set dimension of thumbnail
 	      var $li = $('<li class="thumbDim"></li>');
 	  }else if(galleryid == "gallery1"){	// Added class previewHeight to set height of preview image
    	  	  var $li = $('<li class="previewHeight"></li>');
