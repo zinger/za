@@ -104,7 +104,7 @@
     $parentdiv.append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'], thumbnailEntries));
 
     $("#thumbnail1").anythingSlider({
-      showMultiple: 3, buildNavigation: false, buildStartStop: false, changeBy: 3, infiniteSlides: false,//, vertical: true
+      showMultiple: 7, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false,//, vertical: true
                       onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
                 onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
 	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
