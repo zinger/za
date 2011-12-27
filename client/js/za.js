@@ -164,11 +164,12 @@
 
     var attrs = za.entryattrs;
     $.each(entries, function(idx, entry){
-
-	  if(galleryType == za.galleryTypes['hthumb'] || galleryType == za.galleryTypes['vthumb']){		// Added class thumbDim to set dimension of thumbnail
-	      var $li = $('<li class="thumbDim"></li>');
-	  }else if(galleryType == za.galleryTypes['entrydetail']){	// Added class previewHeight to set height of preview image
-   	  	  var $li = $('<li class="previewHeight"></li>');
+      var $li = $('<li></li>');
+      
+	  if(galleryType === za.galleryTypes['hthumb'] || galleryType === za.galleryTypes['vthumb']){
+            $li.addClass('thumbDim'); // Added class thumbDim to set dimension of thumbnail
+	  } else if (galleryType === za.galleryTypes['entrydetail'] ){	// Added class previewHeight to set height of preview image
+   	    $li.addClass('previewHeight');
 	  }
 		  
       var $div = $('<div class="gallery-div"></div>');
@@ -209,11 +210,9 @@
       if ($('input[name="rating"]:checked').val() === '0') {
 	$("#rating-rating-1").attr('checked','checked');
 	$("#rating-rating-1").button('refresh');
-	alert("No Zing was clicked");
       } else if ($('input[name="rating"]:checked').val() === '11') {
 	$("#rating-rating-10").attr('checked','checked');
 	$("#rating-rating-10").button('refresh');
-	alert("Sizzling was clicked");
       } else {
         alert($('input[name="rating"]:checked').val() + " was clicked");
       }     

@@ -83,15 +83,9 @@
       else var $base = slider.$targetPage;
       var myvote;
       $base.find('#myvote').each(function(){ myvote = $(this).val(); })
-      if (myvote === '-1') {
-	  alert("coming in myvote 1 " + myvote );
-	  $("#rate-root").show();
-	} else {
-	  alert("coming in myvote 2 " + myvote);
-	  $("#rate-root").hide();
-	};
+      if (myvote === '-1') { $("#rate-root").show(); } else { $("#rate-root").hide(); };
     };
-    
+
 	// Preview Gallery
     $parentdiv.append(za.buildAnythingSliderGallery('gallery1', za.galleryTypes['entrydetail'], pictureEntries));
     $("#gallery1").anythingSlider({
@@ -102,7 +96,7 @@
       onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider);}
     });
 	$("#gallery1").parent().parent().addClass("infoHeight");	// Added infoHeight class to adjust information shown under preview image
-	
+
 	// Horizontal thumbnail
     $parentdiv.append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'], thumbnailEntries));
     $("#thumbnail1").anythingSlider({
@@ -121,12 +115,12 @@
     });
 	
 	// Vertical thumbnail
-	$parentdiv.append(za.buildAnythingSliderGallery("thumbnail2", za.galleryTypes['vthumb'], thumbnailEntries));
-	$("#thumbnail2").anythingSlider({
-      showMultiple: false, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false, vertical: true,
-                      onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
-                onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
-	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
+    $parentdiv.append(za.buildAnythingSliderGallery("thumbnail2", za.galleryTypes['vthumb'], thumbnailEntries));
+    $("#thumbnail2").anythingSlider({
+    showMultiple: false, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false, vertical: true,
+		  onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
+	    onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
+	    onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
     });
     $("#thumbnail2").parent().parent().addClass("verThumb");	// Added verThumb class to relevant properties
 	
