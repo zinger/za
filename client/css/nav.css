@@ -150,9 +150,50 @@ fieldset { border: none }
 /* clear float effect */
 .clr{clear:both;}
 
+/* containers for hor and ver gallery */
+.galleryContainer {
+	width:890px;
+	margin:0 auto;
+}
+.galleryContainer .col1{
+	float:left;
+	width:190px;
+	margin-top: 41px;
+}
+.galleryContainer .col2{
+	float:left;
+	width:700px;
+}
+
 /* shift anythingWindow from top to adjust pagination */
 .anythingWindow{
 	top:13px;
+}
+
+/* vertical thumbnail arrow alignment */
+.verThumb.anythingSlider .anythingWindow {
+	border:none !important;
+    border-left: 3px solid #777777 !important;
+    border-right: 3px solid #777777 !important;
+}
+.verThumb.anythingSlider .arrow.back{
+	top:0 !important;
+}
+.verThumb.anythingSlider .arrow.back a{
+	margin: -32px 0 0 22px;
+	background:url(../plugins/anythingslider/images/vertical.png) no-repeat !important;
+}
+.verThumb.anythingSlider .arrow.forward{
+	left: 22px;
+    top: 473px !important;
+}
+.verThumb.anythingSlider .arrow.forward a{
+	margin:0;
+	background:url(../plugins/anythingslider/images/vertical.png) no-repeat 0 -44px !important;
+}
+.verThumb.anythingSlider .arrow a{	
+	height: 45px;
+    width: 140px;
 }
 
 /* set preview and information height */

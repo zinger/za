@@ -98,9 +98,18 @@
       $div.append($('<div class="img-trend"></div>'));
       $("#gallery1").parent().append($div);
     };
-
+	
+	// Following code for wrap ver thumb in col1 and preview container & hor thumb in col2
+	var $galleryContainer = $("<div class='galleryContainer'></div>");
+	var $col1 = $("<div class='col1'></div>");
+	var $col2 = $("<div class='col2'></div>");
+	var $clr  = $('<div class="clr"></div>');
+	
+	$parentdiv.append($galleryContainer);
+	$galleryContainer.append($col1).append($col2).append($clr);
+	
 	// Preview Gallery
-    $parentdiv.append(za.buildAnythingSliderGallery('gallery1', za.galleryTypes['entrydetail'], pictureEntries));
+    $col2.append(za.buildAnythingSliderGallery('gallery1', za.galleryTypes['entrydetail'], pictureEntries));
     $("#gallery1").anythingSlider({
       showMultiple: false, buildStartStop: false, buildArrows: true, buildNavigation: false,
       infiniteSlides: false, startPanel: goToSlide,
@@ -111,7 +120,7 @@
 	$("#gallery1").parent().parent().addClass("infoHeight");	// Added infoHeight class to adjust information shown under preview image
 
 	// Horizontal thumbnail
-    $parentdiv.append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'], thumbnailEntries));
+    $col2.append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'], thumbnailEntries));
     $("#thumbnail1").anythingSlider({
       showMultiple: false, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false,//,vertical: true,
                       onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
@@ -128,7 +137,7 @@
     });
 	
 	// Vertical thumbnail
-    $parentdiv.append(za.buildAnythingSliderGallery("thumbnail2", za.galleryTypes['vthumb'], thumbnailEntries));
+    $col1.append(za.buildAnythingSliderGallery("thumbnail2", za.galleryTypes['vthumb'], thumbnailEntries));
     $("#thumbnail2").anythingSlider({
     showMultiple: false, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false, vertical: true,
 		  onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
@@ -152,13 +161,13 @@
     var $pagetext = $('<input type="text" readonly="readonly" data-max-page="40" />');
     var $next = $('<a href="#" class="next" data-action="next">&rsaquo;</a>');
     var $last = $('<a href="#" class="last" data-action="last">&raquo;</a>');
-	var $clr = $('<div class="clr"></div>');	// Created to clear the float effect
+	$clr = $('<div class="clr"></div>');	// Created to clear the float effect
     
     $pagination.append($first).append($previous).append($pagetext).append($next).append($last);
     $paginationContianer.append($pagination).append($clr);	// Wrapped pagination to pagination contianer
     $paginationContianer.append('<input type="hidden" id="thumbnail1page" value="1"></input>');
 	
-    $(".anythingSlider:eq(0)").after($paginationContianer); // Added pagination between preview and thumbnail images
+    $(".col2 .anythingSlider:eq(0)").after($paginationContianer); // Added pagination between preview and thumbnail images
     
     $('.pagination').jqPagination({
 		paged: function(page) {
