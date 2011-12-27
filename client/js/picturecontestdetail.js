@@ -156,13 +156,19 @@
     
     $pagination.append($first).append($previous).append($pagetext).append($next).append($last);
     $paginationContianer.append($pagination).append($clr);	// Wrapped pagination to pagination contianer
+    $paginationContianer.append('<input type="hidden" id="thumbnail1page" value="1"></input>');
 	
     $(".anythingSlider:eq(0)").after($paginationContianer); // Added pagination between preview and thumbnail images
     
     $('.pagination').jqPagination({
 		paged: function(page) {
-			var idx = parseInt(page) * 3;
-			$("#thumbnail1").anythingSlider(idx);
+		// need to add logic if page is 1 or 40 then dont use goForward or go Back.
+		alert("requested page is" + page );
+		  if (parseInt(page) > parseInt($("#thumbnail1page").val())) 
+		    $("#thumbnail1").data('AnythingSlider')['goForward']();
+		  else
+		    $("#thumbnail1").data('AnythingSlider')['goBack']();
+		  $("#thumbnail1page").val(page);
 		}
     });
 	
