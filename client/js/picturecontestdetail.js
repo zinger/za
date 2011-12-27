@@ -78,12 +78,25 @@
       $(this).button();
     });
     
-    var toggleRatingPanel = function(slider, invokedByInit) {
+    var showMiscInfo = function(slider, invokedByInit) {
       if (invokedByInit) var $base = slider.$el.find('.panel').eq(slider.options.startPanel);
       else var $base = slider.$targetPage;
       var myvote;
       $base.find('#myvote').each(function(){ myvote = $(this).val(); })
-      if (myvote === '-1') { $("#rate-root").show(); } else { $("#rate-root").hide(); };
+      if (myvote === '-1') $("#rate-root").show(); else $("#rate-root").hide();
+      showRatingInfo();
+      $("#gallery1").parent().append($('<div class="send-gift">Send a gift</div>'));
+    };
+    
+    var showRatingInfo = function() {
+      if ($(".rating-info")) $(".rating-info").remove();
+      var $div = $('<div class="rating-info"></div>');
+      $div.append($('<div class="votes"></div>'));
+      $div.append($('<span class="avg-score">'+score+'</span>'));
+      $div.append($('<span class="vote-count">'+voteCount+' votes</span>'));
+      $div.append($('<div class="rank">#'+rank+'</div>'));
+      $div.append($('<div class="img-trend"></div>'));
+      $("#gallery1").parent().append($div);
     };
 
 	// Preview Gallery
@@ -91,8 +104,8 @@
     $("#gallery1").anythingSlider({
       showMultiple: false, buildStartStop: false, buildArrows: true, buildNavigation: false,
       infiniteSlides: false, startPanel: goToSlide,
-      onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); toggleRatingPanel(slider, true); },
-      onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); toggleRatingPanel(slider, false); },
+      onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); showMiscInfo(slider, true); },
+      onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); showMiscInfo(slider, false); },
       onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider);}
     });
 	$("#gallery1").parent().parent().addClass("infoHeight");	// Added infoHeight class to adjust information shown under preview image
