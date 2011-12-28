@@ -51,7 +51,7 @@
 	thumbnailEntries.push({id: '11', url: '../../samplecontent/images/thumbnails/11.jpg', thumb: '../../samplecontent/images/thumbnails/11.jpg', title: 'Title11', fbpid: 'User11', fbpname: 'fbpname 11', fbpurl: '../../samplecontent/images/thumbnails/11.jpg' });
 	thumbnailEntries.push({id: '12', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
 
-   var $contestTitle = $('<div class="contestTitle">'+contestTitle+'</div>');
+   var $contestTitle = $('<div class="contest-title">'+contestTitle+'</div>');
     $contestTitle.bind('click', function () {
       $parentdiv.empty();
       za.ViewContest({parentid: parentid});
@@ -85,7 +85,9 @@
       $base.find('#myvote').each(function(){ myvote = $(this).val(); })
       if (myvote === '-1') $("#rate-root").show(); else $("#rate-root").hide();
       showRatingInfo();
+      if ($(".send-gift")) $(".send-gift").remove();
       $("#gallery1").parent().append($('<div class="send-gift">Send a gift</div>'));
+      $(".send-gift").effect("bounce", { times:3, direction: 'left'}, 1000);
     };
     
     var showRatingInfo = function() {
