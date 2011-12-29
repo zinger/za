@@ -214,8 +214,10 @@ fieldset { border: none }
 
 .thumbDim{
 	height: 62px !important;
+	
 	margin-right:2px !important;
 	border:1px solid #000;
+	
 }
 
 /* hor thumb gallery height */

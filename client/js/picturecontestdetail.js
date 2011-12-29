@@ -153,6 +153,11 @@
       return false;
     });
 	
+	var $likebtn = $('<div style="margin-top:25px;"></div>');
+	$likebtn.append($('<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fphoto.php%3Ffbid%3D225872857487883%26amp%3Bset%3Da.225872854154550.56156.100001955114352&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80&amp;appId=211738135569277" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:25px;" allowTransparency="true"></iframe>'));
+	
+	$col2.append($likebtn);
+	
 	// Pagination
     var $paginationContianer = $('<div class="paginationContianer"></div>');	// Created pagination container to right align pagination between preview and thumbnail images
     var $pagination = $('<div class="pagination"></div>');
@@ -167,9 +172,16 @@
     $paginationContianer.append($pagination).append($clr);	// Wrapped pagination to pagination contianer
     $paginationContianer.append('<input type="hidden" id="thumbnail1page" value="1"></input>');
 	
-    $(".col2 .anythingSlider:eq(0)").after($paginationContianer); // Added pagination between preview and thumbnail images
+    var $comment = $('<div></div>');
+	
+	//$comment.append($('<fb:comments href="http://www.facebook.com/photo.php?pid=515490&amp;id=100001955114352" num_posts="4" width="600"></fb:comments>'));
+	//$comment.append($('<div class="fb-comments" data-href="http://www.facebook.com/photo.php?fbid=225872857487883&amp;set=a.225872854154550.56156.100001955114352" data-num-posts="2" data-width="500"></div>'));
+	$comment.append($('<iframe src="comment.html" width="100%" height="100%" frameborder=0><p>Your browser does not support IFrame.</p></iframe>'));
+
+	$col2.append($comment);
+	$(".col2 .anythingSlider:eq(0)").after($paginationContianer); // Added pagination between preview and thumbnail images
     
-    $('.pagination').jqPagination({
+	$('.pagination').jqPagination({
 		paged: function(page) {
 		// need to add logic if page is 1 or 40 then dont use goForward or go Back.
 		alert("requested page is" + page );

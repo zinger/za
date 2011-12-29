@@ -25,6 +25,28 @@ if (!$user) {
 } 
 
 $logger->info("index.php: url: " . $url);
+
+if(isset($_POST['upload_pic']))
+{
+	//echo "<pre>";print_r($_POST);
+	//print_r($_FILES); echo "<pre>"; die;
+	
+	$fbobj = new FBHelper();
+	//echo "ran::".$_FILES['files']['tmp_name'][0]."<br/>";
+	$pic = $fbobj->uploadPhoto($_FILES['files']['tmp_name'][0], $_POST['title']);
+
+	echo "hey:::: ";
+	print_r($pic); die;
+}
+
+$picfb = new FBHelper();
+$upic = $picfb->getPictureById(null, '225900327485136');
+//$upic = $picfb->getPictureById(null, '100001955114352');
+/*
+echo "<pre>";
+print_r($upic);
+echo "</pre>";
+die;*/
 echo "<script type='text/javascript'>window.location.href='$url'</script>";
 
 ?>

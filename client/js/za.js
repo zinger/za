@@ -9,7 +9,7 @@
   
   za.redirectUri = '';
   za.appId = '';
-  za.fbScope = 'email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
+  za.fbScope = 'email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday,user_photo_video_tags,offline_access';
   za.userFbId = '';
   
   za.configDev = {

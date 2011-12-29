@@ -83,8 +83,8 @@ class FBHelper {
     }
     $token = $fb->getAccessToken(); 
     try {
-      //$url = "/" . $id . "?access_token=" . $token;
-      $url = "/" . 98423808305; 
+      $url = "/" . $id . "?access_token=" . $token;
+      //$url = "/" . 98423808305; 
       $logger->info("FBHelper::getPictureById:Url: " . $url);
       $ph = $fb->api($url);
     } catch (Exception $e) {
@@ -94,29 +94,44 @@ class FBHelper {
   }
 
   public static function uploadPhoto($img, $caption = null, $fb = null) {
-    global $logger;
+	global $logger;
 
     if (($path = realpath($img)) === FALSE) {
-      return false;
+      return 'falses';
     }
-
+	
     if (is_null($fb)) {
       $fb = self::getFacebook();
     }
     $msg = ((!empty($caption)) && (is_string($caption))) ? $caption : "Zing photo";
-
-    try {
+	
+	$me = $fb->api('/me');
+	echo "<pre>";print_r($me); echo "</pre>";
+	/*die('wo hi');
+    */
+	
+	try {
       $photo = $fb->api('/me/photos', 'POST',
                         array('source' => '@' . $path,
                               'message'=> $msg
-                        )); 
+                        ));
+	  
+	  /*echo 'posted <br />';
       $id = $photo['id'];
+	  echo $id."<br />";
+	  */
+	  
       $logger->info("FBHelper::uploadPhoto:ImagePath: " . $path . " | Caption: " . $msg . " | PhotoID: " . $id);
     } catch (Exception $e) {
+		/*echo "error<br />";
+		echo $e->getMessage()."<br /><br />";
+		echo $e->getTraceAsString()."<br />";
+		*/
       $logger->info("FBHelper::uploadPhoto:Exception: " . $e->getMessage());
       $logger->info("ExceptionTrace: " . $e->getTraceAsString());
     }
     return $photo;
+	
   }
 
   public static function getScope() {
