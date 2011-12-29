@@ -26,7 +26,7 @@
 }
 
 .h-thumb-gallery .gallery-div, .h-thumb-gallery li {
-    width: 40px;
+    width: 82px;
 }
 
 .v-thumb-gallery .main-img, .h-thumb-gallery .main-img{
@@ -248,4 +248,8 @@ fieldset { border: none }
 }
 .pagination{
 	float:right !important;
+}
+
+.contest-title {
+    cursor: pointer;
 }
