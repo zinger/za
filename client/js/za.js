@@ -7,21 +7,24 @@
   za.configType = 'DEV';
   //za.configType = 'STAGE';
   
-  za.redirectUri = '';
   za.appId = '';
   za.fbScope = 'email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday,user_photo_video_tags,offline_access';
   za.userFbId = '';
+  za.serverUri = '';
+  za.redirectUri = '';
   
   za.configDev = {
     appId : '318117531546857',
    // redirectUri : 'http://localhost:8888/client/html/'
-    redirectUri : 'http://localhost:8888/za/' 
+    redirectUri : 'http://localhost:8888/za/',
+    serverUri : 'http://localhost:8888/za/backend/index.php'
   };
   
   za.configStage = {
     appId : '188092504602584',
     //redirectUri : 'http://www.whatsyourzing.com/sangeeta/za/client/html/'
-    redirectUri : 'http://www.whatsyourzing.com/sangeeta/za/'
+    redirectUri : 'http://www.whatsyourzing.com/sangeeta/za/',
+    serverUri : 'http://www.whatsyourzing.com/sangeeta/za/backend/index.php'
   }
   
   za.getConfig = function() {
@@ -41,6 +44,14 @@
       za.redirectUri = za.getConfig().redirectUri;
     }
     return za.redirectUri;
+  }
+  
+  za.getServerUri = function() {
+    if (za.serverUri === 'undefined' || za.serverUri === '') {
+      var config = za.getConfig();
+      za.serverUri = za.getConfig().serverUri;
+    }
+    return za.serverUri;
   }
   
   za.getFbScope = function () {

@@ -124,7 +124,7 @@
 
        //alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
 
-       $.post( 'http://www.whatsyourzing.com/sunil/zaroot/za/backend/index.php', jsonobject,
+       $.post( za.getServerUri(), jsonobject,
           function(data) { 
               alert('response received ' + JSON.stringify(data));
               sendContestRequest(); return false;
