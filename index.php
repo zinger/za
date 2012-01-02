@@ -1,4 +1,6 @@
 <?php
+mysql_connect('localhost', 'root', '') or die(mysql_error());
+mysql_select_db('za') or die(mysql_error());
 
 require_once('backend/logger.php');
 require_once('backend/facebook.php');
@@ -38,9 +40,14 @@ if(isset($_POST['upload_pic']))
 	echo "hey:::: ";
 	print_r($pic); die;
 }
-
+/*
 $picfb = new FBHelper();
 $upic = $picfb->getPictureById(null, '225900327485136');
+*/
+
+$comfb = new FBHelper();
+$comfb->getComments();
+
 //$upic = $picfb->getPictureById(null, '100001955114352');
 /*
 echo "<pre>";

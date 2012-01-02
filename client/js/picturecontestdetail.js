@@ -156,7 +156,7 @@
     });
 	
 	var $likebtn = $('<div style="margin-top:25px;margin-left:50px;"></div>');
-	$likebtn.append($('<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fphoto.php%3Ffbid%3D225872857487883%26amp%3Bset%3Da.225872854154550.56156.100001955114352&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=30&amp;appId=211738135569277" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:30px;" allowTransparency="true"></iframe>'));
+	$likebtn.append($('<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fphoto.php%3Ffbid%3D225872857487883%26amp%3Bset%3Da.225872854154550.56156.100001955114352&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=30&amp;appId=211738135569277" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:30px;" allowTransparency="true"></iframe>'));
 	
 	$col2.append($likebtn);
 	
