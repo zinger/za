@@ -36,6 +36,7 @@
       else marginV = 0;
       $('#content').css({height: 480, width: contentWidth, marginLeft:margin, marginTop: marginV, marginBottom: marginV, marginRight: margin});
     }
+    $("#content").append('<input id="isFlipped" type="hidden" value="0"></input>');
     /*
     if (screen.width >= 1200) {
       baseWidth=128;
@@ -54,29 +55,29 @@
     var left=0;
     var color;
     var images = [];
-             images.push({src: 'images/glamour-party-girl-2-by-3.png'}); //2 by 3
+             images.push({src: 'images/trio-2-by-3.png'}); //2 by 3
      
      
       images.push({src: 'images/vintage-sing-2-by-2.png'}); // 2 by 2
       images.push({src: 'images/young-artists-4-by-2.png'}); // 4 by 2
-      images.push({src: 'images/beautiful-black-4-by-1.png'}); // 4 by 1
+            images.push({src: 'images/beautiful-black-4-by-1.png'}); // 4 by 1
 
-            images.push({src: 'images/indian-girls-smiling-2-by-2.png'});
+
+
+           images.push({src: 'images/Bigstock_10656812-2-by-2.png'}); // 4 by 1
 
           //  images.push({src: 'images/mother-and-son-photograph-2-by-2.png'}); // 4 by 1
       images.push({src: 'images/pair-of-dancers-2-by-5.png'}); // 4 by 1
 
-//images.push({src: 'images/photographer-2-by-2.png'}); // 2 by 2
        images.push({src: 'images/juggling-blind-2-by-3.png'}); // 2 by 3
        images.push({src: 'images/photographer-2-by-3.png'}); // 2 by 2
 
- //images.push({src: 'images/ball-dance-2-by-3.png'}); // 2 by 3
+            images.push({src: 'images/indian-girls-smiling-2-by-2.png'});
+                  images.push({src: 'images/canine-education-4-by-1.png'}); // 4 by 1
 
-           images.push({src: 'images/Bigstock_10656812-2-by-2.png'}); // 4 by 1
 
        //     images.push({src: 'images/indian-girls-2-by-2.png'});
-            images.push({src: 'images/canine-education-4-by-1.png'}); // 4 by 1
-                        images.push({src: 'images/title.png'}); // 4 by 1
+                        images.push({src: 'images/titlegrad1.png'}); // 4 by 1
 
     for (var i=0; i<11; i++) {
       var id = 'div' + i;
@@ -157,6 +158,7 @@
           height=baseHeight*2;
           top=baseHeight*3;
           left=baseWidth*2;
+          color='#0000ff';
         default:
           break;
       }
@@ -166,6 +168,30 @@
       $div.append($img);
       $("#content").append($div);
     };
+    var $content = $('<div id="info-and-like"></div>');
+    var $displayText = $('<span>Music, Dance, Sports, Art, Fashion, Craft, Food, Humor, Kindness, Love, Clumsiness! Whatever your zing may be... showcase it, get discovered, compete, and have fun!</span>');
+    $content.append($displayText);
+    $content.append($('<span>We\'re launching soon as a Facebook app! Like our page to receive updates and launch specials.'));
+        //var $img = $('<img src="images/title_flipped.png" />');
+        //$img.css({top: $(this).attr('top'), left:$(this).attr('left'), width:$(this).attr('width'), height:$(this).attr('height')});
+    $content.append('<fb:like-box href="http://www.facebook.com/pages/WhatsYourZing/286055948109208" width="292" show_faces="false" stream="false" header="false"></fb:like-box>');
+    $content.append('<fb:send href="http://www.whatsyourzing.com/za/website" font="verdana" height="60" width="120"></fb:send>');
+    $("#div10").append($content);
+    $("#info-and-like").hide();
+    $("#content").bind('click', function() {
+      if ($("#isFlipped").val() === '0') {
+        $("#isFlipped").attr('value', '1');
+        $("#div10").flip({
+          direction:'rl',
+          color: '#ccccff'
+        });
+        $("#div10").find('img').hide();
+        $("#info-and-like").show();
+        FB.XFBML.parse(document.getElementById('info-and-like'));
+      } else { $("#isFlipped").attr('val', '0');$("#div10").revertFlip();
+        $("#info-and-like").hide();$("#div10").find('img').show();
+         }
+    });
   };
   za.ShowPage = ShowPage;
 }(jQuery));

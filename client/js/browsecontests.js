@@ -30,12 +30,12 @@
 		}
 	});
     
-    $parentdiv.append($('<div><span>Host in 60 seconds! It\'s Free!!</span></div>'));
-    var $createContestButton = $('<input id="'+za.buttons['createcontest'].id+'" type="button" />') ;
-    
+    var $createContestDiv = $('<div class="create-contest-div"></div>');
+    $createContestDiv.append($('<div class="label-host">Host in 60 seconds! It\'s Free!</div>'));
+    var $createContestButton = $('<div><input id="'+za.buttons['createcontest'].id+'" type="button" /></div>');
     $createContestButton.button({label: za.buttons['createcontest'].label});
-    
-    $parentdiv.append($createContestButton);
+    $createContestDiv.append($createContestButton);
+    $parentdiv.append($createContestDiv);
     
     $createContestButton.bind('click', function(){
       $parentdiv.empty();
@@ -53,23 +53,31 @@
     pictureEntries.push({eid: '8', url: '../../samplecontent/images/8.jpg', thumb: '../../samplecontent/images/thumbnails/8.jpg', title: 'Title1', fbpid: 'User8', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '1', ctitle: 'Wierd Hairdo Contest'   });
     pictureEntries.push({eid: '9', url: '../../samplecontent/images/8.jpg', thumb: '../../samplecontent/images/thumbnails/8.jpg', title: 'Title1', fbpid: 'User8', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '1', ctitle: 'Wierd Hairdo Contest'   });
 	
-    var galleryid = 'gallery1';
-    
-    $parentdiv.append(za.buildAnythingSliderGallery(galleryid, za.galleryTypes['contests'], pictureEntries));
-    $(za.jq(galleryid)).anythingSlider({
-	    	showMultiple: 3, buildNavigation: false, buildStartStop: false, changeBy: 3, infiniteSlides: false,
-                onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
-                onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
-	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
-    });
-    
-    $("#gallery1 .gallery-div").click(function() {
-      var entryid = $(this).find('.entry-id').first().val();
-      var contestid = $(this).find('.contest-id').first().val();
-      $parentdiv.empty();
-      za.PictureContestDetail({parentid: parentid, contestid: contestid, entryid: entryid});
-    });
+    var categories = [];
+    categories.push({text: 'My Contests'});
+    categories.push({text: 'New Contests'});
+    categories.push({text: 'Recently Concluded'});
+
+    for (var i=0; i<3; i++) {
+      $parentdiv.append($('<div class="contest-category">'+categories[i].text+'</div>'));
+      var galleryid = 'gallery'+i;
+      $parentdiv.append(za.buildAnythingSliderGallery(galleryid, za.galleryTypes['contests'], pictureEntries));
+      $(za.jq(galleryid)).anythingSlider({
+	  showMultiple: 3, buildNavigation: false, buildStartStop: false, changeBy: 3, infiniteSlides: false,
+	  onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
+	  onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
+	  onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
+      });
+      
+      $(za.jq(galleryid)).find('.gallery-div').click(function() {
+      //$("#gallery1 .gallery-div").click(function() {
+	var entryid = $(this).find('.entry-id').first().val();
+	var contestid = $(this).find('.contest-id').first().val();
+	$parentdiv.empty();
+	za.PictureContestDetail({parentid: parentid, contestid: contestid, entryid: entryid});
+      });
+    };
   };
-      za.BrowseContests = BrowseContests;
+  za.BrowseContests = BrowseContests;
 }(jQuery));
     

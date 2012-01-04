@@ -1,5 +1,6 @@
 <?php
 
+echo "<p>I AM THE BEST</p>";
 require_once('logger.php');
 require_once('serverfunctions.php');
 require_once('ContestService.php');
