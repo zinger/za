@@ -106,8 +106,8 @@ class FBHelper {
     $msg = ((!empty($caption)) && (is_string($caption))) ? $caption : "Zing photo";
 	
 	$me = $fb->api('/me');
-	echo "<pre>";print_r($me); echo "</pre>";
-	/*die('wo hi');
+	/*echo "<pre>";print_r($me); echo "</pre>";
+	die('wo hi');
     */
 	
 	try {
@@ -174,7 +174,7 @@ class FBHelper {
 					 );
 	*/
 	// note format json-strings is necessary because 32-bit php sucks at decoding 64-bit ints :(
-	$result = json_decode(file_get_contents('http://api.facebook.com/restserver.php?format=json-strings&method=fql.multiquery&queries='.urlencode(json_encode($comment_queries))));
+	$result = json_decode(@file_get_contents('http://api.facebook.com/restserver.php?format=json-strings&method=fql.multiquery&queries='.urlencode(json_encode($comment_queries))));
 	
 	if($result)
 	{
@@ -205,7 +205,7 @@ class FBHelper {
 		//return result;
 	}
 	
-	$result2 = json_decode(file_get_contents('http://api.facebook.com/restserver.php?format=json-strings&method=fql.multiquery&queries='.urlencode(json_encode($reply_queries))));
+	$result2 = json_decode(@file_get_contents('http://api.facebook.com/restserver.php?format=json-strings&method=fql.multiquery&queries='.urlencode(json_encode($reply_queries))));
 	
 	/*echo "<pre>";
 	print_r($result2);

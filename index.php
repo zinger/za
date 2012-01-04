@@ -37,8 +37,8 @@ if(isset($_POST['upload_pic']))
 	//echo "ran::".$_FILES['files']['tmp_name'][0]."<br/>";
 	$pic = $fbobj->uploadPhoto($_FILES['files']['tmp_name'][0], $_POST['title']);
 
-	echo "hey:::: ";
-	print_r($pic); die;
+	/*echo "hey:::: ";
+	print_r($pic); die;*/
 }
 /*
 $picfb = new FBHelper();
