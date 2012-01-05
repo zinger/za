@@ -246,6 +246,30 @@ class FBHelper {
 	return $friends;
   }
   
+  public function setVote($contestId='')
+  {
+	if($contestId=='')
+		return 'contest id not found';
+	else
+	{
+		$fb = self::getFacebook();
+		$userdata = $fb->api('/me');
+		/*echo "<pre>";
+		print_r($friends);
+		echo "</pre>";die;
+		*/
+		$check_query = mysql_query("SELECT id FROM contest_votes WHERE contest_id='".$contestId."' AND user_fbid='".$userdata['id']."'") or die(mysql_error());
+		if(mysql_num_rows($check_query)>0)
+			return 'already registered';
+		else
+		{
+			mysql_query("INSERT INTO contest_votes SET contest_id='".$contestId."', user_fbid='".$userdata['id']."', vote_time='".strtotime('now')."'") or die(mysql_error());
+			return 'success';
+		}
+	}
+	
+  }
+  
 }
 
 ?>

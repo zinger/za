@@ -40,6 +40,17 @@ if(isset($_POST['upload_pic']))
 	/*echo "hey:::: ";
 	print_r($pic); die;*/
 }
+
+if(isset($_GET['contest']) AND @$_GET['contest']!='')
+{
+	$voteFor = base64_decode($_GET['contest']);
+	$fbobj = new FBHelper();
+	$vote = $fbobj->setVote($voteFor);
+	if($vote=='already registered')
+		echo '<script>alert("Your vote is already registered for this contest");</script>';
+	else if($vote=='contest id not found')
+		echo '<script>alert("Contest not found");</script>';
+}
 /*
 $picfb = new FBHelper();
 $upic = $picfb->getPictureById(null, '225900327485136');

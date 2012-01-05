@@ -20,7 +20,7 @@
 	target="_top"
     method="POST"
     type="Zingerdev"
-    content="I would like you to check this application &lt;fb:req-choice url=&quot;http://apps.facebook.com/zingerdev/&quot; label=&quot;Let me check my friends&quot; /&gt;"
+    content="I would like you to check this application &lt;fb:req-choice url=&quot;http://apps.facebook.com/zingerdev/index.php?contest=<?=base64_encode($_GET['c'])?>&quot; label=&quot;Let me check my friends&quot; /&gt;"
     >
     <fb:multi-friend-selector showborder="false" actiontext="Invite your firend to Zingerdev" />
     </fb:request-form>
