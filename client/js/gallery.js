@@ -72,7 +72,7 @@
     categories.push({text: 'Participated In'});
     categories.push({text: 'Interested In'});
 
-    for (i=0; i<3; i++) {
+    for (var i=0; i<3; i++) {
       $parentdiv.append($('<div class="contest-category">'+categories[i].text+'</div>'));
       var galleryid = 'gallery'+i;
       $parentdiv.append(za.buildAnythingSliderGallery(galleryid, za.galleryTypes['contests'], pictureEntries));

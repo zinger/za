@@ -140,32 +140,33 @@ class FBHelper {
   }
   
   public static function getComments() {
-	   $url = 'http://sabdekho.com/projects/zatest/comment.php';
-	
-		$lastCommentTime_query = mysql_query("SELECT time FROM comment ORDER BY time DESC LIMIT 0,1") or die(mysql_error());
-		if(mysql_num_rows($lastCommentTime_query)>0)
-		{
-			$lastCommentTime = mysql_fetch_array($lastCommentTime_query);
-			$commentTime = $lastCommentTime['time'];
-		}
-		else
-			$commentTime = 0;
-			
-		$lastReplyTime_query = mysql_query("SELECT time FROM reply ORDER BY time DESC LIMIT 0,1");
-		if(mysql_num_rows($lastReplyTime_query)>0)
-		{
-			$lastReplyTime = mysql_fetch_array($lastReplyTime_query);
-			$replyTime = $lastReplyTime['time'];
-		}
-		else
-			$replyTime = 0;
+  
+  	$url = 'http://sabdekho.com/projects/zatest/comment.php';
+
+	$lastCommentTime_query = mysql_query("SELECT time FROM comment ORDER BY time DESC LIMIT 0,1") or die(mysql_error());
+	if(mysql_num_rows($lastCommentTime_query)>0)
+	{
+		$lastCommentTime = mysql_fetch_array($lastCommentTime_query);
+		$commentTime = $lastCommentTime['time'];
+	}
+	else
+		$commentTime = 0;
 		
+	$lastReplyTime_query = mysql_query("SELECT time FROM reply ORDER BY time DESC LIMIT 0,1");
+	if(mysql_num_rows($lastReplyTime_query)>0)
+	{
+		$lastReplyTime = mysql_fetch_array($lastReplyTime_query);
+		$replyTime = $lastReplyTime['time'];
+	}
+	else
+		$replyTime = 0;
+	
 	$comment_queries = array('cq1' => 'select post_fbid, fromid, object_id, text, time from comment where object_id in (select comments_fbid from link_stat where url ="'.$url.'") AND time>"'.$commentTime.'"',
 							'cq2' => 'select name, id, url, pic_square from profile where id in (select fromid from #cq1)',
 							);
 	
 	$reply_queries = array('rq1' => 'select post_fbid, fromid, object_id, text, time from comment where object_id in (select post_fbid from comment where object_id in (select comments_fbid from link_stat where url ="'.$url.'")) AND time>"'.$replyTime.'"',
-							'rq2' => 'select name, id, url, pic_square from profile where id in (select fromid from #rq1)',
+						'rq2' => 'select name, id, url, pic_square from profile where id in (select fromid from #rq1)',
 							);
 	// fql multiquery to fetch all the data we need to display in one go
 	/*$queries = array('q1' => 'select post_fbid, fromid, object_id, text, time from comment where object_id in (select comments_fbid from link_stat where url ="'.$url.'")',
@@ -174,7 +175,7 @@ class FBHelper {
 					 );
 	*/
 	// note format json-strings is necessary because 32-bit php sucks at decoding 64-bit ints :(
-	$result = json_decode(@file_get_contents('http://api.facebook.com/restserver.php?format=json-strings&method=fql.multiquery&queries='.urlencode(json_encode($comment_queries))));
+	$result = @json_decode(@file_get_contents('http://api.facebook.com/restserver.php?format=json-strings&method=fql.multiquery&queries='.urlencode(json_encode($comment_queries))));
 	
 	if($result)
 	{
@@ -205,7 +206,7 @@ class FBHelper {
 		//return result;
 	}
 	
-	$result2 = json_decode(@file_get_contents('http://api.facebook.com/restserver.php?format=json-strings&method=fql.multiquery&queries='.urlencode(json_encode($reply_queries))));
+	$result2 = @json_decode(@file_get_contents('http://api.facebook.com/restserver.php?format=json-strings&method=fql.multiquery&queries='.urlencode(json_encode($reply_queries))));
 	
 	/*echo "<pre>";
 	print_r($result2);
@@ -235,6 +236,14 @@ class FBHelper {
 		}
 	}
 	//die;
+  }
+  
+  public function getFriends()
+  {
+	$fb = self::getFacebook();
+    
+	$friends = $fb->api('/me/friends');
+	return $friends;
   }
   
 }

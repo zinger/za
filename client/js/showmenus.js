@@ -10,6 +10,7 @@
     $.each(za.menus, function(idx, menu) {
       var menuid = '"' + idx + '"';
       var menuidhref = '"#'  + idx + '"';
+	  //alert(menuid);
       $ul.append('<li><a href='+menuidhref+' class="menutab"><span>'+menu.display+'</span></li>');
       $panelcontainer.append('<div id='+menuid+' class="panels"></div>');
     });

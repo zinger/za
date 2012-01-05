@@ -70,7 +70,8 @@
     gallery: {display: 'Gallery', href: '#za-gallery'},
     hall: {display: 'Hall of Fame', href: '#za-hall'},
     coins: {display: 'Get Zing Coins', href: '#za-coins'},
-    invite: {display: 'Invite', href: '#za-invite'}
+    invite: {display: 'Invite', href: '#za-invite'},
+	vote: {display: 'Vote to Contest', href: '#za-vote'}
   };
   
   za.showPanel = function(menuid) {
@@ -80,6 +81,7 @@
     if (menuid === 'hall') { za.Hall({parentid: menuid}); };
     if (menuid === 'coins') { za.Coins({parentid: menuid}); };
     if (menuid === 'invite') { za.Invite({parentid: menuid}); };
+	if (menuid === 'vote') { za.Vote({parentid: menuid}); };
   };
   
 
