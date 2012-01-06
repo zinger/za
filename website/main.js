@@ -37,17 +37,6 @@
       $('#content').css({height: 480, width: contentWidth, marginLeft:margin, marginTop: marginV, marginBottom: marginV, marginRight: margin});
     }
     $("#content").append('<input id="isFlipped" type="hidden" value="0"></input>');
-    /*
-    if (screen.width >= 1200) {
-      baseWidth=128;
-      baseHeight=96;
-      $('#content').css({height: 960, width: 1280, marginLeft:128, marginTop: 96, marginBottom: 96, marginRight: 128});
-    } else {
-      baseWidth=100;
-      baseHeight=75;
-      $('#content').css({height: 780, width: 1280, paddingLeft:128, paddingRight: 128});
-
-    }*/
     
     var width=baseWidth;
     var height=baseHeight;
@@ -56,28 +45,16 @@
     var color;
     var images = [];
              images.push({src: 'images/trio-2-by-3.png'}); //2 by 3
-     
-     
       images.push({src: 'images/vintage-sing-2-by-2.png'}); // 2 by 2
       images.push({src: 'images/young-artists-4-by-2.png'}); // 4 by 2
             images.push({src: 'images/beautiful-black-4-by-1.png'}); // 4 by 1
-
-
-
            images.push({src: 'images/Bigstock_10656812-2-by-2.png'}); // 4 by 1
-
-          //  images.push({src: 'images/mother-and-son-photograph-2-by-2.png'}); // 4 by 1
       images.push({src: 'images/pair-of-dancers-2-by-5.png'}); // 4 by 1
-
        images.push({src: 'images/juggling-blind-2-by-3.png'}); // 2 by 3
        images.push({src: 'images/photographer-2-by-3.png'}); // 2 by 2
-
             images.push({src: 'images/indian-girls-smiling-2-by-2.png'});
                   images.push({src: 'images/canine-education-4-by-1.png'}); // 4 by 1
-
-
-       //     images.push({src: 'images/indian-girls-2-by-2.png'});
-                        images.push({src: 'images/titlegrad1.png'}); // 4 by 1
+                        images.push({src: 'images/title-red-zing.png'}); // 4 by 1
 
     for (var i=0; i<11; i++) {
       var id = 'div' + i;
@@ -168,30 +145,68 @@
       $div.append($img);
       $("#content").append($div);
     };
-    var $content = $('<div id="info-and-like"></div>');
-    var $displayText = $('<span>Music, Dance, Sports, Art, Fashion, Craft, Food, Humor, Kindness, Love, Clumsiness! Whatever your zing may be... showcase it, get discovered, compete, and have fun!</span>');
-    $content.append($displayText);
-    $content.append($('<span>We\'re launching soon as a Facebook app! Like our page to receive updates and launch specials.'));
-        //var $img = $('<img src="images/title_flipped.png" />');
-        //$img.css({top: $(this).attr('top'), left:$(this).attr('left'), width:$(this).attr('width'), height:$(this).attr('height')});
-    $content.append('<fb:like-box href="http://www.facebook.com/pages/WhatsYourZing/286055948109208" width="292" show_faces="false" stream="false" header="false"></fb:like-box>');
-    $content.append('<fb:send href="http://www.whatsyourzing.com/za/website" font="verdana" height="60" width="120"></fb:send>');
-    $("#div10").append($content);
-    $("#info-and-like").hide();
     $("#content").bind('click', function() {
+      $("#div10").flip({
+          direction:'rl',
+          color: '#ff0000', /*'#ccccff',*/
+          onEnd: function() {
+            changeFilpContent();
+          }
+      });
+    });
+    var changeFilpContent = function() {
+      $("#div10").empty();
       if ($("#isFlipped").val() === '0') {
         $("#isFlipped").attr('value', '1');
-        $("#div10").flip({
-          direction:'rl',
-          color: '#ccccff'
-        });
-        $("#div10").find('img').hide();
-        $("#info-and-like").show();
+        addFlipContent();
+      } else {
+        $("#isFlipped").attr('value', '0');
+        removeFlipContent();
+      }
+    };
+    var addFlipContent = function() {
+        var $content = $('<div id="info-and-like"></div>');
+        var $displayText = $('<div id="info-text">Music, Dance, Sports, Art, Fashion, Food, Humor, Love, Clumsiness... whatever your zing may be, showcase it, get discovered, compete, and have fun!</div>');
+        $content.append($displayText);
+        $content.append($('<div id="info-launch">We\'re launching soon as a Facebook app! Like us to receive updates and launch specials.</div>'));
+        $content.append('<div id="za-like-box" style="display: inline; width: 292px;"><fb:like-box href="http://www.facebook.com/pages/WhatsYourZing/286055948109208" send="true" width="292" show_faces="false" stream="false" header="false"></fb:like-box></div>');
+        $content.append('<div id="za-send" style="display: inline; width: 90px;"><fb:send href="http://www.whatsyourzing.com/za/website" font="verdana" ></fb:send></div>');
+        $("#div10").append($content);
+        var width=baseWidth*6;
+        var height=baseHeight*4;
+        var top=baseHeight*2;
+        var left=baseWidth*1;
+        var color='#ffffff';   // '#ccccff';
         FB.XFBML.parse(document.getElementById('info-and-like'));
-      } else { $("#isFlipped").attr('val', '0');$("#div10").revertFlip();
-        $("#info-and-like").hide();$("#div10").find('img').show();
-         }
-    });
+        $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'solid', borderColor:'#ff0000', borderWidth:'4px'});
+        if (baseWidth === 128) {
+          $("#info-text").addClass('info-text-large');
+          $("#info-launch").addClass('info-launch-large');
+          $("#za-like-box").addClass('za-like-large');
+          $("#za-send").addClass('za-send-large');
+        } else if (baseWidth === 104) {
+          $("#info-text").addClass('info-text-medium');
+          $("#info-launch").addClass('info-launch-medium');
+          $("#za-like-box").addClass('za-like-medium');
+          $("#za-send").addClass('za-send-medium');
+        } else {
+          $("#info-text").addClass('info-text-small');
+          $("#info-launch").addClass('info-launch-small');
+          $("#za-like-box").addClass('za-like-small');
+          $("#za-send").addClass('za-send-small');
+        }
+    }
+    var removeFlipContent = function() {
+        var $img = $('<img src="'+images[10].src+'" />');
+        var width=baseWidth*4;
+        var height=baseHeight*2;
+        var top=baseHeight*3;
+        var left=baseWidth*2;
+        var color='#ccccff';
+        $img.css({top: top, left:left, width:width, height:height});
+        $("#div10").append($img);
+        $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'none'});
+    }
   };
   za.ShowPage = ShowPage;
 }(jQuery));
