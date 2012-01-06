@@ -71,7 +71,7 @@
     hall: {display: 'Hall of Fame', href: '#za-hall'},
     coins: {display: 'Get Zing Coins', href: '#za-coins'},
     invite: {display: 'Invite', href: '#za-invite'},
-	vote: {display: 'Vote to Contest', href: '#za-vote'}
+	vote: {display: 'Invite to Contest', href: '#za-vote'}
   };
   
   za.showPanel = function(menuid) {
