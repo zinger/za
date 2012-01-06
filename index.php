@@ -30,15 +30,16 @@ $logger->info("index.php: url: " . $url);
 
 if(isset($_POST['upload_pic']))
 {
-	//echo "<pre>";print_r($_POST);
+	//echo "<pre>";print_r($_POST);die;
 	//print_r($_FILES); echo "<pre>"; die;
 	
 	$fbobj = new FBHelper();
-	//echo "ran::".$_FILES['files']['tmp_name'][0]."<br/>";
-	$pic = $fbobj->uploadPhoto($_FILES['files']['tmp_name'][0], $_POST['title']);
-
-	/*echo "hey:::: ";
-	print_r($pic); die;*/
+	if(isset($_POST['publish_to_fb']))
+	{
+		$pic = $fbobj->uploadPhoto($_FILES['files']['tmp_name'][0], $_POST['title']);
+	}
+	$result = $fbobj->uploadPhotoToDir($_FILES['files']);
+	
 }
 
 if(isset($_GET['contest']) AND @$_GET['contest']!='')

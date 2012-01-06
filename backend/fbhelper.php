@@ -94,47 +94,46 @@ class FBHelper {
   }
 
   public static function uploadPhoto($img, $caption = null, $fb = null) {
-	global $logger;
-
-    if (($path = realpath($img)) === FALSE) {
-      return 'falses';
-    }
-	
-    if (is_null($fb)) {
-      $fb = self::getFacebook();
-    }
-    $msg = ((!empty($caption)) && (is_string($caption))) ? $caption : "Zing photo";
-	
-	$me = $fb->api('/me');
-	/*echo "<pre>";print_r($me); echo "</pre>";
-	die('wo hi');
-    */
-	
-	try {
-      $photo = $fb->api('/me/photos', 'POST',
-                        array('source' => '@' . $path,
-                              'message'=> $msg
-                        ));
-	  
-	  /*echo 'posted <br />';
-      $id = $photo['id'];
-	  echo $id."<br />";
-	  */
-	  
-      $logger->info("FBHelper::uploadPhoto:ImagePath: " . $path . " | Caption: " . $msg . " | PhotoID: " . $id);
-    } catch (Exception $e) {
-		/*echo "error<br />";
-		echo $e->getMessage()."<br /><br />";
-		echo $e->getTraceAsString()."<br />";
-		*/
-      $logger->info("FBHelper::uploadPhoto:Exception: " . $e->getMessage());
-      $logger->info("ExceptionTrace: " . $e->getTraceAsString());
-    }
-    return $photo;
+		global $logger;
+		if (($path = realpath($img)) === FALSE) {
+		  return 'falses';
+		}
+		
+		
+		if (is_null($fb)) {
+		  $fb = self::getFacebook();
+		}
+		$msg = ((!empty($caption)) && (is_string($caption))) ? $caption : "Zing photo";
+		
+		try {
+			 $photo = $fb->api('/me/photos', 'POST',
+							array('source' => '@' . $path,
+								  'message'=> $msg
+							));
+			$id = $photo['id'];
+			//echo "id: ".$id."<br />";
+			$logger->info("FBHelper::uploadPhoto:ImagePath: " . $path . " | Caption: " . $msg . " | PhotoID: " . $id);
+		} catch (Exception $e) {
+			//die("Error:: ".$e->getMessage());
+			$logger->info("FBHelper::uploadPhoto:Exception: " . $e->getMessage());
+		  $logger->info("ExceptionTrace: " . $e->getTraceAsString());
+		}
+		return $photo;
 	
   }
+  
+	public static function uploadPhotoToDir($file) {
+		$img = $file['tmp_name'][0];
+		$imgname = $file['name'][0];
+		
+		if(move_uploaded_file($img, 'uploaded_photos/'.strtotime('now').$imgname))
+			return 'true';
+		else
+			return 'false';
+		
+	}
 
-  public static function getScope() {
+	public static function getScope() {
     $scope = implode(",", Config::$FB_APP_SCOPE);
     return $scope;
   }

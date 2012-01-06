@@ -34,6 +34,7 @@
 	$frm.append($('<label for="entry-title">Entry Title</label>'));
 	$frm.append($('<div><input type="text" name="title" id="entry-title" /></div>'));
 	$frm.append($('<input id="upload-caption-button" type="file" name="files[]" multiple/>'));
+	$frm.append($('<br /><input id="publish_to_fb" type="checkbox" name="publish_to_fb" value="yes" /> <label for="entry-title">Publish photo to Facebook</label>'));
 	
 	var $checkboxdiv = $('<div class="checkbox-div"></div>');
 	var termsString1 = 'I agree to What\'s Your Zing\'s ';
