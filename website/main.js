@@ -143,6 +143,12 @@
       var $img = $('<img src="'+images[i].src+'" />');
       $img.css({top: top, left:left, width:width, height:height});
       $div.append($img);
+      $div.mouseover(function() {
+        $(this).addClass('highlight-div');
+      });
+      $div.mouseout(function() {
+        $(this).removeClass('highlight-div');
+      });
       $("#content").append($div);
     };
     $("#content").bind('click', function() {
@@ -163,6 +169,12 @@
         $("#isFlipped").attr('value', '0');
         removeFlipContent();
       }
+      $("#div10").mouseover(function() {
+          $("#div10").addClass('highlight-div');
+        });
+        $("#div10").mouseout(function() {
+          $("#div10").removeClass('highlight-div');
+        });
     };
     var addFlipContent = function() {
         var $content = $('<div id="info-and-like"></div>');
@@ -176,9 +188,9 @@
         var height=baseHeight*4;
         var top=baseHeight*2;
         var left=baseWidth*1;
-        var color='#ffffff';   // '#ccccff';
+        var color= '#ffffff';//'#ffffcc'; //'#ffffff';   // '#ccccff';
         FB.XFBML.parse(document.getElementById('info-and-like'));
-        $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'solid', borderColor:'#ff0000', borderWidth:'4px'});
+        $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'solid', borderColor:'#ff0000', borderWidth:'6px'});
         if (baseWidth === 128) {
           $("#info-text").addClass('info-text-large');
           $("#info-launch").addClass('info-launch-large');
@@ -204,6 +216,12 @@
         var left=baseWidth*2;
         var color='#ccccff';
         $img.css({top: top, left:left, width:width, height:height});
+        $img.mouseover(function() {
+          $img.addClass('highlight-div');
+        });
+        $img.mouseout(function() {
+          $img.removeClass('highlight-div');
+        });
         $("#div10").append($img);
         $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'none'});
     }

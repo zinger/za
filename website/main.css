@@ -102,3 +102,9 @@ body {
   left: 5%;
   top: -1%;
 }
+.highlight-div {
+  border: solid;
+  border-color: #ffff66;
+  border-width: 6px;
+  z-index: 999999;
+}
