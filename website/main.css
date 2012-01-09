@@ -1,23 +1,110 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #6666ff;
-  background-image: url('images/back5.png');
+  /*background-color: #6666ff;
+  background-color: /*#ff0000;
+  background-color: #ffffff;*/
+  background-image: url('images/back6_yellow.png'); /* back5 */
   background-repeat: repeat;
   /*#0000ff; /*#cccc99;/* #ccffff; /*#ffccff; /*#00ccff; /*#cccc99*/; /*#ffff99; /*#cccc33;*/
 }
 #content {
   position: relative;
+  /*border: solid;
+  border-color: #ff0000;
+  border-width: 5px;*/
 }
 .imgDiv {
   position: absolute;
   display: inline;
   margin: 0;
   padding: 0;
-  border-style: solid;
+  /*border-style: solid;
   border-width: 1px;
-  border-color: #ccccff; /*#ffffff;*/
+  border-color: #ff0000; *//*yellow #ffff66; /*#ff0000; *//*#330000; *//*#ccccff; /*#ffffff;*/
 }
 #content{
   cursor: pointer;
+}
+
+#info-and-like * {
+  font-family: Helvetica, Verdana, Arial, sans-serif;
+}
+
+.info-text-large {
+  font-size: 1.4em;
+  padding-top: 40px;
+  padding-left: 35px;
+  padding-right: 20px;
+}
+.info-text-medium {
+  font-size: 1.1em;
+  padding-top: 30px;
+  padding-left: 25px;
+  padding-right: 20px;
+}
+.info-text-small {
+  font-size: 0.9em;
+  padding-top: 25px;
+  padding-left: 20px;
+  padding-right: 15px;
+}
+.info-launch-large {
+  font-size: 1.2em;
+  font-style: italic;
+  padding-left: 60px;
+  padding-top: 25px;
+  padding-bottom: 50px;
+  padding-right: 40px;
+}
+.info-launch-medium {
+  font-size: 1.0em;
+  font-style: italic;
+  padding-left: 45px;
+  padding-top: 25px;
+  padding-bottom: 40px;
+  padding-right: 40px;
+
+}
+.info-launch-small {
+  font-size: 0.8em;
+  font-style: italic;
+  padding-left: 40px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-right: 40px;
+}
+#za-like-box * {
+  position: relative;
+  top: 0;
+}
+#za-send * {
+  position: relative;
+}
+.za-like-large * {
+  left: 15%;
+}
+.za-like-medium * {
+  left: 10%;
+}
+.za-like-small * {
+  left: 7%;
+}
+.za-send-large * {
+  left: 20%;
+  top: -0.6%;
+}
+.za-send-medium * {
+  left: 12%;
+  top: -0.8%;
+}
+.za-send-small * {
+  left: 5%;
+  top: -1%;
+}
+.highlight-div {
+  border: solid;
+  border-color: #ffff66;
+  border-width: 6px;
+  z-index: 999999;
 }
