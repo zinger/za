@@ -29,11 +29,14 @@
 
 	$div.append($currentEntries);
       
-	var $frm = $('<form id="uploadit" action="../../index.php" enctype="multipart/form-data" method="post"></form>');
+	var $frm = $('<form id="uploadit" enctype="multipart/form-data" method="post"></form>');
 	$frm.append($('<input type="hidden" name="upload_pic" value="yes" />'));
 	$frm.append($('<label for="entry-title">Entry Title</label>'));
 	$frm.append($('<div><input type="text" name="title" id="entry-title" /></div>'));
-	$frm.append($('<input id="upload-caption-button" type="file" name="files[]" multiple/>'));
+	$frm.append($('<div><textarea name="text" id="text"></textarea></div>'));
+	$frm.append($('<input id="upload-caption-button" type="file" name="files"/>'));
+	$frm.append($('<div id="upload"></div>'));
+	//$frm.append($('<ol><li id="imagearea"><label for="example1_field">Choose a file to upload: </label><input name="MAX_FILE_SIZE" value="1048576" type="hidden" /><input name="myFile"  id="example1_field"  type="file" /></li></ol>'));
 	$frm.append($('<br /><input id="publish_to_fb" type="checkbox" name="publish_to_fb" value="yes" /> <label for="entry-title">Publish photo to Facebook</label>'));
 	
 	var $checkboxdiv = $('<div class="checkbox-div"></div>');
@@ -45,7 +48,8 @@
 	$finishbutton.button({label: za.buttons['finishentrysubmit'].label});
 	$finishbutton.bind('click', function() {
 		//alert("I was clicked"); 
-		$('#uploadit').submit();
+		//$('#uploadit').submit();
+		fileUpload(this.form,'../../iframe_image_upload.php','upload');
 	});
 	
 	$frm.append($checkboxdiv);

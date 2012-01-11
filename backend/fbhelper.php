@@ -103,6 +103,7 @@ class FBHelper {
 		if (is_null($fb)) {
 		  $fb = self::getFacebook();
 		}
+		
 		$msg = ((!empty($caption)) && (is_string($caption))) ? $caption : "Zing photo";
 		
 		try {
@@ -118,16 +119,51 @@ class FBHelper {
 			$logger->info("FBHelper::uploadPhoto:Exception: " . $e->getMessage());
 		  $logger->info("ExceptionTrace: " . $e->getTraceAsString());
 		}
-		return $photo;
-	
+		
+		if(isset($id))
+			return $id;
+		else
+			return '';
   }
   
 	public static function uploadPhotoToDir($file) {
-		$img = $file['tmp_name'][0];
-		$imgname = $file['name'][0];
+		$img = $file['tmp_name'];
+		$imgname = $file['name'];
 		
-		if(move_uploaded_file($img, 'uploaded_photos/'.strtotime('now').$imgname))
-			return 'true';
+		$fb = self::getFacebook();
+		$userdata = $fb->api('/me');
+		$user_fbid = $userdata['id'];
+		
+		if(!file_exists('uploaded_photos/'.$user_fbid))
+			mkdir('uploaded_photos/'.$user_fbid);
+		
+		$upload_dir = 'uploaded_photos/'.$user_fbid.'/';
+		$image_path =  $upload_dir.strtotime('now').$imgname;
+		
+		if(move_uploaded_file($img, $image_path))
+			return $image_path;
+		else
+			return 'false';
+		
+	}
+	
+	public static function saveToPhotoEntry($entries) {
+		
+		if(is_array($entries))
+		{
+			$fb = self::getFacebook();
+			$userdata = $fb->api('/me');
+			$user_fbid = $userdata['id'];
+			
+			if($entries['publish_to_facebook']=='yes')
+				$fb_publish = "yes";
+			else
+				$fb_publish = "no";
+				
+			if(mysql_query("INSERT INTO photo_entry SET title='".$entries['title']."', description='".$entries['description']."', photo='".$entries['photo']."', user_fbid='".$user_fbid."', publish_to_facebook='".$fb_publish."', photo_fbid='".$entries['photo_fbid']."'"))
+				return 'true';
+			
+		}
 		else
 			return 'false';
 		

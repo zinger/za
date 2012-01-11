@@ -25,42 +25,49 @@
   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <link rel="stylesheet" href="../css/jquery-ui-1.8.16.custom.css">
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-  <!-- anything slider -->
-  <link rel="stylesheet" href="../plugins/anythingslider/css/anythingslider.css">
-  <script src="../plugins/anythingslider/js/jquery.anythingslider.js"></script>
-  <link rel="stylesheet" href="../css/nav.css" />
-  
-  <!-- file upload -->
-  <script src="../plugins/blueimp/jquery.iframe-transport.js"></script>
-  <script src="../plugins/blueimp/jquery.fileupload.js"></script>
-
-  <!-- pagination -->
-  <link rel="stylesheet" href="../plugins/jqpagination/css/jqpagination.css" />
-  <script src="../plugins/jqpagination/js/jquery.jqpagination.js"></script>
-  <script src="../plugins/jqpagination/js/scripts.js"></script>
-
-  <!-- tinymce -->
-  <script type="text/javascript" src="../plugins/tinymce/jscripts/tiny_mce/tiny_mce.js" ></script>
-
-  <!--<script type="text/javascript" src="/Users/sunilmasand/Downloads/spellchecker/editor_plugin.js" ></script>-->
-
-  <script src="../js/za.js"></script>
-  <script src="../js/showmenus.js"></script>
-  <script src="../js/home.js"></script>
-  <script src="../js/contests.js"></script>
-  <script src="../js/gallery.js"></script>
-  <script src="../js/hall.js"></script>
-  <script src="../js/invite.js"></script>
-  <script src="../js/coins.js"></script>
-  <script src="../js/picturecontestdetail.js"></script>
-  <script src="../js/createcontest.js"></script>
-  <script src="../js/submitentry.js"></script>
-  <script src="../js/browsecontests.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <!-- anything slider -->
+    <link rel="stylesheet" href="../plugins/anythingslider/css/anythingslider.css">
+    <script src="../plugins/anythingslider/js/jquery.anythingslider.js"></script>
+    <link rel="stylesheet" href="../css/nav.css" />
+    
+    <!--<link rel="stylesheet" href="../css/style.css" />-->
+    
+    <!-- file upload -->
+    <script src="../plugins/blueimp/jquery.iframe-transport.js"></script>
+    <script src="../plugins/blueimp/jquery.fileupload.js"></script>
+    
+    <!-- pagination -->
+    <link rel="stylesheet" href="../plugins/jqpagination/css/jqpagination.css" />
+    <script src="../plugins/jqpagination/js/jquery.jqpagination.js"></script>
+    <script src="../plugins/jqpagination/js/scripts.js"></script>
+    
+    <!-- tinymce -->
+    <script type="text/javascript" src="../plugins/tinymce/jscripts/tiny_mce/tiny_mce.js" ></script>
+    
+    <!--<script type="text/javascript" src="/Users/sunilmasand/Downloads/spellchecker/editor_plugin.js" ></script>-->
+    
+    <script src="../js/za.js"></script>
+    <script src="../js/showmenus.js"></script>
+    <script src="../js/home.js"></script>
+    <script src="../js/contests.js"></script>
+    <script src="../js/gallery.js"></script>
+    <script src="../js/hall.js"></script>
+    <script src="../js/invite.js"></script>
+    <script src="../js/coins.js"></script>
+    <script src="../js/picturecontestdetail.js"></script>
+    <script src="../js/createcontest.js"></script>
+    <script src="../js/submitentry.js"></script>
+    <script src="../js/browsecontests.js"></script>
     <script src="../js/viewcontest.js"></script>
     <script src="../js/vote.js"></script>
+    <script src="../js/image_upload.js"></script>
 
+	<!-- START Included for jQuery image uploader -->
+	<!--<script type="text/javascript" src="../js/jquery.flash.js"></script>
+    <script type="text/javascript" src="../js/jquery.jqUploader.js"></script>    -->
+	<!-- END Included for jQuery image uploader -->
 
 
 </head>
@@ -137,7 +144,20 @@
     $(document).ready(function() {
       za.MenuTabs();
       //alert(" appId " + za.getAppId() + " redirectUri " + za.getRedirectUri() + " configType ");
-    });
+		/*$('#imagearea').jqUploader({
+						debug:0
+						,background:'FFFFDF'
+						,barColor:'FFDD00'
+						,allowedExt:'*.avi; *.jpg; *.jpeg; *.png'
+						,allowedExtDescr: 'what you want'
+						,validFileMessage: 'Thanks, now hit Upload!'
+						,endMessage: 'and don\'t you come back ;)'
+						,hideSubmit: false
+					});
+		*/
+   });
+	
+	
   </script>
   
   <script>
