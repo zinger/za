@@ -100,7 +100,7 @@ fieldset { border: none }
 	-webkit-transition-duration: 0.4s, 0.4s;
 	-webkit-transition-timing-function: linear, ease-in;
 	}
-#current-Entries {
+#current-Entries, #text-entries-ul {
     list-style: none;
 }
 .entry-li {
@@ -253,3 +253,56 @@ fieldset { border: none }
 .contest-title {
     cursor: pointer;
 }
+
+.text-entry-li {
+    width: 600px;
+    height: auto;
+    display: block;
+}
+
+.text-rating-info {
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    top: 10px;
+}
+.text-entry-li .part-pic, .text-entry-li .text-div-info, .text-entry-li .text-rating-info {
+    float: left;
+}
+.text-div-info {
+    padding-left: 5px;
+}
+.part-pic {
+    width: 40px;
+    height: 40px;
+}
+.part-name {
+    font-size: 0.8em;
+    padding-left: 5px;
+}
+/*
+.avg-score {
+    border: solid;
+    border-width: 1px;
+    border-color: blue;
+    padding: 0 2px 0 2px;
+    font-size: 11pt;
+}
+
+.vote-count {
+    font-size: 8pt;
+    top: 40px;
+}
+
+.rank {
+    float: right;
+}
+
+.send-gift {
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    border: solid;
+    border-width: 1px;
+    background-color: white;
+}*/

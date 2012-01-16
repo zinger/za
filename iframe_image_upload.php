@@ -1,6 +1,6 @@
 <?php
 //echo "yup coming here";
-mysql_connect('localhost', 'root', '') or die(mysql_error());
+mysql_connect('localhost', 'root', 'root') or die(mysql_error());
 mysql_select_db('za') or die(mysql_error());
 
 require_once('backend/logger.php');
@@ -9,7 +9,7 @@ require_once('backend/fbhelper.php');
 require_once('backend/common/Config.php');
 require_once('backend/common/constants.php');
 
-$response = '';
+$response = 'none';
 $photo_fbid = '';
 $fbobj = new FBHelper();
 $ufrnd = $fbobj->getFriends();
@@ -23,10 +23,12 @@ if($_FILES['files']['size']>0)
 		{
 			$fbobj2 = new FBHelper();
 			$photo_fbid = $fbobj2->uploadPhoto($_FILES['files']['tmp_name'], $_POST['title']);
+			$response = 'uploaded pic to fb';
 		}
 		
 		$fbobj3 = new FBHelper();
 		$result = $fbobj3->uploadPhotoToDir($_FILES['files']);
+		$response = 'uploaded photo to Dir';
 		
 		if($result!='false')
 		{

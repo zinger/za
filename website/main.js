@@ -14,7 +14,7 @@
       baseWidth=128;
       baseHeight=96;
       contentWidth = 1024;
-      margin = ($(window).width() - 1024 )/ 2;
+      margin = ($(window).width() - 1024 )/ 2 -12;
       if ($(window).height() > 768) { marginV = ($(window).height() - 768 )/ 2;}
       else marginV = 0;
       $('#content').css({height: 768, width: contentWidth, marginLeft:margin, marginTop: marginV, marginBottom: marginV, marginRight: margin});
@@ -22,7 +22,7 @@
       baseWidth = 104;
       baseHeight = 78;
       contentWidth = 832;
-      margin = ($(window).width() - 832 )/ 2;
+      margin = ($(window).width() - 832 )/ 2 -12;
       if ($(window).height() > 624) { marginV = ($(window).height() - 624 )/ 2;}
       else marginV = 0;
       $('#content').css({height: 624, width: contentWidth, marginLeft:margin, marginTop: marginV, marginBottom: marginV, marginRight: margin});
@@ -30,7 +30,7 @@
       baseWidth = 80;
       baseHeight = 60;
       contentWidth = 640;
-      if ($(window).width() > 640) margin = ($(window).width() - 640 )/ 2;
+      if ($(window).width() > 640) margin = ($(window).width() - 640 )/ 2 -12;
       else margin = 0;
       if ($(window).height() > 480) { marginV = ($(window).height() - 480 )/ 2;}
       else marginV = 0;
@@ -47,14 +47,20 @@
              images.push({src: 'images/trio-2-by-3.png'}); //2 by 3
       images.push({src: 'images/vintage-sing-2-by-2.png'}); // 2 by 2
       images.push({src: 'images/young-artists-4-by-2.png'}); // 4 by 2
-            images.push({src: 'images/beautiful-black-4-by-1.png'}); // 4 by 1
-           images.push({src: 'images/Bigstock_10656812-2-by-2.png'}); // 4 by 1
-      images.push({src: 'images/pair-of-dancers-2-by-5.png'}); // 4 by 1
+                        images.push({src: 'images/canine-education-4-by-1.png'}); // 4 by 1
+            images.push({src: 'images/indian-girls-smiling-2-by-2.png'});
+
+//           images.push({src: 'images/Bigstock_10656812-2-by-2.png'}); 
+      images.push({src: 'images/pair-of-dancers-2-by-5.png'}); 
        images.push({src: 'images/juggling-blind-2-by-3.png'}); // 2 by 3
        images.push({src: 'images/photographer-2-by-3.png'}); // 2 by 2
-            images.push({src: 'images/indian-girls-smiling-2-by-2.png'});
-                  images.push({src: 'images/canine-education-4-by-1.png'}); // 4 by 1
-                        images.push({src: 'images/title-red-zing.png'}); // 4 by 1
+                   images.push({src: 'images/stock-photo-17403228-trapeze-artist.png'});
+
+                        images.push({src: 'images/beautiful-black-4-by-1.png'}); // 4 by 1
+
+              //          images.push({src: 'images/title-red-zing.png'}); // 4 by 1
+                            images.push({src: 'images/title.png'}); // 4 by 1
+
 
     for (var i=0; i<11; i++) {
       var id = 'div' + i;
@@ -63,7 +69,6 @@
         case 0:
           width=baseWidth*2;
           height=baseHeight*3;
-          color ='green';
           top = 0;
           left=0;
           break;
@@ -71,14 +76,12 @@
           width=baseWidth*2;
           height=baseHeight*2;
           left=baseWidth*2;
-          color ='blue';
           top = 0;
           break;
         case 2:
           width=baseWidth*4;
           height=baseHeight*2;
           left=baseWidth*4;
-          color ='teal';
           top = 0;
           break;
         case 3:
@@ -86,60 +89,52 @@
           height=baseHeight*1;
           left=baseWidth*2;
           top=baseHeight*2;
-          color = 'pink';
           break;
         case 4:
           width=baseWidth*2;
           height=baseHeight*2;
           left=baseWidth*6;
           top=baseHeight*2;
-          color='maroon';
           break;
         case 5:
           width=baseWidth*2;
           height=baseHeight*5;
           left=0;
           top=baseHeight*3;
-          color='aqua';
           break;
         case 6:
           width=baseWidth*2;
           height=baseHeight*3;
           top=baseHeight*4;
           left=baseWidth*6;
-          color='yellow';
           break;
         case 7:
           width=baseWidth*2;
           height=baseHeight*3;
           top=baseHeight*5;
           left=baseWidth*2;
-          color='red';
           break;
         case 8:
           width=baseWidth*2;
           height=baseHeight*2;
           top=baseHeight*5;
           left=baseWidth*4;
-          color='orange';
           break;
         case 9:
           width=baseWidth*4;
           height=baseHeight*1;
           top=baseHeight*7;
           left=baseWidth*4;
-          color='purple';
           break;
         case 10:
           width=baseWidth*4;
           height=baseHeight*2;
           top=baseHeight*3;
           left=baseWidth*2;
-          color='#0000ff';
         default:
           break;
       }
-      $div.css({backgroundColor:color, top: top, left:left, width:width, height:height});
+      $div.css({top: top, left:left, width:width, height:height});
       var $img = $('<img src="'+images[i].src+'" />');
       $img.css({top: top, left:left, width:width, height:height});
       $div.append($img);
@@ -187,10 +182,10 @@
         var width=baseWidth*6;
         var height=baseHeight*4;
         var top=baseHeight*2;
-        var left=baseWidth*1;
-        var color= '#ffffff';//'#ffffcc'; //'#ffffff';   // '#ccccff';
+        var left=baseWidth*1 - 14;
+        var color= '#ffffee'; //'#ffffff';//'#ffffcc'; //'#ffffff';   // '#ccccff';
         FB.XFBML.parse(document.getElementById('info-and-like'));
-        $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'solid', borderColor:'#ff0000', borderWidth:'6px'});
+        $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'solid', borderColor:'#ff0000', borderWidth:'14px'});
         if (baseWidth === 128) {
           $("#info-text").addClass('info-text-large');
           $("#info-launch").addClass('info-launch-large');

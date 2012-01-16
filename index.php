@@ -1,5 +1,5 @@
 <?php
-mysql_connect('localhost', 'root', '') or die(mysql_error());
+mysql_connect('localhost', 'root', 'root') or die(mysql_error());
 mysql_select_db('za') or die(mysql_error());
 
 require_once('backend/logger.php');
@@ -58,7 +58,7 @@ $upic = $picfb->getPictureById(null, '225900327485136');
 */
 
 $comfb = new FBHelper();
-$comfb->getComments();
+//$comfb->getComments();
 
 //$upic = $picfb->getPictureById(null, '100001955114352');
 /*

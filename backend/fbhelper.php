@@ -174,6 +174,7 @@ class FBHelper {
     return $scope;
   }
   
+  /**** temp comment by sunil since comment table does not exist
   public static function getComments() {
   
   	$url = 'http://sabdekho.com/projects/zatest/comment.php';
@@ -204,11 +205,11 @@ class FBHelper {
 						'rq2' => 'select name, id, url, pic_square from profile where id in (select fromid from #rq1)',
 							);
 	// fql multiquery to fetch all the data we need to display in one go
-	/*$queries = array('q1' => 'select post_fbid, fromid, object_id, text, time from comment where object_id in (select comments_fbid from link_stat where url ="'.$url.'")',
-					 'q2' => 'select post_fbid, fromid, object_id, text, time from comment where object_id in (select post_fbid from #q1)',
-					 'q3' => 'select name, id, url, pic_square from profile where id in (select fromid from #q1) or id in (select fromid from #q2)',
-					 );
-	*/
+	//$queries = array('q1' => 'select post_fbid, fromid, object_id, text, time from comment where object_id in (select comments_fbid from link_stat where url ="'.$url.'")',
+	//				 'q2' => 'select post_fbid, fromid, object_id, text, time from comment where object_id in (select post_fbid from #q1)',
+	//				 'q3' => 'select name, id, url, pic_square from profile where id in (select fromid from #q1) or id in (select fromid from #q2)',
+	//				 );
+	//
 	// note format json-strings is necessary because 32-bit php sucks at decoding 64-bit ints :(
 	$result = @json_decode(@file_get_contents('http://api.facebook.com/restserver.php?format=json-strings&method=fql.multiquery&queries='.urlencode(json_encode($comment_queries))));
 	
@@ -234,19 +235,19 @@ class FBHelper {
 			//echo "no new comment";	
 		}
 		//saveComments($result);
-		/*echo "<pre>";
-		print_r($result);
-		echo "</pre>";*/
+		//echo "<pre>";
+		//print_r($result);
+		//echo "</pre>";
 		
 		//return result;
 	}
 	
 	$result2 = @json_decode(@file_get_contents('http://api.facebook.com/restserver.php?format=json-strings&method=fql.multiquery&queries='.urlencode(json_encode($reply_queries))));
 	
-	/*echo "<pre>";
-	print_r($result2);
-	echo "</pre>";
-	*/
+	//echo "<pre>";
+	//print_r($result2);
+	//echo "</pre>";
+	//
 	
 	if($result2)
 	{
@@ -271,7 +272,7 @@ class FBHelper {
 		}
 	}
 	//die;
-  }
+  }*/
   
   public function getFriends()
   {

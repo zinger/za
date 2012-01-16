@@ -74,7 +74,8 @@
 	var entryid = $(this).find('.entry-id').first().val();
 	var contestid = $(this).find('.contest-id').first().val();
 	$parentdiv.empty();
-	za.PictureContestDetail({parentid: parentid, contestid: contestid, entryid: entryid});
+	if (entryid === '2') za.TextContestDetail({parentid: parentid, contestid: contestid, entryid: entryid});
+	else za.PictureContestDetail({parentid: parentid, contestid: contestid, entryid: entryid});
       });
     };
   };

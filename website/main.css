@@ -1,11 +1,12 @@
 body {
   margin: 0;
   padding: 0;
-  /*background-color: #6666ff;
-  background-color: /*#ff0000;
-  background-color: #ffffff;*/
+  /*background-color: #ffffee;*/
   background-image: url('images/back6_yellow.png'); /* back5 */
   background-repeat: repeat;
+  border: solid;
+  border-width: 10px;
+  border-color: #ffff00;
   /*#0000ff; /*#cccc99;/* #ccffff; /*#ffccff; /*#00ccff; /*#cccc99*/; /*#ffff99; /*#cccc33;*/
 }
 #content {
@@ -28,7 +29,16 @@ body {
 }
 
 #info-and-like * {
-  font-family: Helvetica, Verdana, Arial, sans-serif;
+  font-family: sans-serif;
+}
+
+#info-text {
+  font-family: cursive, Verdana, Arial, sans-serif;
+}
+
+#info-launch {
+    font-family: cursive, sans-serif;
+
 }
 
 .info-text-large {
@@ -104,7 +114,7 @@ body {
 }
 .highlight-div {
   border: solid;
-  border-color: #ffff66;
-  border-width: 6px;
+  border-color: #ffff00; /*#ff0000; /*#ffff66;*/
+  border-width: 10px;
   z-index: 999999;
 }
