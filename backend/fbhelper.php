@@ -8,15 +8,22 @@ class FBHelper {
 
   public static function getFacebook() {
     global $logger;
-    try {
-      $fb = new Facebook(array(
-        'appId' => FB_APP_ID, 
-        'secret' => FB_SECRET,
-        'fileUpload' => true));  
-      return $fb;
-    } catch (Exception $e) {
-      $logger->info("FBHelper::getFacebook:Exception: " . $e->getTraceAsString());    
-    }
+    if(!$fb)
+	{
+		try {
+		  $fb = new Facebook(array(
+			'appId' => FB_APP_ID, 
+			'secret' => FB_SECRET,
+			'fileUpload' => true));  
+		  return $fb;
+		} catch (Exception $e) {
+		  $logger->info("FBHelper::getFacebook:Exception: " . $e->getTraceAsString());    
+		}
+	}
+	else
+	{
+		return $fb;	
+	}
   }
 
   public static function getFBLoginUrl($fb = null) {
@@ -172,6 +179,78 @@ class FBHelper {
 	public static function getScope() {
     $scope = implode(",", Config::$FB_APP_SCOPE);
     return $scope;
+  }
+  
+  
+  public static function photoEntry($entries, $file, $fb = null) {
+	  	global $logger;
+		$img = $file['tmp_name'];
+		$imgname = $file['name'];
+		$caption = $entries['title'];
+		
+		#### Making Facebook Session ####
+		if (is_null($fb)) {
+		  $fb = self::getFacebook();
+		}
+		
+		$userdata = $fb->api('/me');
+		$user_fbid = $userdata['id'];
+			
+		if($entries['publish_to_facebook']=='yes')
+		{
+			$fb_publish = "yes";
+			if (($path = realpath($img)) === FALSE) {
+			  return 'Image not Found';
+			}
+		
+			$msg = ((!empty($caption)) && (is_string($caption))) ? $caption : "Zing photo";
+			
+			try {
+				 $photo = $fb->api('/me/photos', 'POST',
+								array('source' => '@' . $path,
+									  'message'=> $msg
+								));
+				$id = $photo['id'];
+				//echo "id: ".$id."<br />";
+				$logger->info("FBHelper::uploadPhoto:ImagePath: " . $path . " | Caption: " . $msg . " | PhotoID: " . $id);
+			} catch (Exception $e) {
+				//die("Error:: ".$e->getMessage());
+				$logger->info("FBHelper::uploadPhoto:Exception: " . $e->getMessage());
+			  $logger->info("ExceptionTrace: " . $e->getTraceAsString());
+			}
+		}
+		else
+		{
+			$fb_publish = "no";
+		}
+		
+		#### Uploading photo to diresctory ####
+		#### Making folder and naming it with user fbid ####
+		if(!file_exists('uploaded_photos/'.$user_fbid))
+				mkdir('uploaded_photos/'.$user_fbid);
+
+		$upload_dir = 'uploaded_photos/'.$user_fbid.'/';
+		$image_path =  $upload_dir.strtotime('now').$imgname;
+		
+		if(move_uploaded_file($img, $image_path))
+		{
+			//return $image_path;
+			#### Inserting entries in database ####
+			if(mysql_query("INSERT INTO photo_entry SET title='".$entries['title']."', description='".$entries['description']."',
+										photo='".$image_path."', user_fbid='".$user_fbid."', publish_to_facebook='".$fb_publish."', 
+										photo_fbid='".$id."'"))
+			{
+				return "Entry submitted successfully";
+			}
+			else
+			{
+				return "Error Occured. Please try again";	
+			}
+		}
+		else
+		{
+			return 'Error Occured while upload. Please try again';
+		}
   }
   
   /**** temp comment by sunil since comment table does not exist

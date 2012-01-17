@@ -33,6 +33,7 @@
 	$frm.append($('<input type="hidden" name="upload_pic" value="yes" />'));
 	$frm.append($('<label for="entry-title">Entry Title</label>'));
 	$frm.append($('<div><input type="text" name="title" id="entry-title" /></div>'));
+	$frm.append($('<label for="entry-title">Entry Description</label>'));
 	$frm.append($('<div><textarea name="text" id="text"></textarea></div>'));
 	$frm.append($('<input id="upload-caption-button" type="file" name="files"/>'));
 	$frm.append($('<div id="upload"></div>'));
