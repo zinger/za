@@ -44,9 +44,11 @@ function fileUpload(form, action_url, div_id) {
     form.setAttribute("method", "post");
     form.setAttribute("enctype", "multipart/form-data");
     form.setAttribute("encoding", "multipart/form-data");
+    //form.setAttribute("op", "submit_entry");
  
     // Submit the form...
+    alert("submitting form.. ");
     form.submit();
  
-    document.getElementById(div_id).innerHTML = "<img src='images/uploading.gif'><br />Uploading...";
+    document.getElementById(div_id).innerHTML = "<img src='../html/images/uploading.gif'><br />Uploading...";
 }

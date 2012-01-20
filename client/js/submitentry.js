@@ -34,8 +34,9 @@
 	$frm.append($('<label for="entry-title">Entry Title</label>'));
 	$frm.append($('<div><input type="text" name="title" id="entry-title" /></div>'));
 	$frm.append($('<label for="entry-title">Entry Description</label>'));
-	$frm.append($('<div><textarea name="text" id="text"></textarea></div>'));
+	$frm.append($('<div><textarea name="desc" id="desc"></textarea></div>'));
 	$frm.append($('<input id="upload-caption-button" type="file" name="files"/>'));
+	$frm.append($('<input id="op" name="op" value="submit_entry" />'));
 	$frm.append($('<div id="upload"></div>'));
 	//$frm.append($('<ol><li id="imagearea"><label for="example1_field">Choose a file to upload: </label><input name="MAX_FILE_SIZE" value="1048576" type="hidden" /><input name="myFile"  id="example1_field"  type="file" /></li></ol>'));
 	$frm.append($('<br /><input id="publish_to_fb" type="checkbox" name="publish_to_fb" value="yes" /> <label for="entry-title">Publish photo to Facebook</label>'));
@@ -50,7 +51,9 @@
 	$finishbutton.bind('click', function() {
 		//alert("I was clicked"); 
 		//$('#uploadit').submit();
-		fileUpload(this.form,'../../iframe_image_upload.php','upload');
+		//fileUpload(this.form,'../../iframe_image_upload.php','upload');
+		fileUpload(this.form,za.getServerUri(),'upload');
+
 	});
 	
 	$frm.append($checkboxdiv);

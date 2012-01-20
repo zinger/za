@@ -100,12 +100,10 @@ fieldset { border: none }
 	-webkit-transition-duration: 0.4s, 0.4s;
 	-webkit-transition-timing-function: linear, ease-in;
 	}
-#current-Entries, #text-entries-ul {
+#current-entries, #text-entries-ul {
     list-style: none;
 }
-.entry-li {
-    float: left;
-}
+
 .rating-button {
     background-image: none !important;
     background: red !important;
@@ -279,6 +277,30 @@ fieldset { border: none }
 .part-name {
     font-size: 0.8em;
     padding-left: 5px;
+}
+
+.my-entries {
+    width: 40%;
+    height: auto;
+}
+
+.entry-img-div {
+    width: 120px;
+    height: 90px;
+}
+
+.my-entries ul, .my-entries li {
+    display: block;
+}
+
+.submit-entry-form {
+    width: 50%;
+    padding-left: 10px;
+    float: left;
+}
+
+.entry-info {
+    float: right;
 }
 /*
 .avg-score {

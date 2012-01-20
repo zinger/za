@@ -96,7 +96,11 @@ CREATE TABLE `entry` (
   `name` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(1024) DEFAULT NULL,
   `entry_type` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `url` varchar(255) DEFAULT NULL,
+  `big_url` varchar(255) DEFAULT NULL,
+  `med_url` varchar(255) DEFAULT NULL,
+  `small_url` varchar(255) DEFAULT NULL,
+  `fb_pid` bigint(20) unsigned DEFAULT NULL,
+  `fb_pname` varchar(255) DEFAULT NULL,
   `fb_object_id` bigint(20) unsigned DEFAULT NULL,
   `text_entry_id` bigint(20) unsigned DEFAULT NULL,
   `tags` varchar(1025) DEFAULT NULL,
@@ -106,16 +110,7 @@ CREATE TABLE `entry` (
   `created_by_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `date_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `entry_entrytype` (`entry_type`),
-  UNIQUE KEY `entry_status` (`status`),
-  UNIQUE KEY `entry_contest_id` (`contest_id`),
-  UNIQUE KEY `entry_createdbyid` (`created_by_id`),
-  UNIQUE KEY `entry_datecreated` (`date_created`),
-  UNIQUE KEY `entry_dateupdated` (`date_updated`),
-  UNIQUE KEY `entry_fbobjectid` (`fb_object_id`),
-  UNIQUE KEY `entry_textentryid` (`text_entry_id`),
-  UNIQUE KEY `entry_category` (`category`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

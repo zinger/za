@@ -43,7 +43,7 @@ body {
 
 .info-text-large {
   font-size: 1.4em;
-  padding-top: 40px;
+  padding-top: 45px;
   padding-left: 35px;
   padding-right: 20px;
 }
@@ -55,7 +55,7 @@ body {
 }
 .info-text-small {
   font-size: 0.9em;
-  padding-top: 25px;
+  padding-top: 15px;
   padding-left: 20px;
   padding-right: 15px;
 }
@@ -63,7 +63,7 @@ body {
   font-size: 1.2em;
   font-style: italic;
   padding-left: 60px;
-  padding-top: 25px;
+  padding-top: 30px;
   padding-bottom: 50px;
   padding-right: 40px;
 }
@@ -80,7 +80,7 @@ body {
   font-size: 0.8em;
   font-style: italic;
   padding-left: 40px;
-  padding-top: 25px;
+  padding-top: 15px;
   padding-bottom: 25px;
   padding-right: 40px;
 }
@@ -114,7 +114,7 @@ body {
 }
 .highlight-div {
   border: solid;
-  border-color: #ffff00; /*#ff0000; /*#ffff66;*/
+  border-color: #00ddff; /*#ffff00; /*#ff0000; /*#ffff66;*/
   border-width: 10px;
   z-index: 999999;
 }

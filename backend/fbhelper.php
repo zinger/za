@@ -82,7 +82,7 @@ class FBHelper {
     return $src; 
   }
 
-  public static function getPictureById($fb =null, $id = null) {
+  public static function getPictureById($id = null, $fb = null) {
     global $logger;
 
     if (is_null($fb)) {
@@ -94,48 +94,73 @@ class FBHelper {
       //$url = "/" . 98423808305; 
       $logger->info("FBHelper::getPictureById:Url: " . $url);
       $ph = $fb->api($url);
+      //$logger->info("FBHelper::getPictureById:Pic: " . print_r($ph));
     } catch (Exception $e) {
       $logger->info("FBHelper::getPictureById:Exception: " . $e->getTraceAsString());
     }
     return $ph;
   }
-
+/*
   public static function uploadPhoto($img, $caption = null, $fb = null) {
-		global $logger;
-		if (($path = realpath($img)) === FALSE) {
-		  return 'falses';
-		}
-		
-		
-		if (is_null($fb)) {
-		  $fb = self::getFacebook();
-		}
-		
-		$msg = ((!empty($caption)) && (is_string($caption))) ? $caption : "Zing photo";
-		
-		try {
-			 $photo = $fb->api('/me/photos', 'POST',
-							array('source' => '@' . $path,
-								  'message'=> $msg
-							));
-			$id = $photo['id'];
-			//echo "id: ".$id."<br />";
-			$logger->info("FBHelper::uploadPhoto:ImagePath: " . $path . " | Caption: " . $msg . " | PhotoID: " . $id);
-		} catch (Exception $e) {
-			//die("Error:: ".$e->getMessage());
-			$logger->info("FBHelper::uploadPhoto:Exception: " . $e->getMessage());
-		  $logger->info("ExceptionTrace: " . $e->getTraceAsString());
-		}
-		
-		if(isset($id))
-			return $id;
-		else
-			return '';
+    global $logger;
+    if (($path = realpath($img)) === FALSE) {
+      return 'false';
+    }
+    if (is_null($fb)) {
+      $fb = self::getFacebook();
+    }
+    $msg = ((!empty($caption)) && (is_string($caption))) ? $caption : "Zing photo";
+    try {
+      $photo = $fb->api('/me/photos', 'POST', array('source' => '@' . $path, 'message'=> $msg));
+      $id = $photo['id'];
+      $logger->info("FBHelper::uploadPhoto:ImagePath: " . $path . " | Caption: " . $msg . " | PhotoID: " . $id);
+    } catch (Exception $e) {
+	$logger->info("FBHelper::uploadPhoto:Exception: " . $e->getMessage());
+        $logger->info("ExceptionTrace: " . $e->getTraceAsString());
+    }
+    
+    if(isset($id)) return $id;
+    else return '';
   }
-  
+*/
+
+  public static function uploadPhoto($entries, $file, $fb = null) {
+    global $logger;
+    $img = $file['tmp_name'];
+    $imgname = $file['name'];
+    $caption = $entries['title'];
+    
+    #### Making Facebook Session ####
+    if (is_null($fb)) {
+      $fb = self::getFacebook();
+    }
+			
+    if (($path = realpath($img)) === FALSE) {
+      return 'Image not Found';
+    }
+		
+    $msg = ((!empty($caption)) && (is_string($caption))) ? $caption : "Zing photo";
+			
+    try {
+      $photo = $fb->api('/me/photos', 'POST', array('source' => '@' . $path, 'message'=> $msg ));
+      $id = $photo['id'];
+     
+      $logger->info("FBHelper::uploadPhoto:ImagePath: " . $path . " | Caption: " . $msg . " | PhotoID: " . $id );
+    } catch (Exception $e) {
+      $logger->info("FBHelper::uploadPhoto:Exception: " . $e->getMessage());
+      $logger->info("ExceptionTrace: " . $e->getTraceAsString());
+    }  
+    
+    if(isset($id)) return $id;
+    else return '';
+  }
+
 	public static function uploadPhotoToDir($file) {
+	  global $logger;
 		$img = $file['tmp_name'];
+		$logger->info("img = $img");
 		$imgname = $file['name'];
+		$logger->info("imgname = $imgname");
 		
 		$fb = self::getFacebook();
 		$userdata = $fb->api('/me');
@@ -148,9 +173,9 @@ class FBHelper {
 		$image_path =  $upload_dir.strtotime('now').$imgname;
 		
 		if(move_uploaded_file($img, $image_path))
-			return $image_path;
+		  return $image_path;
 		else
-			return 'false';
+		  return 'false';
 		
 	}
 	
@@ -226,10 +251,10 @@ class FBHelper {
 		
 		#### Uploading photo to diresctory ####
 		#### Making folder and naming it with user fbid ####
-		if(!file_exists('uploaded_photos/'.$user_fbid))
-				mkdir('uploaded_photos/'.$user_fbid);
+		if(!file_exists('../uploaded_photos/'.$user_fbid))
+				mkdir('../uploaded_photos/'.$user_fbid);
 
-		$upload_dir = 'uploaded_photos/'.$user_fbid.'/';
+		$upload_dir = '../uploaded_photos/'.$user_fbid.'/';
 		$image_path =  $upload_dir.strtotime('now').$imgname;
 		
 		if(move_uploaded_file($img, $image_path))
