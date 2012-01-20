@@ -32,7 +32,7 @@
     
     $parentdiv.append($('<div class="pageTitle">Create Contest</div>'));
     
-    var $createcontestform = $('<div id="create-contest-form"></div>');
+    //var $createcontestform = $('<div id="create-contest-form"></div>');
     
     var buildCheckboxDiv = function (attr) {
       var $div = $('<div class="checkbox-div"></div>');
@@ -71,6 +71,10 @@
       return $div;
     }
     
+    var $createcontestform = $('<form id="create-contest-form" enctype="multipart/form-data" method="post"></form>');
+    //$createcontestform.append($('<input id="op" name="op" value="create_contest" />'));
+    $createcontestform.append($('<input id="obj" type="hidden" name="obj">'));
+    
     $.each(attrs, function(idx, attr) {
       switch (attr.type) {
       case 'checkbox':
@@ -92,7 +96,7 @@
         break;
       }
     });
-                
+    $createcontestform.append($('<div id="upload"></div>'));
     var $finishbutton = $('<button id="'+za.buttons['finishcontest'].id+'" />') ;
     $finishbutton.button({label: za.buttons['finishcontest'].label});
     
@@ -120,15 +124,18 @@
             jsonobject[attr.id] = $( za.jq(attr.id)).val();
             break;
         }
+        
+        $('#obj').val(JSON.stringify(jsonobject));
+
        });
 
        //alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
-
-       $.post( za.getServerUri(), jsonobject,
-          function(data) { 
-              alert('response received ' + JSON.stringify(data));
-              sendContestRequest(); return false;
-          } );
+        fileUpload(this.form,za.getServerUri(),'upload');
+       //$.post( za.getServerUri(), jsonobject,
+       //   function(data) { 
+       //       alert('response received ' + JSON.stringify(data));
+       //       sendContestRequest(); return false;
+       //   } );
     });
     $createcontestform.append($finishbutton);
     
@@ -141,7 +148,8 @@
     $( za.jq(attrs['iscaption'].id)).change(function() {
       if ($( za.jq(attrs['iscaption'].id)).is(':checked')) {
         var $uploadcaptiondiv = $('<div id="upload-caption-div"></div>');
-        var $uploadcaptionpic = $('<input id="upload-caption-button" type="file" name="capFile" multiple/>') ;
+        //var $uploadcaptionpic = $('<input id="upload-caption-button" type="file" name="capFile" multiple/>') ;
+        var $uploadcaptionpic = $('<input id="upload-caption-button" type="file" name="files" />') ;
         $uploadcaptiondiv.append($uploadcaptionpic);
         $uploadcaptiondiv.insertAfter($(this));
       } else {

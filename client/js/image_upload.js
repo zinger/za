@@ -48,6 +48,7 @@ function fileUpload(form, action_url, div_id) {
  
     // Submit the form...
     alert("submitting form.. ");
+    
     form.submit();
  
     document.getElementById(div_id).innerHTML = "<img src='../html/images/uploading.gif'><br />Uploading...";

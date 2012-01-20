@@ -14,7 +14,7 @@
       baseWidth=128;
       baseHeight=96;
       contentWidth = 1024;
-      margin = ($(window).width() - 1024 )/ 2 -12;
+      margin = ($(window).width() - 1024 )/ 2 -2 -10;
       if ($(window).height() > 768) { marginV = ($(window).height() - 768 )/ 2;}
       else marginV = 0;
       $('#content').css({height: 768, width: contentWidth, marginLeft:margin, marginTop: marginV, marginBottom: marginV, marginRight: margin});
@@ -22,7 +22,7 @@
       baseWidth = 104;
       baseHeight = 78;
       contentWidth = 832;
-      margin = ($(window).width() - 832 )/ 2 -12;
+      margin = ($(window).width() - 832 )/ 2 -2 -10;
       if ($(window).height() > 624) { marginV = ($(window).height() - 624 )/ 2;}
       else marginV = 0;
       $('#content').css({height: 624, width: contentWidth, marginLeft:margin, marginTop: marginV, marginBottom: marginV, marginRight: margin});
@@ -30,7 +30,7 @@
       baseWidth = 80;
       baseHeight = 60;
       contentWidth = 640;
-      if ($(window).width() > 640) margin = ($(window).width() - 640 )/ 2 -12;
+      if ($(window).width() > 640) margin = ($(window).width() - 640 )/ 2 -2 -10;
       else margin = 0;
       if ($(window).height() > 480) { marginV = ($(window).height() - 480 )/ 2;}
       else marginV = 0;
@@ -59,7 +59,7 @@
                         images.push({src: 'images/beautiful-black-4-by-1.png'}); // 4 by 1
 
               //          images.push({src: 'images/title-red-zing.png'}); // 4 by 1
-                            images.push({src: 'images/title.png'}); // 4 by 1
+                            images.push({src: 'images/title_pale_red_apple.png'}); // 4 by 1
 
 
     for (var i=0; i<11; i++) {
@@ -139,17 +139,33 @@
       $img.css({top: top, left:left, width:width, height:height});
       $div.append($img);
       $div.mouseover(function() {
+        if ($(this).attr('id') === 'div10' && $("#isFlipped").val() === '0') {
+          $( this ).css( "left","-=10" );
+          $( this ).css( "top","-=10" );
+        }
+        else if ($(this).attr('id') !== 'div10') {
+          $( this ).css( "left","-=10" );
+          $( this ).css( "top","-=10" );
+        }
         $(this).addClass('highlight-div');
       });
       $div.mouseout(function() {
         $(this).removeClass('highlight-div');
+        if ($(this).attr('id') === 'div10' && $("#isFlipped").val() === '0') {
+          $( this ).css( "left","+=10" );
+          $( this ).css( "top","+=10" );
+        }
+        else if ($(this).attr('id') !== 'div10') {
+          $( this ).css( "left","+=10" );
+          $( this ).css( "top","+=10" );
+        }
       });
       $("#content").append($div);
     };
     $("#content").bind('click', function() {
       $("#div10").flip({
           direction:'rl',
-          color: '#ff0000', /*'#ccccff',*/
+         // color: '#ffffff',/*'#ff0000', /*'#ccccff',*/
           onEnd: function() {
             changeFilpContent();
           }
@@ -163,13 +179,13 @@
       } else {
         $("#isFlipped").attr('value', '0');
         removeFlipContent();
-      }
+      }/*
       $("#div10").mouseover(function() {
           $("#div10").addClass('highlight-div');
         });
         $("#div10").mouseout(function() {
           $("#div10").removeClass('highlight-div');
-        });
+        });*/
     };
     var addFlipContent = function() {
         var $content = $('<div id="info-and-like"></div>');
@@ -183,9 +199,9 @@
         var height=baseHeight*4;
         var top=baseHeight*2;
         var left=baseWidth*1 - 14;
-        var color= '#ffffee'; //'#ffffff';//'#ffffcc'; //'#ffffff';   // '#ccccff';
+        var color= '#cccccc'; //'#ffddaa'; //'#ffffff';//'#ffffcc'; //'#ffffff';   // '#ccccff';
         FB.XFBML.parse(document.getElementById('info-and-like'));
-        $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'solid', borderColor:'#ff0000', borderWidth:'14px'});
+        $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'outset', borderColor:'#ffffff', borderWidth:'14px'});
         if (baseWidth === 128) {
           $("#info-text").addClass('info-text-large');
           $("#info-launch").addClass('info-launch-large');

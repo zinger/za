@@ -10,7 +10,12 @@ require_once('fbhelper.php');
 require_once('common/Config.php');
 require_once('common/constants.php');
 
-$op = $_REQUEST['op'];
+$op = $_POST['op'];
+if (!isset($op)) {
+  $obj = json_decode(stripslashes($_POST['obj']));
+  //$logger->info("obj = $obj");
+  $op = $obj->op;
+}
 $logger->info("op = $op");
 $fbobj = new FBHelper();
 
@@ -41,7 +46,7 @@ switch($op) {
     }
     echo $response;
     break;
-  case "submit_entry_old":
+  case "submit_entry_old": 
     mysql_connect('localhost', 'root', 'root') or die(mysql_error());
     mysql_select_db('za') or die(mysql_error());
     if($_FILES['files']['size']>0) {
@@ -60,9 +65,23 @@ switch($op) {
     echo $response;
     break;
   case "create_contest":
-    $files = $_FILES['capFile'];
-    echo $files;
-    $result = ContestService::instance()->createContest();
+    if($_FILES['files']['size']>0) {
+	$type = @exif_imagetype($_FILES['files']['tmp_name']);
+	if (($type >= 1) && ($type <= 3)) {
+          //$contestImgArr['title'] = $_POST['name'];
+          $contestImgArr['title'] = $obj->name;
+          $id = $fbobj->uploadPhoto($contestImgArr, $_FILES['files']);
+          if (isset($id)) {
+            $photo = $fbobj->getPictureById($id);
+            //$logger->info("index.php contest photo " . print_r($photo));
+          } else { $response = "Error Submitting Photo. Please try again"; }
+	} else { $response = "Invalid image. Please use JPG, GIF or PNG image type"; }
+    }
+    if (!isset($response)) $result = ContestService::instance()->createContest($photo);
+    else echo $response;
+    //$files = $_FILES['capFile'];
+    //echo $files;
+    //$result = ContestService::instance()->createContest();
     break;
   case "get_contests_by_creation_date":
     $sd = $_REQUEST['sd'];
