@@ -44,6 +44,7 @@ body {
 
 .info-text-large {
   font-size: 1.4em;
+  /*font-weight: 500;*/
   padding-top: 45px;
   padding-left: 35px;
   padding-right: 20px;
@@ -55,10 +56,10 @@ body {
   padding-right: 20px;
 }
 .info-text-small {
-  font-size: 0.9em;
+  font-size: 1.0em;
   padding-top: 15px;
-  padding-left: 20px;
-  padding-right: 15px;
+  padding-left: 11px;
+  padding-right: 11px;
 }
 .info-launch-large {
   font-size: 1.2em;
@@ -78,11 +79,11 @@ body {
 
 }
 .info-launch-small {
-  font-size: 0.8em;
+  font-size: 0.9em;
   font-style: italic;
   padding-left: 40px;
   padding-top: 15px;
-  padding-bottom: 25px;
+  padding-bottom: 15px;
   padding-right: 40px;
 }
 #za-like-box * {
@@ -93,24 +94,24 @@ body {
   position: relative;
 }
 .za-like-large * {
-  left: 15%;
+  margin-left: 15%;
 }
 .za-like-medium * {
-  left: 10%;
+  margin-left: 10%;
 }
 .za-like-small * {
-  left: 7%;
+  margin-left: 7%;
 }
 .za-send-large * {
-  left: 20%;
+  margin-left: 0;
   top: -0.6%;
 }
 .za-send-medium * {
-  left: 12%;
+  margin-left: 0; /*12 */
   top: -0.8%;
 }
 .za-send-small * {
-  left: 5%;
+  margin-left: -5%;/* 5 */
   top: -1%;
 }
 .highlight-div {

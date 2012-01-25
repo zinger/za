@@ -27,6 +27,7 @@ USE `za`;
 -- Table structure for table `contest`
 --
 
+/* TODO make fb_pid, fb_object_id, fb_pname consistent across all tables in terms of storage */
 DROP TABLE IF EXISTS `contest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -41,9 +42,16 @@ CREATE TABLE `contest` (
   `entry_type` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `description` varchar(5000) DEFAULT NULL,
   `tags` varchar(1025) DEFAULT NULL,
+  `who_can_participate` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `invite_others` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `cause_id` int(10) unsigned DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
+  `fb_object_id` varchar(255) DEFAULT NULL,
+  `big_url` varchar(255) DEFAULT NULL,
+  `med_url` varchar(255) DEFAULT NULL,
+  `small_url` varchar(255) DEFAULT NULL,
+  `fb_pid` varchar(255) DEFAULT NULL, /* TODO change this to not null at a later date */
+  `fb_pname` varchar(255) DEFAULT NULL, /* TODO change this to not null at a later date */
   `featured` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `featured_start_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `featured_end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -51,15 +59,7 @@ CREATE TABLE `contest` (
   `updated_by_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `date_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `contest_startdate` (`start_date`),
-  UNIQUE KEY `contest_enddate` (`end_date`),
-  UNIQUE KEY `contest_submissionenddate` (`submission_end_date`),
-  UNIQUE KEY `contest_contesttype` (`contest_type`),
-  UNIQUE KEY `contest_entrytype` (`entry_type`),
-  UNIQUE KEY `contest_status` (`status`),
-  UNIQUE KEY `contest_featured` (`featured`),
-  UNIQUE KEY `contest_createdbyid` (`created_by_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

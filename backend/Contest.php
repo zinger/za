@@ -17,7 +17,13 @@ class Contest {
   public $featured;
   public $featured_start_date;
   public $featured_end_date;
-  public $url;
+  public $fb_object_id;
+  public $big_url;
+  public $med_url;
+  public $small_url;
+  public $fb_pid;
+  public $fb_pname;
+
 
   // Contest property => (client attr, esc?)
   private static $clientPropMapping = array(
@@ -33,8 +39,13 @@ class Contest {
     'who_can_participate' => array ('whocan', true),
     'invite_others'       => array ('invothers', false),
     'status'              => array ('status', false),
-    'cause_id'            => array ('cause' , false), 
-    'url'                 => array ('url'   , true),
+    'cause_id'            => array ('cause' , false),
+    'fb_object_id'        => array ('fboid' , false),
+    'big_url'             => array ('burl'  , false),
+    'med_url'             => array ('murl'  , false),
+    'small_url'           => array ('surl'  , false),
+    'fb_pid'              => array ('fbpid' , false),
+    'fb_pname'            => array ('fbpname', false),
     'featured'            => array ('isf'   , false), 
     'featured_start_date' => array ('fsd'   , false),
     'featured_end_date'   => array ('fed'   , false)

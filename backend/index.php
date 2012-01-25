@@ -12,7 +12,7 @@ require_once('common/constants.php');
 
 $op = $_POST['op'];
 if (!isset($op)) {
-  $obj = json_decode(stripslashes($_POST['obj']));
+  $obj = json_decode(stripslashes($_POST['obj'])); // for create_contest, op is sent as a variable in obj
   //$logger->info("obj = $obj");
   $op = $obj->op;
 }
@@ -77,7 +77,7 @@ switch($op) {
           } else { $response = "Error Submitting Photo. Please try again"; }
 	} else { $response = "Invalid image. Please use JPG, GIF or PNG image type"; }
     }
-    if (!isset($response)) $result = ContestService::instance()->createContest($photo);
+    if (!isset($response)) $result = ContestService::instance()->createContest($obj, $photo);
     else echo $response;
     //$files = $_FILES['capFile'];
     //echo $files;

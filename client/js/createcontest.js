@@ -129,13 +129,8 @@
 
        });
 
-       //alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
+       alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
         fileUpload(this.form,za.getServerUri(),'upload');
-       //$.post( za.getServerUri(), jsonobject,
-       //   function(data) { 
-       //       alert('response received ' + JSON.stringify(data));
-       //       sendContestRequest(); return false;
-       //   } );
     });
     $createcontestform.append($finishbutton);
     
@@ -182,24 +177,6 @@
       }     
     });
 
-    tinyMCE.init({
-            mode : "textareas",
-            theme : "advanced",   //(n.b. no trailing comma, this will be critical as you experiment later)
-            plugins : "spellchecker,emotions,iespell,inlinepopups,preview,print,directionality,visualchars",
-            theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect,|,bullist,numlist,|,outdent,indent",
-        theme_advanced_buttons2 : "undo,redo,|,forecolor,backcolor,|,hr,charmap,emotions,image,|,iespell,|,ltr,rtl,|,spellchecker,|,preview,|,print",
-        theme_advanced_buttons3 : "",
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-        theme_advanced_statusbar_location : "bottom",
-        theme_advanced_resizing : true,
-
-        // Skin options
-        skin : "o2k7",
-        skin_variant : "silver"
-
-    });
-    
     $.each(attrs, function(idx, attr) {
         switch (idx) {
           case 'entrytype':
@@ -243,6 +220,52 @@
             break;
         };
     });
+        tinyMCE.init({
+            mode : "textareas",
+            theme : "advanced",   //(n.b. no trailing comma, this will be critical as you experiment later)
+            plugins : "spellchecker,emotions,iespell,inlinepopups,preview,print,directionality,visualchars",
+            theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect,|,bullist,numlist,|,outdent,indent",
+        theme_advanced_buttons2 : "undo,redo,|,forecolor,backcolor,|,hr,charmap,emotions,image,|,iespell,|,ltr,rtl,|,spellchecker,|,preview,|,print",
+        theme_advanced_buttons3 : "",
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+        theme_advanced_statusbar_location : "bottom",
+        theme_advanced_resizing : true,
+        // Skin options
+        skin : "o2k7",
+        skin_variant : "silver",
+        setup : function(ed) {
+          ed.bind('mouseover', function(ed) {
+            $("#desc_ifr").qtip({
+            content: 'I was clicked',
+            style: 'mystyle',
+            show: 'click',
+            hide: 'mouseout'
+            }).qtip("focus").qtip("show");
+          });
+        // Display an alert onclick
+        /*
+                    $("#desc_ifr").qtip({
+            content: 'I was clicked',
+            style: 'mystyle',
+            show: 'click',
+            hide: 'mouseout'
+          }).qtip("focus").qtip("show");*/
+        //ed.onClick.add(function(ed) {
+        //    ed.windowManager.alert('User clicked the editor.');
+
+        //});
+    }
+
+    });
+          za.buildCreateContestTooltip();
+         /*   tinymce.get(0).qtip({
+            content: 'I was clicked',
+            style: 'mystyle',
+            show: 'mouseover',
+            hide: 'mouseout'
+          }).qtip("focus").qtip("show");*/
+
   };
   za.CreateContest = CreateContest;
 }(jQuery));

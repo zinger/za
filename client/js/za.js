@@ -146,6 +146,53 @@
     rank: {id: 'rank'},
     trend: {id: 'trend'}
   };
+  $.fn.qtip.styles.mystyle = { // Last part is the name of the style
+   width: 200,
+   background: '#A2D959',
+   color: 'black',
+   textAlign: 'center',
+   border: {
+      width: 7,
+      radius: 5,
+      color: '#A2D959'
+   },
+   tip: 'bottomLeft',
+   name: 'dark' // Inherit the rest of the attributes from the preset dark style
+  };
+  //$.fn.qtip.zindex = 1000000;
+
+  za.buildCreateContestTooltip = function() {
+    var attrs = za.contestattrs;
+    var content;
+    $.each(attrs, function(idx, attr) {
+      switch (idx) {
+        case 'title':
+          content = 'Short and sweet is best';
+          break;
+        case 'tagline':
+          content = 'Make it fun... add a cool tag line!';
+          break;
+        case 'details':
+          content: 'Add details you wish to share ... rules, organizer details, prizes, if any.'
+          break;
+        default:
+          content = '';
+          break;
+      };
+      if (content !== '' && content !== 'undefined') {
+        var $field = $(za.jq(attrs[idx].id));
+        if (idx !== 'details') {//$field = $("#desc_ifr");
+          $field.qtip({
+            content: content,
+            show: 'mouseover',
+            hide: 'mouseout',
+            style: 'mystyle'
+          });
+        };
+              
+      };
+    });
+  };
   
   za.galleryTypes = {
     entrydetail: {id: 'a', cName: 'big-gallery'},

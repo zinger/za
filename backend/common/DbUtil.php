@@ -20,6 +20,13 @@ class DbUtil {
   static function getDate($timestamp) {
     return date('Y-m-d H:i:s', $timestamp);
   }
+  
+  function getMySQLDateString($inputstring) //typical date : 04/21/2009
+  {
+    $mysqlDateString = date('Y-m-d H:i:s', strtotime($inputstring));
+    return $mysqlDateString;
+  }
+
 }
 
 ?>
