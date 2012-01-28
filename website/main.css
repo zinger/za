@@ -1,29 +1,20 @@
 body {
   margin: 0;
   padding: 0;
-  /*background-color: #cccccc;
-  /*appearance: amber;*/
-  background-image: url('images/back6_white.png'); /* back5 */
+  background-image: url('images/back_white_final.png'); 
   background-repeat: repeat;
   border: inset;
   border-width: 10px;
   border-color: transparent;
-  /*#0000ff; /*#cccc99;/* #ccffff; /*#ffccff; /*#00ccff; /*#cccc99*/; /*#ffff99; /*#cccc33;*/
 }
 #content {
   position: relative;
-  /*border: solid;
-  border-color: #ff0000;
-  border-width: 5px;*/
 }
 .imgDiv {
   position: absolute;
   display: inline;
   margin: 0;
   padding: 0;
- /* border-style: inset;
-  border-width: 2px;
-  border-color: #ffffff;/*#ff0000; /*yellow #ffff66; /*#ff0000; *//*#330000; *//*#ccccff; /*#ffffff;*/
 }
 #content{
   cursor: pointer;

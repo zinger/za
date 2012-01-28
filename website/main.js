@@ -54,8 +54,8 @@
 
      // images.push({src: 'images/bm_angry_birds.png'}); // 4 by 2
                              images.push({src: 'images/iStock_000004363077Small.png'}); // 4 by 1
-
-images.push({src: 'images/stock-photo-18990574-geek-man-giving-his-girlfriend-a-valentine-present.png'});
+//images.push({src: 'images/stock-photo-18990574-geek-man-giving-his-girlfriend-a-valentine-present.png'});
+images.push({src: 'images/stock-photo-15402653-happy-loving-couple-with-red-heart-gift-box-and-roses.png'});
 
 //           images.push({src: 'images/Bigstock_10656812-2-by-2.png'}); 
       images.push({src: 'images/iStock_000016550935Small-dancers-2-by-5.png'});
