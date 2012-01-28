@@ -233,39 +233,9 @@
         theme_advanced_resizing : true,
         // Skin options
         skin : "o2k7",
-        skin_variant : "silver",
-        setup : function(ed) {
-          ed.bind('mouseover', function(ed) {
-            $("#desc_ifr").qtip({
-            content: 'I was clicked',
-            style: 'mystyle',
-            show: 'click',
-            hide: 'mouseout'
-            }).qtip("focus").qtip("show");
-          });
-        // Display an alert onclick
-        /*
-                    $("#desc_ifr").qtip({
-            content: 'I was clicked',
-            style: 'mystyle',
-            show: 'click',
-            hide: 'mouseout'
-          }).qtip("focus").qtip("show");*/
-        //ed.onClick.add(function(ed) {
-        //    ed.windowManager.alert('User clicked the editor.');
-
-        //});
-    }
-
+        skin_variant : "silver"
     });
           za.buildCreateContestTooltip();
-         /*   tinymce.get(0).qtip({
-            content: 'I was clicked',
-            style: 'mystyle',
-            show: 'mouseover',
-            hide: 'mouseout'
-          }).qtip("focus").qtip("show");*/
-
   };
   za.CreateContest = CreateContest;
 }(jQuery));

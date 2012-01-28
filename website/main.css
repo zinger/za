@@ -34,11 +34,11 @@ body {
 }
 
 #info-text {
-  font-family: cursive, Verdana, Arial, sans-serif;
+  font-family: Times, Times New Roman, Palatino, Georgia, Arial, Verdana, serif, sans-serif;
 }
 
 #info-launch {
-    font-family: cursive, sans-serif;
+    font-family: Times, Times New Roman, Palatino, Georgia, Arial, Verdana, serif, sans-serif;
 
 }
 
@@ -70,7 +70,7 @@ body {
   padding-right: 40px;
 }
 .info-launch-medium {
-  font-size: 1.0em;
+  font-size: 1.1em;
   font-style: italic;
   padding-left: 45px;
   padding-top: 25px;
@@ -79,7 +79,7 @@ body {
 
 }
 .info-launch-small {
-  font-size: 0.9em;
+  font-size: 1.0em;
   font-style: italic;
   padding-left: 40px;
   padding-top: 15px;
