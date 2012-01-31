@@ -10,6 +10,8 @@
     var margin;
     var contentWidth;
     var marginV;
+    //var imgroot = 'za/website/';
+    var imgroot = './';
     if ($(window).width() > 1200) {
       baseWidth=128;
       baseHeight=96;
@@ -46,31 +48,31 @@
     var images = [];
                       //images.push({src: 'images/stock-photo-11769318-chef-completing-cake.png'});
 
-                      images.push({src: 'images/iStock_000017929712Small-cake-2-by-3.png'});
+                      images.push({src: imgroot+'images/iStock_000017929712Small-cake-2-by-3.png'});
 
         //     images.push({src: 'images/trio-2-by-3.png'}); //2 by 3
-      images.push({src: 'images/iStock_000016550997XSmall-singer-2-by-2.png'}); // 2 by 2
-                              images.push({src: 'images/iStock_000016009576Small-painting-4-by-2.png'});
+      images.push({src: imgroot+'images/iStock_000016550997XSmall-singer-2-by-2.png'}); // 2 by 2
+                              images.push({src: imgroot+'images/iStock_000016009576Small-painting-4-by-2.png'});
 
      // images.push({src: 'images/bm_angry_birds.png'}); // 4 by 2
-                             images.push({src: 'images/iStock_000004363077Small-man-dog-4-by-1.png'}); // 4 by 1
+                             images.push({src: imgroot+'images/iStock_000004363077Small-man-dog-4-by-1.png'}); // 4 by 1
 //images.push({src: 'images/stock-photo-18990574-geek-man-giving-his-girlfriend-a-valentine-present.png'});
-images.push({src: 'images/iStock_000015402653XSmall-valentine-2-by-2.png'});
+images.push({src: imgroot+'images/iStock_000015402653XSmall-valentine-2-by-2.png'});
 
 //           images.push({src: 'images/Bigstock_10656812-2-by-2.png'}); 
-      images.push({src: 'images/iStock_000016550935Small-dancers-2-by-5.png'});
-           images.push({src: 'images/iStock_000008765918Small-juggler.png'}); // 2 by 3
+      images.push({src: imgroot+'images/iStock_000016550935Small-dancers-2-by-5.png'});
+           images.push({src: imgroot+'images/iStock_000008765918Small-juggler.png'}); // 2 by 3
 
-       images.push({src: 'images/iStock_000005353776Small-photographer-2-by-3.png'}); // 2 by 2
-                   images.push({src: 'images/iStock_000015695089XSmall-swimmer-2-by-2.png'});
+       images.push({src: imgroot+'images/iStock_000005353776Small-photographer-2-by-3.png'}); // 2 by 2
+                   images.push({src: imgroot+'images/iStock_000015695089XSmall-swimmer-2-by-2.png'});
 
          //   images.push({src: 'images/stock-photo-17403228-trapeze-artist.png'});
     //                    images.push({src: 'images/stock-photo-16009576-closeup-of-man-painting-green-picture-with-circle-pattern.png'});
 
-                             images.push({src: 'images/iStock_000016164599XSmall-black-woman.png'}); // 4 by 1
+                             images.push({src: imgroot+'images/iStock_000016164599XSmall-black-woman.png'}); // 4 by 1
 
               //          images.push({src: 'images/title-red-zing.png'}); // 4 by 1
-                            images.push({src: 'images/title_red_finalv2.png'}); // 4 by 1
+                            images.push({src: imgroot+'images/title_red_finalv2.png'}); // 4 by 1
 
 
     for (var i=0; i<11; i++) {

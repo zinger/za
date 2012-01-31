@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('images/back_white_final.png'); 
+  background-image: url('images/back_white_final.png');
+/*  background-image: url('za/website/back_white_final.png');*/
   background-repeat: repeat;
   border: inset;
   border-width: 10px;
