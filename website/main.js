@@ -182,6 +182,8 @@ images.push({src: 'images/iStock_000015402653XSmall-valentine-2-by-2.png'});
           }
       });
     });
+      //      $("#content").append('<div id="za-send" style="width: 90px;"><fb:send href="http://www.whatsyourzing.com/za/website" font="verdana"></fb:send></div>');
+
     var changeFilpContent = function() {
       $("#div10").empty();
       if ($("#isFlipped").val() === '0') {
@@ -203,8 +205,8 @@ images.push({src: 'images/iStock_000015402653XSmall-valentine-2-by-2.png'});
         var $displayText = $('<div id="info-text">Music, Dance, Sports, Art, Fashion, Food, Humor, Love, Clumsiness... whatever your zing may be, showcase it, get discovered, compete, and have fun!</div>');
         $content.append($displayText);
         $content.append($('<div id="info-launch">We\'re launching soon as a Facebook app! Like us to receive updates and launch specials.</div>'));
-        $content.append('<div id="za-like-box" style="display: inline; width: 292px;"><fb:like-box href="http://www.facebook.com/pages/WhatsYourZing/286055948109208" send="true" width="292" show_faces="false" stream="false" header="false"></fb:like-box></div>');
-        $content.append('<div id="za-send" style="display: inline; width: 90px;"><fb:send href="http://www.whatsyourzing.com/za/website" font="verdana" ></fb:send></div>');
+        $content.append('<div id="za-like-box" style="display: inline; width: 292px;"><fb:like-box href="http://www.facebook.com/pages/WhatsYourZing/314869278555317" send="true" width="292" show_faces="false" stream="false" header="false"></fb:like-box></div>');
+        $content.append('<div id="za-send" style="width: 90px;"><fb:send href="http://www.whatsyourzing.com" font="verdana"></fb:send></div>');
         $("#div10").append($content);
         var width=baseWidth*6;
         var height=baseHeight*4;
@@ -212,7 +214,7 @@ images.push({src: 'images/iStock_000015402653XSmall-valentine-2-by-2.png'});
         var left=baseWidth*1 - 14;
         var color= '#cccccc'; //'#ffddaa'; //'#ffffff';//'#ffffcc'; //'#ffffff';   // '#ccccff';
         FB.XFBML.parse(document.getElementById('info-and-like'));
-        $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'outset', borderColor:'#dd0000', borderWidth:'14px'});
+        $("#div10").css({backgroundColor:color, top: top, left:left, width:width, height:height, border:'outset', borderColor:'#ff0000', borderWidth:'14px'});
         if (baseWidth === 128) {
           $("#info-text").addClass('info-text-large');
           $("#info-launch").addClass('info-launch-large');
