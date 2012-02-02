@@ -130,10 +130,26 @@
        });
 
        alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
-        fileUpload(this.form,za.getServerUri(),'upload');
+       fileUpload(this.form,za.getServerUri(),'upload', true);
+       // var message = 'Participate in my exciting new contest: Zing of the Month';
+       // var data = [];
+       // data['cid'] = '123';
+       // FB.ui({method: 'apprequests',
+       //   message: message,
+       //   data: data
+       // }, requestCallbackForContestInvite);
     });
     $createcontestform.append($finishbutton);
     
+    function requestCallbackForContestInvite(response) {
+        // Handle callback here
+        var to = response.request_ids; 
+        alert(" response is " + JSON.stringify(response));
+        //contestRequest.push({cid: za.tempvars.contestid, request: response[request], to: response[to]});
+//        $.each(response, function(i, entry) {
+  //        alert("response " + i + " is " + entry);
+    //    });
+      };
     var $savebutton = $('<button id="'+za.buttons['savecontest'].id+'" />') ;
     $savebutton.button({label: za.buttons['savecontest'].label});
     $createcontestform.append($savebutton);

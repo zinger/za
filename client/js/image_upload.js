@@ -1,4 +1,4 @@
-function fileUpload(form, action_url, div_id) {
+function fileUpload(form, action_url, div_id, performInvite) {
     // Create the iframe...
     var iframe = document.createElement("iframe");
     iframe.setAttribute("id", "upload_iframe");
@@ -20,19 +20,27 @@ function fileUpload(form, action_url, div_id) {
             if (iframeId.detachEvent) iframeId.detachEvent("onload", eventHandler);
             else iframeId.removeEventListener("load", eventHandler, false);
  
+            var content;
             // Message from server...
             if (iframeId.contentDocument) {
+                alert("came in 1");
                 content = iframeId.contentDocument.body.innerHTML;
             } else if (iframeId.contentWindow) {
+                alert("came in 2");
                 content = iframeId.contentWindow.document.body.innerHTML;
             } else if (iframeId.document) {
+                alert("came in 3");
                 content = iframeId.document.body.innerHTML;
             }
- 
+            var contestId = content['cid'];
+            za.tempvars.contestid = contestId;
             document.getElementById(div_id).innerHTML = content;
- 
             // Del the iframe...
             setTimeout('iframeId.parentNode.removeChild(iframeId)', 250);
+            if (performInvite) {
+                alert("perform invite is true");
+                za.inviteToContest();
+            }
         }
  
     if (iframeId.addEventListener) iframeId.addEventListener("load", eventHandler, true);

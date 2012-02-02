@@ -322,6 +322,17 @@
     };
   };
   
+  za.inviteToContest = function() {
+    var message = 'Participate in my exciting new contest: Zing of the Month';
+    FB.ui({method: 'apprequests',
+      message: message
+    }, za.requestCallbackForContestInvite)
+  };
+    
+  za.requestCallbackForContestInvite = function(response) {
+    alert(" response is " + JSON.stringify(response));
+    //submit a form to store request and contest id
+  };
   za.tempvars = {
     entryid: '',
     contestsub: 'browse',
