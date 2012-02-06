@@ -74,7 +74,13 @@ class ContestService {
     $sql .= "'$contest->featured_start_date', '$contest->featured_end_date')"; 
 
     $result = $this->queryDB($sql, $dbc, "createContest");
-    return $result;
+    // TODO check if result is true then proceed
+    $res = mysql_query('SELECT LAST_INSERT_ID()');
+    $row = mysql_fetch_array($res);
+    $lastInsertId = $row[0];
+
+    //return $result;
+    return $lastInsertId;
   }
 
   //range is on creation date

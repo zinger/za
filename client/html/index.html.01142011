@@ -1,0 +1,166 @@
+<!DOCTYPE html> 
+  <!--PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<!--<html>-->
+<head>
+  <meta property="og:title" content="Create Competitions, Showcase your Talent, Get Discovered" />
+  <meta property="og:type" content="website" />
+  <!-- STAGE 
+  <meta property="og:url" content="http://www.whatsyourzing.com/sangeeta/za/client/html/" />
+  <meta property="og:image" content="http://www.whatsyourzing.com/sangeeta/za/client/images/stage.png" /> 
+  <meta property="fb:app_id" content="188092504602584" /> -->
+
+  <!-- DEV -->
+  <meta property="og:url" content="http://localhost:8888/za/client/html/" />
+  <meta property="og:image" content="http://localhost:8888/za/client/images/stage.png" />
+  <meta property="fb:app_id" content="318117531546857" />
+
+  <meta property="og:description" content="ZingArena lets you create competitions, gives you an avenue to showcase your talent, discover, and get discovered. All this just for fun or as competitive as you would like it...use your stage and audience the way you like!" />
+  <meta property="og:site_name" content="ZingArena"/>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+  <title>Zing Arena</title>
+
+
+
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="../css/jquery-ui-1.8.16.custom.css">
+
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+  -->
+  <script src="../js/jquery/jquery-1.6.2.min.js"></script>
+    <script src="../js/jquery/jquery-ui-1.8.16.custom.min.js"></script>
+
+  <!-- anything slider -->
+  <link rel="stylesheet" href="../plugins/anythingslider/css/anythingslider.css">
+  <script src="../plugins/anythingslider/js/jquery.anythingslider.js"></script>
+  <link rel="stylesheet" href="../css/nav.css" />
+  
+  <!-- file upload -->
+  <script src="../plugins/blueimp/jquery.iframe-transport.js"></script>
+  <script src="../plugins/blueimp/jquery.fileupload.js"></script>
+
+  <!-- pagination -->
+  <link rel="stylesheet" href="../plugins/jqpagination/css/jqpagination.css" />
+  <script src="../plugins/jqpagination/js/jquery.jqpagination.js"></script>
+  <script src="../plugins/jqpagination/js/scripts.js"></script>
+
+  <!-- tinymce -->
+  <script type="text/javascript" src="../plugins/tinymce/jscripts/tiny_mce/tiny_mce.js" ></script>
+
+  <!--<script type="text/javascript" src="/Users/sunilmasand/Downloads/spellchecker/editor_plugin.js" ></script>-->
+
+  <script src="../js/za.js"></script>
+  <script src="../js/showmenus.js"></script>
+  <script src="../js/home.js"></script>
+  <script src="../js/contests.js"></script>
+  <script src="../js/gallery.js"></script>
+  <script src="../js/hall.js"></script>
+  <script src="../js/invite.js"></script>
+  <script src="../js/coins.js"></script>
+  <script src="../js/picturecontestdetail.js"></script>
+    <script src="../js/textcontestdetail.js"></script>
+
+  <script src="../js/createcontest.js"></script>
+  <script src="../js/submitentry.js"></script>
+  <script src="../js/browsecontests.js"></script>
+    <script src="../js/viewcontest.js"></script>
+    <script src="../js/vote.js"></script>
+
+
+
+</head>
+<body>
+  <div id="fb-root"></div>
+	 
+
+  <script type="text/javascript">
+    window.fbAsyncInit = function() {
+      FB.init({
+        //appId      : '188092504602584', // App ID
+        //appId      : '318117531546857', // App ID
+        appId      : za.getAppId(), // App ID
+       // channelUrl : '//www.whatsyourzing.com/sangeeta/za/client/html/channel.html', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        oauth      : true, // enable OAuth 2.0
+        xfbml      : true  // parse XFBML
+      });
+      FB.getLoginStatus(function(response) {
+        if (response.authResponse) {
+          //alert('user ' + response.authResponse.userID + ' accessToken ' + response.authResponse.accessToken);
+          //TODO : Logged in. Now what?
+        } else {
+          window.location.href='http://www.facebook.com/dialog/oauth?client_id=za.getAppId()&redirect_uri=za.getRedirectUri()&scope=za.getFbScope()';
+       }
+      });
+      FB.Event.subscribe('edge.create', function(response) { alert('Yeah! Liked ' + response); });
+    };
+
+    // Load the SDK Asynchronously
+    (function(d){
+      var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/en_US/all.js";
+      d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
+    /*
+      function sendRequestToRecipients() {
+        var user_ids = document.getElementsByName("user_ids")[0].value;
+        FB.ui({method: 'apprequests',
+          message: 'My Great Request',
+          to: user_ids,
+        }, requestCallback);
+      };
+    */
+      function sendContestRequest(args) {
+        var message = 'Participate in my exciting new contest: ' + args.contestTitle;
+        FB.ui({method: 'apprequests',
+          message: message
+        }, requestCallbackForContestInvite);
+      };
+      
+      function requestCallbackForContestInvite(response) {
+        // Handle callback here
+        var contestRequest = [];
+        contestRequest.push({cid: za.tempvars.contestid, request: response[request], to: response[to]});
+        $.each(response.to, function(i, entry) {
+          alert("response is " + entry);
+        });
+      };
+  </script>
+  
+  <!--<script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=318117531546857";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>-->
+    
+  <script type="text/javascript">
+    $(document).ready(function() {
+      za.MenuTabs();
+      //alert(" appId " + za.getAppId() + " redirectUri " + za.getRedirectUri() + " configType ");
+    });
+  </script>
+  
+  <script>
+  	FB.Event.subscribe('edge.create',
+						function(response) {
+							alert('You liked the URL: ' + response);
+							// ...
+						}
+					);
+  </script>
+
+  <div id="header">
+    <div class="fb-like" data-send="true" data-layout="standard" data-width="450" data-show-faces="true" data-font="tahoma" ref="za_home"></div>
+  </div>
+  <div id="content"></div>  
+  <div id="footer">I am the footer</div>
+</body>
+</html>

@@ -25,15 +25,27 @@ function fileUpload(form, action_url, div_id, performInvite) {
             if (iframeId.contentDocument) {
                 alert("came in 1");
                 content = iframeId.contentDocument.body.innerHTML;
+                //content = content.replace (/{/g, "");
+                //content = content.replace (/}/g, "");
+                //var result = content.split(",");
+                //result.push(content);
+                var result = eval('('+content+')');
             } else if (iframeId.contentWindow) {
                 alert("came in 2");
                 content = iframeId.contentWindow.document.body.innerHTML;
+                var result = content.split(",");
+                        //        var result = [].slice.call(content);
+
             } else if (iframeId.document) {
                 alert("came in 3");
                 content = iframeId.document.body.innerHTML;
+                var result = content.split(",");
+
             }
-            var contestId = content['cid'];
-            za.tempvars.contestid = contestId;
+            alert("result array is " + result);
+            var contestId = result['cid'];
+            alert("contest ID is " + contestId);
+            za.tempvars['contestid'] = contestId;
             document.getElementById(div_id).innerHTML = content;
             // Del the iframe...
             setTimeout('iframeId.parentNode.removeChild(iframeId)', 250);

@@ -85,6 +85,22 @@ CREATE TABLE `contest_stats` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `contest_stats`
+--
+
+DROP TABLE IF EXISTS `invite`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `invite` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `request_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `fb_user_id` varchar(255) NOT NULL, /* TODO change this to not null at a later date */
+  `invite_type` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `object_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+--
 -- Table structure for table `entry`
 --
 

@@ -7,24 +7,21 @@
   za.configType = 'DEV';
   //za.configType = 'STAGE';
   
-  za.appId = '';
-  za.fbScope = 'email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday,user_photo_video_tags,offline_access';
-  za.userFbId = '';
-  za.serverUri = '';
   za.redirectUri = '';
+  za.appId = '';
+  za.fbScope = 'email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday';
+  za.userFbId = '';
   
   za.configDev = {
     appId : '318117531546857',
    // redirectUri : 'http://localhost:8888/client/html/'
-    redirectUri : 'http://localhost:8888/za/',
-    serverUri : 'http://localhost:8888/za/backend/index.php'
+    redirectUri : 'http://localhost:8888/za/' 
   };
   
   za.configStage = {
     appId : '188092504602584',
     //redirectUri : 'http://www.whatsyourzing.com/sangeeta/za/client/html/'
-    redirectUri : 'http://www.whatsyourzing.com/sangeeta/za/',
-    serverUri : 'http://www.whatsyourzing.com/sangeeta/za/backend/index.php'
+    redirectUri : 'http://www.whatsyourzing.com/sangeeta/za/'
   }
   
   za.getConfig = function() {
@@ -46,14 +43,6 @@
     return za.redirectUri;
   }
   
-  za.getServerUri = function() {
-    if (za.serverUri === 'undefined' || za.serverUri === '') {
-      var config = za.getConfig();
-      za.serverUri = za.getConfig().serverUri;
-    }
-    return za.serverUri;
-  }
-  
   za.getFbScope = function () {
     return fbScope;
   }
@@ -70,8 +59,7 @@
     gallery: {display: 'Gallery', href: '#za-gallery'},
     hall: {display: 'Hall of Fame', href: '#za-hall'},
     coins: {display: 'Get Zing Coins', href: '#za-coins'},
-    invite: {display: 'Invite', href: '#za-invite'},
-	vote: {display: 'Invite to Contest', href: '#za-vote'}
+    invite: {display: 'Invite', href: '#za-invite'}
   };
   
   za.showPanel = function(menuid) {
@@ -81,7 +69,6 @@
     if (menuid === 'hall') { za.Hall({parentid: menuid}); };
     if (menuid === 'coins') { za.Coins({parentid: menuid}); };
     if (menuid === 'invite') { za.Invite({parentid: menuid}); };
-	if (menuid === 'vote') { za.Vote({parentid: menuid}); };
   };
   
 
@@ -146,53 +133,6 @@
     rank: {id: 'rank'},
     trend: {id: 'trend'}
   };
-  $.fn.qtip.styles.mystyle = { // Last part is the name of the style
-   width: 200,
-   background: '#A2D959',
-   color: 'black',
-   textAlign: 'center',
-   border: {
-      width: 7,
-      radius: 5,
-      color: '#A2D959'
-   },
-   tip: 'bottomLeft',
-   name: 'dark' // Inherit the rest of the attributes from the preset dark style
-  };
-  //$.fn.qtip.zindex = 1000000;
-
-  za.buildCreateContestTooltip = function() {
-    var attrs = za.contestattrs;
-    var content;
-    $.each(attrs, function(idx, attr) {
-      switch (idx) {
-        case 'title':
-          content = 'Short and sweet is best';
-          break;
-        case 'tagline':
-          content = 'Make it fun... add a cool tag line!';
-          break;
-        case 'details':
-          content: 'Add details you wish to share ... rules, organizer details, prizes, if any.'
-          break;
-        default:
-          content = '';
-          break;
-      };
-      if (content !== '' && content !== 'undefined') {
-        var $field = $(za.jq(attrs[idx].id));
-        if (idx !== 'details') {//$field = $("#desc_ifr");
-          $field.qtip({
-            content: content,
-            show: 'mouseover',
-            hide: 'mouseout',
-            style: 'mystyle'
-          });
-        };
-              
-      };
-    });
-  };
   
   za.galleryTypes = {
     entrydetail: {id: 'a', cName: 'big-gallery'},
@@ -225,13 +165,13 @@
     var attrs = za.entryattrs;
     $.each(entries, function(idx, entry){
       var $li = $('<li></li>');
-      
+      /* sunil temp comment
 	  if(galleryType === za.galleryTypes['hthumb'] || galleryType === za.galleryTypes['vthumb']){
             $li.addClass('thumbDim'); // Added class thumbDim to set dimension of thumbnail
 	  } else if (galleryType === za.galleryTypes['entrydetail'] ){	// Added class previewHeight to set height of preview image
    	    $li.addClass('previewHeight');
 	  }
-		  
+      */	  
       var $div = $('<div class="gallery-div"></div>');
 
       var imgId = 'gimg' + galleryType.id + idx;
@@ -322,54 +262,6 @@
     };
   };
   
-  za.inviteToContest = function() {
-    var message = 'Participate in my exciting new contest: Zing of the Month';
-    alert("Inviting for " + za.tempvars['contestid']);
-    FB.ui({method: 'apprequests',
-      message: message
-    }, za.requestCallbackForContestInvite)
-  };
-    
-  za.requestCallbackForContestInvite = function(response) {
-    alert(" response is " + JSON.stringify(response));
-    if (response['request'] === null || response['request'] === undefined) {
-      return;
-    }
-    var obj = {};
-    obj['op'] = 'contest_invite';
-    obj['reqid'] = response['request'];
-    obj['user_ids'] = response['to'];
-    obj['objid'] = za.tempvars.contestid;
-    obj['type'] = 0;
-    alert("obj being passed is " + JSON.stringify(obj));
-    $.post( za.getServerUri(), obj,
-          function(data) {
-              alert('response received ' + JSON.stringify(data));
-              return false;
-          } );
-  };
-  
-  za.inviteToApp = function() {
-    var message = 'Checkout this cool new app';
-    FB.ui({method: 'apprequests',
-      message: message
-    }, za.requestCallbackForAppInvite)
-  };
-    
-  za.requestCallbackForAppInvite = function(response) {
-    /*
-    alert(" response is " + JSON.stringify(response));
-    var obj = {};
-    obj['op'] = 'contest_invite';*/
-    alert("submitting invites");
-    $.post( za.getServerUri(), obj,
-          function(data) {
-              alert('response received ' + JSON.stringify(data));
-              //sendContestRequest();
-              return false;
-          } );
-    //probably not necessary to store app invites?
-  };
   za.tempvars = {
     entryid: '',
     contestsub: 'browse',

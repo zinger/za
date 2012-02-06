@@ -3,7 +3,7 @@ require_once('logger.php');
 require_once('serverfunctions.php');
 require_once('ContestService.php');
 require_once('EntryService.php');
-
+require_once('InviteService.php');
 
 require_once('facebook.php');
 require_once('fbhelper.php');
@@ -12,18 +12,17 @@ require_once('common/constants.php');
 
 $op = $_POST['op'];
 if (!isset($op)) {
+  $logger->info("op is not set in the post");
   $obj = json_decode(stripslashes($_POST['obj'])); // for create_contest, op is sent as a variable in obj
-  //$logger->info("obj = $obj");
   $op = $obj->op;
 }
 $logger->info("op = $op");
+
 $fbobj = new FBHelper();
 
 $logger->info("Before switch statement");
 switch($op) {
   case "submit_entry":
-    //mysql_connect('localhost', 'root', 'root') or die(mysql_error());
-    //mysql_select_db('za') or die(mysql_error());
     if($_FILES['files']['size']>0) {
 	$type = @exif_imagetype($_FILES['files']['tmp_name']);
 	if (($type >= 1) && ($type <= 3)) {
@@ -77,11 +76,25 @@ switch($op) {
           } else { $response = "Error Submitting Photo. Please try again"; }
 	} else { $response = "Invalid image. Please use JPG, GIF or PNG image type"; }
     }
-    if (!isset($response)) $result = ContestService::instance()->createContest($obj, $photo);
+    if (!isset($response)) {
+      $output = ContestService::instance()->createContest($obj, $photo);
+      //TODO check value of $output and then assign
+      $result['cid'] = $output;
+    }
     else echo $response;
     //$files = $_FILES['capFile'];
     //echo $files;
     //$result = ContestService::instance()->createContest();
+    break;
+  case "contest_invite":
+    $logger->info("op = $op");
+    $reqid = $_POST['reqid'];
+    $logger->info("request = $reqid");
+    $user_ids = $_POST['user_ids'];
+    $logger->info("userids = $user_ids");
+    $objid = $_POST['objid'];
+    $logger->info("objid = $objid");
+    $result = InviteService::instance()->createInvite();
     break;
   case "get_contests_by_creation_date":
     $sd = $_REQUEST['sd'];
