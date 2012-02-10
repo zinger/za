@@ -51,11 +51,13 @@
 	thumbnailEntries.push({id: '11', url: '../../samplecontent/images/thumbnails/11.jpg', thumb: '../../samplecontent/images/thumbnails/11.jpg', title: 'Title11', fbpid: 'User11', fbpname: 'fbpname 11', fbpurl: '../../samplecontent/images/thumbnails/11.jpg' });
 	thumbnailEntries.push({id: '12', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
 
-   var $contestTitle = $('<div class="contest-title">'+contestTitle+'</div>');
+   var $contestTitleDiv = $('<div></div>');
+   var $contestTitle = $('<span class="contest-title">'+contestTitle+'</span>');
     $contestTitle.bind('click', function () {
       $parentdiv.empty();
-      za.ViewContest({parentid: parentid});
+      za.ViewContest({parentid: parentid, contestid: contestid});
     });
+    $contestTitleDiv.append($contestTitle);
     $parentdiv.append($contestTitle);
     
 

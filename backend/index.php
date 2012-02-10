@@ -10,7 +10,7 @@ require_once('fbhelper.php');
 require_once('common/Config.php');
 require_once('common/constants.php');
 
-$op = $_POST['op'];
+$op = $_REQUEST['op'];
 if (!isset($op)) {
   $logger->info("op is not set in the post");
   $obj = json_decode(stripslashes($_POST['obj'])); // for create_contest, op is sent as a variable in obj

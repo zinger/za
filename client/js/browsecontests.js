@@ -5,6 +5,15 @@
     var parentid = args.parentid;
     var $parentdiv = $( za.jq(parentid));
     
+    $.ajax({                                      
+      url: za.getServerUri(),       
+      data: "op=get_contests_by_creation_date",                        //you can insert url argumnets here to pass to api.php
+                                       //for example "id=5&parent=6"
+      dataType: 'json',                //data format      
+      success: function(data)          //on recieve of reply
+      { renderContestGroup(data, 0); }
+    });
+    
     $parentdiv.append($('<div class="page-title">Browse Contests</div>'));
     
     var $searchform = $('<form action="" id="search-form"></form>');
@@ -42,23 +51,22 @@
       za.CreateContest({parentid: parentid});
     });
     
-    var pictureEntries = [];
-    pictureEntries.push({eid: '1', url: '../../samplecontent/images/1.jpg', thumb: '../../samplecontent/images/thumbnails/1.jpg', title: 'Title1', fbpid: 'User1', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '1', ctitle: 'Wierd Hairdo Contest' });
-    pictureEntries.push({eid: '2', url: '../../samplecontent/images/2.jpg', thumb: '../../samplecontent/images/thumbnails/2.jpg', title: 'Title1', fbpid: 'User2', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '2', ctitle: 'Zing of The Month'   });
-    pictureEntries.push({eid: '3', url: '../../samplecontent/images/3.jpg', thumb: '../../samplecontent/images/thumbnails/3.jpg', title: 'Title1', fbpid: 'User3', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '1', ctitle: 'Wierd Hairdo Contest'   });
-    pictureEntries.push({eid: '4', url: '../../samplecontent/images/4.jpg', thumb: '../../samplecontent/images/thumbnails/4.jpg', title: 'Title1', fbpid: 'User4', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '3', ctitle: 'Monuments'   });
-    pictureEntries.push({eid: '5', url: '../../samplecontent/images/5.jpg', thumb: '../../samplecontent/images/thumbnails/5.jpg', title: 'Title1', fbpid: 'User5', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '4', ctitle: 'Historic Moments'   });
-    pictureEntries.push({eid: '6', url: '../../samplecontent/images/6.jpg', thumb: '../../samplecontent/images/thumbnails/6.jpg', title: 'Title1', fbpid: 'User6', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '1', ctitle: 'Wierd Hairdo Contest'   });
-    pictureEntries.push({eid: '7', url: '../../samplecontent/images/7.jpg', thumb: '../../samplecontent/images/thumbnails/7.jpg', title: 'Title1', fbpid: 'User7', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '1', ctitle: 'Wierd Hairdo Contest'   });
-    pictureEntries.push({eid: '8', url: '../../samplecontent/images/8.jpg', thumb: '../../samplecontent/images/thumbnails/8.jpg', title: 'Title1', fbpid: 'User8', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '1', ctitle: 'Wierd Hairdo Contest'   });
-    pictureEntries.push({eid: '9', url: '../../samplecontent/images/8.jpg', thumb: '../../samplecontent/images/thumbnails/8.jpg', title: 'Title1', fbpid: 'User8', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '1', ctitle: 'Wierd Hairdo Contest'   });
-	
+    $parentdiv.append($('<div>Fetching Contest Data</div>'));
+    
+    var renderContestGroup = function(data, group) {
+      var pictureEntries = [];
+      $.each(data['result'], function(i, row) {
+	pictureEntries.push({url: row.small_url, thumb: row.small_url, fbpid: row.fb_pid, cid: row.id, name: row.name, etype: row.type});
+      });
+      buildGallery(pictureEntries, group);
+    }
+
     var categories = [];
     categories.push({text: 'My Contests'});
     categories.push({text: 'New Contests'});
     categories.push({text: 'Recently Concluded'});
 
-    for (var i=0; i<3; i++) {
+    var buildGallery = function(pictureEntries, i) {
       $parentdiv.append($('<div class="contest-category">'+categories[i].text+'</div>'));
       var galleryid = 'gallery'+i;
       $parentdiv.append(za.buildAnythingSliderGallery(galleryid, za.galleryTypes['contests'], pictureEntries));
@@ -70,12 +78,13 @@
       });
       
       $(za.jq(galleryid)).find('.gallery-div').click(function() {
-      //$("#gallery1 .gallery-div").click(function() {
 	var entryid = $(this).find('.entry-id').first().val();
 	var contestid = $(this).find('.contest-id').first().val();
+	var type = $(this).find('.contest-type').first().val();
 	$parentdiv.empty();
-	if (entryid === '2') za.TextContestDetail({parentid: parentid, contestid: contestid, entryid: entryid});
-	else za.PictureContestDetail({parentid: parentid, contestid: contestid, entryid: entryid});
+	if (type === za.entrytypes['picture'].value) PictureContestDetail({parentid: parentid, contestid: contestid});
+	else if (type === za.entrytypes['text'].value) za.TextContestDetail({parentid: parentid, contestid: contestid});
+	else za.PictureContestDetail({parentid: parentid, contestid: contestid});
       });
     };
   };

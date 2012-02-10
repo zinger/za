@@ -109,6 +109,7 @@
   };
  
   za.contestattrs = {
+    id: {id: 'cid'},
     title: {id: 'name', label: 'Title', type: 'input'},
     tagline: {id: 'tagl', label: 'Tag Line', type: 'input'},
     startdate: {id: 'sd', label: 'Start Date', type: 'input'},
@@ -120,7 +121,9 @@
     whocanpart: {id: 'whocan', label: 'Who Can Participate?', type: 'radio'},
     inviteothers: {id: 'inviteothers', label: 'Participants can invite other participants', type: 'checkbox'},
     details: {id: 'desc', label: 'Details', type: 'textarea'},
-    tags: {id: 'tags', label: 'Tags', type: 'input'}
+    tags: {id: 'tags', label: 'Tags', type: 'input'},
+    numparts: {id: 'numparts'},
+    fbpartid: {id: 'fbpid'},
   };
   
   za.entryattrs = { //used for contests gallery as well as contest details gallery
@@ -207,15 +210,17 @@
     if (galleryType === za.galleryTypes['entrydetail']) {
       $divinfo.append($('<img src="'+entry[attrs.parturl.id]+'" style="width:40px; height:40px; z-index: 99999;"/>'));
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;padding-left: 4px;">'+entry[attrs.partname.id]+'</span>'));
+      $divinfo.append($('<input class="entry-id" type="hidden" value="'+entry[attrs.id.id]+'" />'));
+      $divinfo.append($('<input id="myvote" type="hidden" value="'+entry[attrs.myvote.id]+'" />'));
     } else if (galleryType === za.galleryTypes['contests']) {
-      $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.contesttitle.id]+'</span>'));
+      attrs = za.contestattrs;
+      $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.title.id]+'</span>'));
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.numparts.id]+'</span>'));
-      $divinfo.append($('<input class="contest-id" type="hidden" value="'+entry[attrs.cid.id]+'" />'));
+      $divinfo.append($('<input class="contest-id" type="hidden" value="'+entry[attrs.id.id]+'" />'));
+      $divinfo.append($('<input class="contest-type" type="hidden" value="'+entry[attrs.entrytype.id]+'" />'));
       $divinfo.append($('<a href="#">Submit Entry</a>'));
     }
-    $divinfo.append($('<input class="entry-id" type="hidden" value="'+entry[attrs.id.id]+'" />'));
     $divinfo.append($('<input class="fbuser-id" type="hidden" value="'+entry[attrs.fbpartid.id]+'" />'));
-    $divinfo.append($('<input id="myvote" type="hidden" value="'+entry[attrs.myvote.id]+'" />'));
     return $divinfo;
   };
   

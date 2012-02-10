@@ -3,6 +3,7 @@
 (function($){
   var CreateContest = function(args) {
     var parentid = args.parentid;
+    var contest
     var $parentdiv = $( za.jq(args.parentid) );
     var attrs = za.contestattrs;
     var entrytypes = za.entrytypes;
@@ -90,6 +91,8 @@
         break;
       case 'button':
         $attrdiv = $createcontestform.append(buildButtonDiv(attr));
+        break;
+      case undefined:
         break;
       default:
         if (idx !== 'pictureurl') var $attrdiv = $createcontestform.append(buildInputDiv(attr));
