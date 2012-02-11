@@ -7,7 +7,8 @@
     var entryid = args.entryid;
     var contestid = args.contestid;
     var invokedBy = args.invokedBy;
-
+    var contestTitle = args.contestTitle;
+    alert("title in picturecontestdetail is " + contestTitle);
     // TODO: Using the contestid we need to get all entries for the contest
     // TODO: We need to set the active page of the slider using the entry id
     
@@ -25,7 +26,6 @@
     pictureEntries.push({eid: '11', url: '../../samplecontent/images/11.jpg', thumb: '../../samplecontent/images/thumbnails/11.jpg', title: 'Title11', fbpid: 'User11', fbpname: 'fbpname 11', fbpurl: '../../samplecontent/images/thumbnails/11.jpg', numparts: 55, cid: '11', ctitle: 'Wierd Hairdo Contest', myvote: 6   });
     pictureEntries.push({eid: '12', url: '../../samplecontent/images/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg', numparts: 55, cid: '12', ctitle: 'Wierd Hairdo Contest' , myvote: 6  });
 	
-    var contestTitle = 'Zing of the month';
     var voteCount = 20;
     var likeCount = 20;
     var commentCount = 5;
@@ -70,7 +70,7 @@
       $submitEntry.button({label: za.buttons['submitentry'].label});
       $submitEntry.bind('click', function() { 
 	$parentdiv.empty();
-	za.SubmitEntry({parentid: parentid});
+	za.SubmitEntry({parentid: parentid, contestid: contestid, contestTitle: contestTitle});
       });
       $parentdiv.append($submitEntry);
     };

@@ -4,10 +4,12 @@
   var SubmitEntry = function(args) {
     var $parentdiv = $( za.jq(args.parentid) );
     var attrs = za.contestattrs;
+    var contestid = args.contestid;
+    var contestTitle = args.contestTitle;
     
     var entrytypes = za.entrytypes;
     
-    $parentdiv.append($('<div class="page-title">Submit Entry</div>'));
+    $parentdiv.append($('<div class="page-title">Submit Your Entry For '+contestTitle+'</div>'));
     
     var currentEntries = [];
     currentEntries.push({id: '1', url: '../../samplecontent/images/thumbnails/1.jpg', thumb: '../../samplecontent/images/thumbnails/1.jpg', title: 'Title1', fbpid: 'User1', fbpname: 'Lucky Walker', fbpurl: '../../samplecontent/images/thumbnails/1.jpg' });
@@ -36,7 +38,9 @@
 	$frm.append($('<label for="entry-title">Entry Description</label>'));
 	$frm.append($('<div><textarea name="desc" id="desc"></textarea></div>'));
 	$frm.append($('<input id="upload-caption-button" type="file" name="files"/>'));
-	$frm.append($('<input id="op" name="op" value="submit_entry" />'));
+	$frm.append($('<input type="hidden" id="op" name="op" value="submit_entry" />'));
+	$frm.append($('<input type="hidden" id="contest-title" name="cid" value="'+contestid+'" />'));
+
 	$frm.append($('<div id="upload"></div>'));
 	//$frm.append($('<ol><li id="imagearea"><label for="example1_field">Choose a file to upload: </label><input name="MAX_FILE_SIZE" value="1048576" type="hidden" /><input name="myFile"  id="example1_field"  type="file" /></li></ol>'));
 	$frm.append($('<br /><input id="publish_to_fb" type="checkbox" name="publish_to_fb" value="yes" /> <label for="entry-title">Publish photo to Facebook</label>'));

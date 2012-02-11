@@ -216,6 +216,7 @@
       attrs = za.contestattrs;
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.title.id]+'</span>'));
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.numparts.id]+'</span>'));
+      $divinfo.append($('<input class="contest-title" type="hidden" value="'+entry[attrs.title.id]+'" />'));
       $divinfo.append($('<input class="contest-id" type="hidden" value="'+entry[attrs.id.id]+'" />'));
       $divinfo.append($('<input class="contest-type" type="hidden" value="'+entry[attrs.entrytype.id]+'" />'));
       $divinfo.append($('<a href="#">Submit Entry</a>'));

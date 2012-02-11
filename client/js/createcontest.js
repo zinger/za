@@ -3,7 +3,7 @@
 (function($){
   var CreateContest = function(args) {
     var parentid = args.parentid;
-    var contest
+    var contestid = args.contestid;
     var $parentdiv = $( za.jq(args.parentid) );
     var attrs = za.contestattrs;
     var entrytypes = za.entrytypes;
@@ -23,6 +23,25 @@
     tags: {id: 'tags', label: 'Tags', type: 'input'}
   };
     */
+    if (contestid !== undefined) {
+      var data = 'op=get_contest_by_id&id=' + contestid;
+      $.ajax({                                      
+        url: za.getServerUri(),       
+        data: data,                        //you can insert url argumnets here to pass to api.php
+                                         //for example "id=5&parent=6"
+        dataType: 'json',                //data format      
+        success: function(serverdata)          //on recieve of reply
+        { alert(JSON.stringify(serverdata)); populateContestData(serverdata['result'][0]); }
+      });
+    };
+    
+    var contestData;
+    var populateContestData = function(contest) {
+        contestData = {name: contest.name, tagl: contest.tag_line, sd: contest.start_date, ed: contest.end_date, sed: contest.submission_end_date,
+        ctype: contest.contest_type, etype: contest.entry_type, whocan: contest.who_can_participate, inviteothers: contest.invite_others,
+        desc: contest.description, tags: contest.tags};
+    };
+    /*
     var contestData = {name: 'Crazy Fools', tagl:'Craziest Zing Ever', sd:'1/12/2012',
                        ed:'2/18/2012', sed:'1/30/2012', ctype: '1', etype:'1', whocan: '1',
                        inviteothers: '1',
@@ -30,11 +49,9 @@
                        //'<div style=\"color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; background-image: initial; background-repeat: initial; background-attachment: initial; -webkit-background-clip: initial; -webkit-background-origin: initial; background-color: #ffffff; outline-width: 0px; outline-style: initial; outline-color: initial; background-position: initial initial; margin: 8px;\">\n<p>&nbsp;</p>\n<div style=\"color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; background-image: initial; background-repeat: initial; background-attachment: initial; -webkit-background-clip: initial; -webkit-background-origin: initial; background-color: #ffffff; outline-width: 0px; outline-style: initial; outline-color: initial; margin: 8px;\">\n<div style=\"color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; background-image: initial; background-repeat: initial; background-attachment: initial; -webkit-background-clip: initial; -webkit-background-origin: initial; background-color: #ffffff; outline-width: 0px; outline-style: initial; outline-color: initial; margin: 8px;\">\n<div style=\"color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; background-image: initial; background-repeat: initial; background-attachment: initial; -webkit-background-clip: initial; -webkit-background-origin: initial; background-color: #ffffff; outline-width: 0px; outline-style: initial; outline-color: initial; margin: 8px;\">\n<p>this is not the description</p>\n<hr style=\"cursor: default;\" />\n<p><img style=\"border-style: initial; border-color: initial; cursor: default; border-width: 0px;\" title=\"Embarassed\" src=\"file:///Users/sunilmasand/za/za/client/plugins/tinymce/jscripts/tiny_mce/plugins/emotions/img/smiley-embarassed.gif\" alt=\"Embarassed\" border=\"0\" />&nbsp;Must join this contest!!!! Its a lot of fun</p>\n<h1 style=\"font-size: 2em;\">BOOOOOOO.... Join Because</h1>\n<ol>\n<li><span class=\"Apple-style-span\" style=\"font-size: xx-small;\">You will love it</span></li>\n<li><span class=\"Apple-style-span\" style=\"font-size: xx-small;\">You are insane</span></li>\n<li><span class=\"Apple-style-span\" style=\"font-size: xx-small;\">You are stupid</span></li>\n</ol>\n<div><hr style=\"cursor: default;\" /><span class=\"Apple-style-span\" style=\"font-size: xx-small;\">&radic; this is a special character</span></div>\n</div>\n</div>\n</div>\n<p>&nbsp;</p>\n</div>',
                        tags: 'these are tags'
                        };
-    
+    */
     $parentdiv.append($('<div class="pageTitle">Create Contest</div>'));
-    
-    //var $createcontestform = $('<div id="create-contest-form"></div>');
-    
+        
     var buildCheckboxDiv = function (attr) {
       var $div = $('<div class="checkbox-div"></div>');
       $div.append($('<label for="'+attr.id+'">'+attr.label+'</label>'));
@@ -134,13 +151,6 @@
 
        alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
        fileUpload(this.form,za.getServerUri(),'upload', true);
-       // var message = 'Participate in my exciting new contest: Zing of the Month';
-       // var data = [];
-       // data['cid'] = '123';
-       // FB.ui({method: 'apprequests',
-       //   message: message,
-       //   data: data
-       // }, requestCallbackForContestInvite);
     });
     $createcontestform.append($finishbutton);
     
@@ -148,10 +158,6 @@
         // Handle callback here
         var to = response.request_ids; 
         alert(" response is " + JSON.stringify(response));
-        //contestRequest.push({cid: za.tempvars.contestid, request: response[request], to: response[to]});
-//        $.each(response, function(i, entry) {
-  //        alert("response " + i + " is " + entry);
-    //    });
       };
     var $savebutton = $('<button id="'+za.buttons['savecontest'].id+'" />') ;
     $savebutton.button({label: za.buttons['savecontest'].label});
@@ -196,49 +202,51 @@
       }     
     });
 
-    $.each(attrs, function(idx, attr) {
-        switch (idx) {
-          case 'entrytype':
-            if (contestData[attr.id] === za.entrytypes['picture'].value) {
-              $(za.jq(entrytypes['picture'].id)).attr('checked','checked');
-              $(za.jq(entrytypes['picture'].id)).button('refresh');
-            }
-            else if (contestData[attr.id] === za.entrytypes['video'].value) {
-              $(za.jq(entrytypes['video'].id)).attr('checked','checked');
-              $(za.jq(entrytypes['video'].id)).button('refresh');
-            }
-            else if (contestData[attr.id] === za.entrytypes['text'].value) {
-              $(za.jq(entrytypes['text'].id)).attr('checked','checked');
-              $(za.jq(entrytypes['text'].id)).button('refresh');
-            }
-            break;
-          case 'iscaption':
-            if (contestData[attr.id] === '1') 
-              $( za.jq(attr.id)).attr('checked','checked');
-            break;
-          case 'whocanpart':
-            if (contestData[attr.id] === za.whocanpart['everyone'].value) {
-              $(za.jq(za.whocanpart['everyone'].id)).attr('checked','checked');
-              $(za.jq(za.whocanpart['everyone'].id)).button('refresh');
-            } else {
-              $(za.jq(za.whocanpart['restricted'].id)).attr('checked','checked');
-              $(za.jq(za.whocanpart['restricted'].id)).button('refresh');
-            }
-            break;
-          case 'inviteothers':
-            if (contestData[attr.id] === '1') {
-              //$( za.jq(attr.id)).attr('checked','checked');
-              var $invOthers = buildCheckboxDiv(attrs['inviteothers']);
-              $invOthers.insertAfter($('input[name="'+za.contestattrs['whocanpart'].id+'"]').parent());
-              $( za.jq(attr.id)).attr('checked','checked');
-            }
-            break;
-          default:
-            $(za.jq(attr.id)).attr('value', contestData[attr.id]);
-            //jsonobject[attr.id] = $( za.jq(attr.id)).val();
-            break;
-        };
-    });
+    if (contestid !== undefined) { // if contest id is passed in populate fields like in edit mode
+      $.each(attrs, function(idx, attr) {
+          switch (idx) {
+            case 'entrytype':
+              if (contestData[attr.id] === za.entrytypes['picture'].value) {
+                $(za.jq(entrytypes['picture'].id)).attr('checked','checked');
+                $(za.jq(entrytypes['picture'].id)).button('refresh');
+              }
+              else if (contestData[attr.id] === za.entrytypes['video'].value) {
+                $(za.jq(entrytypes['video'].id)).attr('checked','checked');
+                $(za.jq(entrytypes['video'].id)).button('refresh');
+              }
+              else if (contestData[attr.id] === za.entrytypes['text'].value) {
+                $(za.jq(entrytypes['text'].id)).attr('checked','checked');
+                $(za.jq(entrytypes['text'].id)).button('refresh');
+              }
+              break;
+            case 'iscaption':
+              if (contestData[attr.id] === '1') 
+                $( za.jq(attr.id)).attr('checked','checked');
+              break;
+            case 'whocanpart':
+              if (contestData[attr.id] === za.whocanpart['everyone'].value) {
+                $(za.jq(za.whocanpart['everyone'].id)).attr('checked','checked');
+                $(za.jq(za.whocanpart['everyone'].id)).button('refresh');
+              } else {
+                $(za.jq(za.whocanpart['restricted'].id)).attr('checked','checked');
+                $(za.jq(za.whocanpart['restricted'].id)).button('refresh');
+              }
+              break;
+            case 'inviteothers':
+              if (contestData[attr.id] === '1') {
+                //$( za.jq(attr.id)).attr('checked','checked');
+                var $invOthers = buildCheckboxDiv(attrs['inviteothers']);
+                $invOthers.insertAfter($('input[name="'+za.contestattrs['whocanpart'].id+'"]').parent());
+                $( za.jq(attr.id)).attr('checked','checked');
+              }
+              break;
+            default:
+              $(za.jq(attr.id)).attr('value', contestData[attr.id]);
+              //jsonobject[attr.id] = $( za.jq(attr.id)).val();
+              break;
+          };
+      });
+    };
         tinyMCE.init({
             mode : "textareas",
             theme : "advanced",   //(n.b. no trailing comma, this will be critical as you experiment later)

@@ -56,7 +56,11 @@
     var renderContestGroup = function(data, group) {
       var pictureEntries = [];
       $.each(data['result'], function(i, row) {
-	pictureEntries.push({url: row.small_url, thumb: row.small_url, fbpid: row.fb_pid, cid: row.id, name: row.name, etype: row.type});
+	var small_url;
+	if (row.small_url === undefined || row.small_url === '') {
+	  small_url = '../../images/no-img-contest.png';
+	} else small_url = row.small_url;
+	pictureEntries.push({url: small_url, thumb: small_url, fbpid: row.fb_pid, cid: row.id, name: row.name, etype: row.type});
       });
       buildGallery(pictureEntries, group);
     }
@@ -81,10 +85,12 @@
 	var entryid = $(this).find('.entry-id').first().val();
 	var contestid = $(this).find('.contest-id').first().val();
 	var type = $(this).find('.contest-type').first().val();
+	var title = $(this).find('.contest-title').first().val();
 	$parentdiv.empty();
-	if (type === za.entrytypes['picture'].value) PictureContestDetail({parentid: parentid, contestid: contestid});
-	else if (type === za.entrytypes['text'].value) za.TextContestDetail({parentid: parentid, contestid: contestid});
-	else za.PictureContestDetail({parentid: parentid, contestid: contestid});
+	alert("title is " + title);
+	if (type === za.entrytypes['picture'].value) PictureContestDetail({parentid: parentid, contestid: contestid, contestTitle: title});
+	else if (type === za.entrytypes['text'].value) za.TextContestDetail({parentid: parentid, contestid: contestid, contestTitle: title});
+	else za.PictureContestDetail({parentid: parentid, contestid: contestid, contestTitle: title});
       });
     };
   };
