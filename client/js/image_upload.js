@@ -64,7 +64,6 @@ function fileUpload(form, action_url, div_id, performInvite) {
     form.setAttribute("method", "post");
     form.setAttribute("enctype", "multipart/form-data");
     form.setAttribute("encoding", "multipart/form-data");
-    //form.setAttribute("op", "submit_entry");
  
     // Submit the form...
     alert("submitting form.. ");

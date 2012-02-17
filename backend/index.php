@@ -120,6 +120,26 @@ switch($op) {
     $id = $_REQUEST['id'];
     $result = ContestService::instance()->getContestsByCreator($id);
     break;
+  case "get_featured_contests":
+    $result = ContestService::instance()->getFeaturedContests();
+    break;
+  case "get_user_info":
+    $result = $fbobj->getFBUserInfo();
+    break;
+  case "get_entries":
+    $cid = $_REQUEST['cid'];
+    $fbpid = $_REQUEST['fbpid'];
+    $result = EntryService::instance()->getEntries($cid, $fbpid);
+    break;
+  case "get_vote_and_stats":
+    $eid = $_REQUEST['eid'];
+    $fbpid = $_REQUEST['fbpid'];
+    $result['myvote'] = EntryService::instance()->getVote($eid, $fbpid);
+    $result['stats'] = EntryService::instance()->getEntryStats($eid);
+    break;
+  case "save_vote":
+    $result = EntryService::instance()->saveVote();
+    break;
   default:
     $logger->info("Invalid Operator");
     break;

@@ -55,6 +55,8 @@ CREATE TABLE `contest` (
   `featured` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `featured_start_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `featured_end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `num_parts` int(10) unsigned NOT NULL DEFAULT '0',
+  `num_entries` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `updated_by_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `date_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -131,6 +133,25 @@ CREATE TABLE `entry` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `entry_vote_details`
+--
+
+DROP TABLE IF EXISTS `entry_vote_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `entry_vote_details` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `entry_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `voter_fb_pid` bigint(20) unsigned NOT NULL,  
+  `vote` tinyint(3) unsigned NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
 -- Table structure for table `entry_stats`
 --
 
@@ -144,12 +165,11 @@ CREATE TABLE `entry_stats` (
   `num_shares` int(10) unsigned NOT NULL DEFAULT '0',
   `num_comments` int(10) unsigned NOT NULL DEFAULT '0',
   `num_votes` int(10) unsigned NOT NULL DEFAULT '0',
-  `vote_value` int(10) unsigned DEFAULT NULL,
-  `vote_weight` int(10) unsigned DEFAULT NULL,
+  `vote_total` int(10) unsigned DEFAULT 0,
+  `vote_average` int(10) unsigned DEFAULT 0,
   `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `entrystats_entryid` (`entry_id`),
-  UNIQUE KEY `entrystats_voteweight` (`vote_weight`)
+  UNIQUE KEY `entrystats_entryid` (`entry_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

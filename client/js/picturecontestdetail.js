@@ -8,49 +8,9 @@
     var contestid = args.contestid;
     var invokedBy = args.invokedBy;
     var contestTitle = args.contestTitle;
-    alert("title in picturecontestdetail is " + contestTitle);
-    // TODO: Using the contestid we need to get all entries for the contest
     // TODO: We need to set the active page of the slider using the entry id
     
-    var pictureEntries = [];
-    pictureEntries.push({eid: '1', url: '../../samplecontent/images/1.jpg', thumb: '../../samplecontent/images/thumbnails/1.jpg', title: 'Title1', fbpid: 'User1', fbpname: 'fbpname 1', fbpurl: '../../samplecontent/images/thumbnails/1.jpg', numparts: 55, cid: '1', ctitle: 'Wierd Hairdo Contest', myvote: 5 });
-    pictureEntries.push({eid: '2', url: '../../samplecontent/images/2.jpg', thumb: '../../samplecontent/images/thumbnails/2.jpg', title: 'Title2', fbpid: 'User2', fbpname: 'fbpname 2', fbpurl: '../../samplecontent/images/thumbnails/2.jpg', numparts: 55, cid: '2', ctitle: 'Zing of The Month', myvote: 6   });
-    pictureEntries.push({eid: '3', url: '../../samplecontent/images/3.jpg', thumb: '../../samplecontent/images/thumbnails/3.jpg', title: 'Title3', fbpid: 'User3', fbpname: 'fbpname 3', fbpurl: '../../samplecontent/images/thumbnails/3.jpg', numparts: 55, cid: '3', ctitle: 'Wierd Hairdo Contest' , myvote: 6  });
-    pictureEntries.push({eid: '4', url: '../../samplecontent/images/4.jpg', thumb: '../../samplecontent/images/thumbnails/4.jpg', title: 'Title4', fbpid: 'User4', fbpname: 'fbpname 4', fbpurl: '../../samplecontent/images/thumbnails/4.jpg', numparts: 55, cid: '4', ctitle: 'Monuments', myvote: 6   });
-    pictureEntries.push({eid: '5', url: '../../samplecontent/images/5.jpg', thumb: '../../samplecontent/images/thumbnails/5.jpg', title: 'Title5', fbpid: 'User5', fbpname: 'fbpname 5', fbpurl: '../../samplecontent/images/thumbnails/5.jpg', numparts: 55, cid: '5', ctitle: 'Historic Moments', myvote: -1});
-    pictureEntries.push({eid: '6', url: '../../samplecontent/images/6.jpg', thumb: '../../samplecontent/images/thumbnails/6.jpg', title: 'Title6', fbpid: 'User6', fbpname: 'fbpname 6', fbpurl: '../../samplecontent/images/thumbnails/6.jpg', numparts: 55, cid: '6', ctitle: 'Wierd Hairdo Contest', myvote: -1   });
-    pictureEntries.push({eid: '7', url: '../../samplecontent/images/7.jpg', thumb: '../../samplecontent/images/thumbnails/7.jpg', title: 'Title7', fbpid: 'User7', fbpname: 'fbpname 7', fbpurl: '../../samplecontent/images/thumbnails/7.jpg', numparts: 55, cid: '7', ctitle: 'Wierd Hairdo Contest', myvote: -1   });
-    pictureEntries.push({eid: '8', url: '../../samplecontent/images/8.jpg', thumb: '../../samplecontent/images/thumbnails/8.jpg', title: 'Title8', fbpid: 'User8', fbpname: 'fbpname 8', fbpurl: '../../samplecontent/images/thumbnails/8.jpg', numparts: 55, cid: '8', ctitle: 'Wierd Hairdo Contest', myvote: -1   });
-    pictureEntries.push({eid: '9', url: '../../samplecontent/images/9.jpg', thumb: '../../samplecontent/images/thumbnails/9.jpg', title: 'Title9', fbpid: 'User9', fbpname: 'fbpname 9', fbpurl: '../../samplecontent/images/thumbnails/9.jpg', numparts: 55, cid: '9', ctitle: 'Wierd Hairdo Contest', myvote: -1   });
-    pictureEntries.push({eid: '10', url: '../../samplecontent/images/10.jpg', thumb: '../../samplecontent/images/thumbnails/10.jpg', title: 'Title10', fbpid: 'User10', fbpname: 'fbpname 10', fbpurl: '../../samplecontent/images/thumbnails/10.jpg', numparts: 55, cid: '10', ctitle: 'Wierd Hairdo Contest' , myvote: -1  });
-    pictureEntries.push({eid: '11', url: '../../samplecontent/images/11.jpg', thumb: '../../samplecontent/images/thumbnails/11.jpg', title: 'Title11', fbpid: 'User11', fbpname: 'fbpname 11', fbpurl: '../../samplecontent/images/thumbnails/11.jpg', numparts: 55, cid: '11', ctitle: 'Wierd Hairdo Contest', myvote: 6   });
-    pictureEntries.push({eid: '12', url: '../../samplecontent/images/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg', numparts: 55, cid: '12', ctitle: 'Wierd Hairdo Contest' , myvote: 6  });
-	
-    var voteCount = 20;
-    var likeCount = 20;
-    var commentCount = 5;
-    var giftCount = 20;
-    var score = 8.5;
-    var booCount = 15;
-    var rank = 3;
-    var trend = '0';
-    var goToSlide = 3;
-    var myvote = -1;
-    
-    var thumbnailEntries = [];
-    thumbnailEntries.push({id: '1', url: '../../samplecontent/images/thumbnails/1.jpg', thumb: '../../samplecontent/images/thumbnails/1.jpg', title: 'Title1', fbpid: 'User1', fbpname: 'fbpname 1', fbpurl: '../../samplecontent/images/thumbnails/1.jpg' });
-    thumbnailEntries.push({id: '2', url: '../../samplecontent/images/thumbnails/2.jpg', thumb: '../../samplecontent/images/thumbnails/2.jpg', title: 'Title2', fbpid: 'User2', fbpname: 'fbpname 2', fbpurl: '../../samplecontent/images/thumbnails/2.jpg' });
-    thumbnailEntries.push({id: '3', url: '../../samplecontent/images/thumbnails/3.jpg', thumb: '../../samplecontent/images/thumbnails/3.jpg', title: 'Title3', fbpid: 'User3', fbpname: 'fbpname 3', fbpurl: '../../samplecontent/images/thumbnails/3.jpg' });
-    thumbnailEntries.push({id: '4', url: '../../samplecontent/images/thumbnails/4.jpg', thumb: '../../samplecontent/images/thumbnails/4.jpg', title: 'Title4', fbpid: 'User4', fbpname: 'fbpname 4', fbpurl: '../../samplecontent/images/thumbnails/4.jpg' });
-    thumbnailEntries.push({id: '5', url: '../../samplecontent/images/thumbnails/5.jpg', thumb: '../../samplecontent/images/thumbnails/5.jpg', title: 'Title5', fbpid: 'User5', fbpname: 'fbpname 5', fbpurl: '../../samplecontent/images/thumbnails/5.jpg' });
-    thumbnailEntries.push({id: '6', url: '../../samplecontent/images/thumbnails/6.jpg', thumb: '../../samplecontent/images/thumbnails/6.jpg', title: 'Title6', fbpid: 'User6', fbpname: 'fbpname 6', fbpurl: '../../samplecontent/images/thumbnails/6.jpg' });
-    thumbnailEntries.push({id: '7', url: '../../samplecontent/images/thumbnails/7.jpg', thumb: '../../samplecontent/images/thumbnails/7.jpg', title: 'Title7', fbpid: 'User7', fbpname: 'fbpname 7', fbpurl: '../../samplecontent/images/thumbnails/7.jpg' });
-    thumbnailEntries.push({id: '8', url: '../../samplecontent/images/thumbnails/8.jpg', thumb: '../../samplecontent/images/thumbnails/8.jpg', title: 'Title8', fbpid: 'User8', fbpname: 'fbpname 8', fbpurl: '../../samplecontent/images/thumbnails/8.jpg' });
-	thumbnailEntries.push({id: '9', url: '../../samplecontent/images/thumbnails/9.jpg', thumb: '../../samplecontent/images/thumbnails/9.jpg', title: 'Title9', fbpid: 'User9', fbpname: 'fbpname 9', fbpurl: '../../samplecontent/images/thumbnails/9.jpg' });
-	thumbnailEntries.push({id: '10', url: '../../samplecontent/images/thumbnails/10.jpg', thumb: '../../samplecontent/images/thumbnails/10.jpg', title: 'Title10', fbpid: 'User10', fbpname: 'fbpname 10', fbpurl: '../../samplecontent/images/thumbnails/10.jpg' });
-	thumbnailEntries.push({id: '11', url: '../../samplecontent/images/thumbnails/11.jpg', thumb: '../../samplecontent/images/thumbnails/11.jpg', title: 'Title11', fbpid: 'User11', fbpname: 'fbpname 11', fbpurl: '../../samplecontent/images/thumbnails/11.jpg' });
-	thumbnailEntries.push({id: '12', url: '../../samplecontent/images/thumbnails/12.jpg', thumb: '../../samplecontent/images/thumbnails/12.jpg', title: 'Title12', fbpid: 'User12', fbpname: 'fbpname 12', fbpurl: '../../samplecontent/images/thumbnails/12.jpg' });
-
+  /****** start of contest title display ******/
    var $contestTitleDiv = $('<div></div>');
    var $contestTitle = $('<span class="contest-title">'+contestTitle+'</span>');
     $contestTitle.bind('click', function () {
@@ -59,12 +19,10 @@
     });
     $contestTitleDiv.append($contestTitle);
     $parentdiv.append($contestTitle);
+    /****** end of contest title display ******/
     
-
-    var handleFileSelect = function(evt) {
-      $dialog.dialog('open');
-            return false;
-    };
+    /****** start of Submit Entry Button display ******/
+    /** only shown if the picture contest detail was invoked from the Contests Tab **/
     if (invokedBy !== 'home') {
       var $submitEntry = $('<button class="submit-entry-button" id="'+za.buttons['submitentry'].id+'"/>');
       $submitEntry.button({label: za.buttons['submitentry'].label});
@@ -75,128 +33,222 @@
       $parentdiv.append($submitEntry);
     };
     
-    $parentdiv.append(za.buildRatingPanel({entryId: '123', partName: 'Lucky'}));
+    /****** end of Submit Entry Button display *******/
+    
+    var $divinfo = $('<div class="entry-info" style="width:200px; height:50px; z-index: 99999;"></div>');
+    $divinfo.append($('<img class="user-pic" src="" style="width:40px; height:40px; z-index: 99999;"/>'));
+    $divinfo.append($('<input type="text" id="entry-id" style="z-index: 99999;" value="'+entryid+'"/>'));
+    $parentdiv.append($divinfo);
+    //$divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;padding-left: 4px;">'+entry[attrs.partname.id]+'</span>'));
+    //$divinfo.append($('<input id="myvote" type="hidden" value="'+entry[attrs.myvote.id]+'" />'));
+  
+      /**** display voting elements *****/
+    /*** this is appended to the parent div but shown / hidden on a per entry basis if user has voted or not *****/
+    $parentdiv.append(za.buildRatingPanel({partName: 'Lucky'}));
     $("#rate-root").children('input').each(function(i, element){ // this needs to be done after rate-root has been appended to parent
+      //alert("found rate button " + i);
       $(this).button();
     });
+  /**** end of display voting elements *****/
     
-    var showMiscInfo = function(slider, invokedByInit) {
-      if (invokedByInit) var $base = slider.$el.find('.panel').eq(slider.options.startPanel);
-      else var $base = slider.$targetPage;
-      var myvote;
-      $base.find('#myvote').each(function(){ myvote = $(this).val(); })
-      if (myvote === '-1') $("#rate-root").show(); else $("#rate-root").hide();
-      showRatingInfo();
-      if ($(".send-gift")) $(".send-gift").remove();
-      $("#gallery1").parent().append($('<div class="send-gift">Send a gift</div>'));
-      $(".send-gift").effect("bounce", { times:3, direction: 'left'}, 1000);
-    };
+    var data = 'op=get_entries&cid='+contestid;
+    $.ajax({                                      
+      url: za.getServerUri(),       
+      data: data,                        
+      dataType: 'json',                      
+      success: function(data) { displayEntries(data['result']); }
+    });
     
-    var showRatingInfo = function() {
-      if ($(".rating-info")) $(".rating-info").remove();
-      var $div = $('<div class="rating-info"></div>');
-      $div.append($('<div class="votes"></div>'));
-      $div.append($('<span class="avg-score">'+score+'</span>'));
-      $div.append($('<span class="vote-count">'+voteCount+' votes</span>'));
-      $div.append($('<div class="rank">#'+rank+'</div>'));
-      $div.append($('<div class="img-trend"></div>'));
-      $("#gallery1").parent().append($div);
-    };
-	
-	// Following code for wrap ver thumb in col1 and preview container & hor thumb in col2
+    var displayEntries = function(entries) {
+      if (entries.length === 0) {
+	$parentdiv.append($('<div><span>There are no entries for this contest. Be the first one and get 50 bonus Zing Coins!</span></div>'));
+      } else {
+	var pictureEntries = [];
+	var thumbnailEntries = [];
+	var gotoslide = 0;
+	$.each(entries, function(i, row) {
+	    if (entryid !== undefined && row.entryid === entryid) gotoslide = i;
+	    pictureEntries.push({eid: row.id, url: row.small_url, thumb: row.small_url, title: row.name, fbpid: row.fb_pid, fbpname: row.fb_pname, cid: row.contest_id, name: row.name, etype: row.entry_type});
+	    thumbnailEntries.push({id: row.id, url: row.small_url, thumb: row.small_url, fbpid: row.fb_pid, fbpname: row.fb_pname, fb_purl: row.small_url});
+	  });
+	    // Following code for wrap ver thumb in col1 and preview container & hor thumb in col2
 	var $galleryContainer = $("<div class='galleryContainer'></div>");
 	var $col1 = $("<div class='col1'></div>");
 	var $col2 = $("<div class='col2'></div>");
 	var $clr  = $('<div class="clr"></div>');
-	
+    
 	$parentdiv.append($galleryContainer);
 	$galleryContainer.append($col1).append($col2).append($clr);
-	
-	// Preview Gallery
-    $col2.append(za.buildAnythingSliderGallery('gallery1', za.galleryTypes['entrydetail'], pictureEntries));
-    $("#gallery1").anythingSlider({
-      showMultiple: false, buildStartStop: false, buildArrows: true, buildNavigation: false,
-      infiniteSlides: false, startPanel: goToSlide,
-      onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); showMiscInfo(slider, true); },
-      onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); showMiscInfo(slider, false); },
-      onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider);}
-    });
-	$("#gallery1").parent().parent().addClass("infoHeight");	// Added infoHeight class to adjust information shown under preview image
-
-	// Horizontal thumbnail
-    $col2.append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'], thumbnailEntries));
-    $("#thumbnail1").anythingSlider({
-      showMultiple: false, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false,//,vertical: true,
-                      onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
-                onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
-	        onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
-    });
-    $("#thumbnail1").parent().parent().addClass("horThumb");	// Added horThumb class to relevant properties
-	
-    $("#thumbnail1 .gallery-div").click(function() {
-      var idx = $(this).children('img.main-img').first().attr('id').substring(5);
-      idx = parseInt(idx) + 1;
-      $('#gallery1').anythingSlider(idx);
-      return false;
-    });
-	
-	// Vertical thumbnail
-    $col1.append(za.buildAnythingSliderGallery("thumbnail2", za.galleryTypes['vthumb'], thumbnailEntries));
-    $("#thumbnail2").anythingSlider({
-    showMultiple: false, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false, vertical: true,
-		  onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
-	    onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
-	    onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
-    });
-    $("#thumbnail2").parent().parent().addClass("verThumb");	// Added verThumb class to relevant properties
-	
-    $("#thumbnail2 .gallery-div").click(function() {
-      var idx = $(this).children('img.main-img').first().attr('id').substring(5);
-      idx = parseInt(idx) + 1;
-      $('#gallery1').anythingSlider(idx);
-      return false;
-    });
-	
+    
+    	// TODO move like button to show misc info... this needs to be displayed for each main entry
 	var $likebtn = $('<div style="margin-top:25px;margin-left:50px;"></div>');
 	$likebtn.append($('<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fphoto.php%3Ffbid%3D225872857487883%26amp%3Bset%3Da.225872854154550.56156.100001955114352&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=30&amp;appId=211738135569277" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:30px;" allowTransparency="true"></iframe>'));
-	
 	$col2.append($likebtn);
 	
-	// Pagination
-    var $paginationContianer = $('<div class="paginationContianer"></div>');	// Created pagination container to right align pagination between preview and thumbnail images
-    var $pagination = $('<div class="pagination"></div>');
-    var $first = $('<a href="#" class="first" data-action="first">&laquo;</a>');
-    var $previous = $('<a href="#" class="previous" data-action="previous">&lsaquo;</a>');
-    var $pagetext = $('<input type="text" readonly="readonly" data-max-page="40" />');
-    var $next = $('<a href="#" class="next" data-action="next">&rsaquo;</a>');
-    var $last = $('<a href="#" class="last" data-action="last">&raquo;</a>');
-	$clr = $('<div class="clr"></div>');	// Created to clear the float effect
-    
-    $pagination.append($first).append($previous).append($pagetext).append($next).append($last);
-    $paginationContianer.append($pagination).append($clr);	// Wrapped pagination to pagination contianer
-    $paginationContianer.append('<input type="hidden" id="thumbnail1page" value="1"></input>');
-	
-    var $comment = $('<div style="margin-top:5px;margin-left:50px;"></div>');
+    // TODO move comment button to show misc info... this needs to be displayed for each main entry
+	var $comment = $('<div style="margin-top:5px;margin-left:50px;"></div>');
 	
 	//$comment.append($('<fb:comments href="http://www.facebook.com/photo.php?pid=515490&amp;id=100001955114352" num_posts="4" width="600"></fb:comments>'));
 	//$comment.append($('<div class="fb-comments" data-href="http://www.facebook.com/photo.php?fbid=225872857487883&amp;set=a.225872854154550.56156.100001955114352" data-num-posts="2" data-width="500"></div>'));
 	$comment.append($('<iframe src="comment.html" width="600" height="100%" frameborder=0><p>Your browser does not support IFrame.</p></iframe>'));
 
 	$col2.append($comment);
-	$(".col2 .anythingSlider:eq(0)").after($paginationContianer); // Added pagination between preview and thumbnail images
+	  buildMainGallery(pictureEntries, gotoslide);
+	  buildHorizThumbGallery(thumbnailEntries);
+	  buildVertThumbGallery(thumbnailEntries);
+      }
+    };
+
+/**** temp comment
     
-	$('.pagination').jqPagination({
-		paged: function(page) {
-		// need to add logic if page is 1 or 40 then dont use goForward or go Back.
-		alert("requested page is" + page );
-		  if (parseInt(page) > parseInt($("#thumbnail1page").val())) 
-		    $("#thumbnail1").data('AnythingSlider')['goForward']();
-		  else
-		    $("#thumbnail1").data('AnythingSlider')['goBack']();
-		  $("#thumbnail1page").val(page);
-		}
-    });
+******/
+
+
+
+/*
+    var handleFileSelect = function(evt) {
+      $dialog.dialog('open');
+            return false;
+    };
+*/
+    
+    var showMiscInfo = function(slider, invokedByInit) {
+      if (invokedByInit) var $base = slider.$el.find('.panel').eq(slider.options.startPanel);
+      else var $base = slider.$targetPage;
+      var entryid;
+      $base.find('.entry-id').each(function() { entryid = $(this).val();
+				   $("#entry-id").attr('value',entryid);});
+      var data = 'op=get_vote_and_stats&fbpid='+za.userFbId+'&eid='+$("#entry-id").val();
+      $.ajax({                                      
+	url: za.getServerUri(),       
+	data: data,                        
+	dataType: 'json',                      
+	success: function(data) {
+	  //alert("after getting my vote " + JSON.stringify(data));
+	  var myvote = -1;
+	  var voteCount = 0;
+	  var score = 0;
+	  var rank = -1;
+	  var trend = 1;
+	  alert("data is " + JSON.stringify(data));
+	  var myvoterows = data['myvote']; var rows = myvoterows['result'];
+	  if (rows.length > 0) {
+	    $.each(rows, function(i, row) {
+	      myvote = row.vote;
+	      /*
+	      if (i === 1) {
+		voteCount = row.num_votes;
+		score = row.vote_average;
+		//rank = row.rank;
+		//trend = row.trend;
+	      }*/
+	      });
+	  };
+	  var statrows = data['stats'];
+	  rows = statrows['result'];
+	  if (rows.length > 0) {
+	    $.each(rows, function(i, row) {
+	        voteCount = row.num_votes;
+		score = row.vote_average;
+		//rank = row.rank;
+		//trend = row.trend;
+	      });
+	  };
+	  if (myvote === -1) $("#rate-root").show(); else $("#rate-root").hide();
+	  za.showRatingInfo('gallery1', voteCount, score, rank, trend);
+	  }
+      });
+      if ($(".send-gift")) $(".send-gift").remove();
+      $("#gallery1").parent().append($('<div class="send-gift">Send a gift</div>'));
+      $(".send-gift").effect("bounce", { times:3, direction: 'left'}, 1000);
+      var userFbId;
+      $base.find('.fbuser-id').each(function(){ userFbId = $(this).val(); });
+      $(".user-pic").attr('src', 'https://graph.facebook.com/'+userFbId+'/picture');
+      FB.api('/'+userFbId, function(response) {
+        userName = response.name;
+	if ($(".user-name")) $(".user-name").remove();
+	$(".entry-info").append($('<span class="user-name" style="color: #000000; z-index: 99999; font-size: 0.8em;padding-left: 4px;">'+userName+'</span>'));
+      });
+      //$divinfo.append($('<input id="myvote" type="hidden" value="'+entry[attrs.myvote.id]+'" />'));
+
+      //$divinfo.append($('<img src="https://graph.facebook.com/'+entry[attrs.fbpartid.id]+'/picture" style="width:40px; height:40px; z-index: 99999;"/>'));
+
+    };	
 	
+    var buildMainGallery = function(pictureEntries, gotoslide) {
+    // Preview Gallery
+      $('.col2').append(za.buildAnythingSliderGallery('gallery1', za.galleryTypes['entrydetail'], pictureEntries));
+      $("#gallery1").anythingSlider({
+	showMultiple: false, buildStartStop: false, buildArrows: true, buildNavigation: false,
+	infiniteSlides: false, startPanel: gotoslide,
+	onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); showMiscInfo(slider, true); },
+	onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); showMiscInfo(slider, false); },
+	onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider);}
+      });
+
+      $("#gallery1").parent().parent().addClass("infoHeight");	// Added infoHeight class to adjust information shown under preview image
+    }
+
+    var buildHorizThumbGallery = function(thumbnailEntries) {
+      $('.col2').append(za.buildAnythingSliderGallery("thumbnail1", za.galleryTypes['hthumb'], thumbnailEntries));
+      $("#thumbnail1").anythingSlider({
+	showMultiple: false, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false,//,vertical: true,
+			onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
+		  onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
+		  onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
+      });
+      $("#thumbnail1").parent().parent().addClass("horThumb");	// Added horThumb class to relevant properties
+	  
+      $("#thumbnail1 .gallery-div").click(function() {
+	var idx = $(this).children('img.main-img').first().attr('id').substring(5);
+	idx = parseInt(idx) + 1;
+	$('#gallery1').anythingSlider(idx);
+	return false;
+      });
+      var $paginationContianer = $('<div class="paginationContianer"></div>');	// Created pagination container to right align pagination between preview and thumbnail images
+      var $pagination = $('<div class="pagination"></div>');
+      var $first = $('<a href="#" class="first" data-action="first">&laquo;</a>');
+      var $previous = $('<a href="#" class="previous" data-action="previous">&lsaquo;</a>');
+      var $pagetext = $('<input type="text" readonly="readonly" data-max-page="40" />');
+      var $next = $('<a href="#" class="next" data-action="next">&rsaquo;</a>');
+      var $last = $('<a href="#" class="last" data-action="last">&raquo;</a>');
+      $clr = $('<div class="clr"></div>');	// Created to clear the float effect
+      
+      $pagination.append($first).append($previous).append($pagetext).append($next).append($last);
+      $paginationContianer.append($pagination).append($clr);	// Wrapped pagination to pagination contianer
+      $paginationContianer.append('<input type="hidden" id="thumbnail1page" value="1"></input>');
+      $(".col2 .anythingSlider:eq(0)").after($paginationContianer); // Added pagination between preview and thumbnail images
+    
+      $('.pagination').jqPagination({
+	paged: function(page) {
+	// need to add logic if page is 1 or 40 then dont use goForward or go Back.
+	alert("requested page is" + page );
+	  if (parseInt(page) > parseInt($("#thumbnail1page").val())) 
+	    $("#thumbnail1").data('AnythingSlider')['goForward']();
+	  else
+	    $("#thumbnail1").data('AnythingSlider')['goBack']();
+	  $("#thumbnail1page").val(page);
+	}
+      });
+    }
+	
+    var buildVertThumbGallery = function(thumbnailEntries) {
+      $('.col1').append(za.buildAnythingSliderGallery("thumbnail2", za.galleryTypes['vthumb'], thumbnailEntries));
+      $("#thumbnail2").anythingSlider({
+      showMultiple: false, buildNavigation: false, buildStartStop: false, changeBy: 7, infiniteSlides: false, vertical: true,
+		    onInitialized: function(e, slider) { za.removeSrcOnSliderInit(slider); },
+	      onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
+	      onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
+      });
+      $("#thumbnail2").parent().parent().addClass("verThumb");	// Added verThumb class to relevant properties
+	  
+      $("#thumbnail2 .gallery-div").click(function() {
+	var idx = $(this).children('img.main-img').first().attr('id').substring(5);
+	idx = parseInt(idx) + 1;
+	$('#gallery1').anythingSlider(idx);
+	return false;
+      });
+    };
   };
   za.PictureContestDetail = PictureContestDetail;
 }(jQuery));

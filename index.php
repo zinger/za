@@ -12,6 +12,7 @@ global $logger;
 
 $fb = FBHelper::getFacebook();
 $user = $fb->getUser();
+$logger->info("fb user " . $user);
 
 $sr = $fb->getSignedRequest();
 //var_dump($sr);
@@ -66,6 +67,9 @@ echo "<pre>";
 print_r($upic);
 echo "</pre>";
 die;*/
+/*
+$html = '<input id="userFbId" value='.$user.' />';
+$url .= '?userFbId='.$user;*/
 echo "<script type='text/javascript'>window.location.href='$url'</script>";
 
 ?>

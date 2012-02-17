@@ -52,10 +52,10 @@ class ContestService {
         $logger->info("med url = $contest->med_url");
       $contest->small_url = $photo[images][2][source];
         $logger->info("small url = $contest->small_url");
-      $contest->fb_pid = $photo[from][id]; // TODO remove this and get fb_pid by querying graph api or pass in obj
-      $logger->info("part id = $contest->fb_pid");
-      $contest->fb_pname = $photo[from][name];
-        $logger->info("part name = $contest->fb_pname");
+      //$contest->fb_pid = $photo[from][id]; // TODO remove this and get fb_pid by querying graph api or pass in obj
+      //$logger->info("part id = $contest->fb_pid");
+      //$contest->fb_pname = $photo[from][name];
+        //$logger->info("part name = $contest->fb_pname");
     }
     return $contest;
   }
@@ -123,6 +123,13 @@ class ContestService {
       return result;
     }
     $sql = "SELECT * FROM contest WHERE id = " . $id;
+    $result = $this->queryDB($sql, $dbc = null, "getContestById");
+
+    return $result;
+  }
+  
+  public function getFeaturedContests() {
+    $sql = "SELECT * FROM contest WHERE featured > 0";
     $result = $this->queryDB($sql, $dbc = null, "getContestById");
 
     return $result;

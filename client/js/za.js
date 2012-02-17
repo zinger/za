@@ -9,7 +9,8 @@
   
   za.appId = '';
   za.fbScope = 'email,publish_stream,read_friendlists,user_photos,user_videos,user_birthday,friends_birthday,user_photo_video_tags,offline_access';
-  za.userFbId = '';
+  za.userFbId = '100000581992971';
+  za.userFbName = '';
   za.serverUri = '';
   za.redirectUri = '';
   
@@ -124,6 +125,7 @@
     tags: {id: 'tags', label: 'Tags', type: 'input'},
     numparts: {id: 'numparts'},
     fbpartid: {id: 'fbpid'},
+    fbpartname: {id: 'fbpname'}
   };
   
   za.entryattrs = { //used for contests gallery as well as contest details gallery
@@ -208,10 +210,7 @@
     var attrs = za.entryattrs;
     var $divinfo = $('<div style="width:200px; height:50px; z-index: 99999;"></div>');
     if (galleryType === za.galleryTypes['entrydetail']) {
-      $divinfo.append($('<img src="'+entry[attrs.parturl.id]+'" style="width:40px; height:40px; z-index: 99999;"/>'));
-      $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;padding-left: 4px;">'+entry[attrs.partname.id]+'</span>'));
       $divinfo.append($('<input class="entry-id" type="hidden" value="'+entry[attrs.id.id]+'" />'));
-      $divinfo.append($('<input id="myvote" type="hidden" value="'+entry[attrs.myvote.id]+'" />'));
     } else if (galleryType === za.galleryTypes['contests']) {
       attrs = za.contestattrs;
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.title.id]+'</span>'));
@@ -255,7 +254,7 @@
   };
   
   za.buildRatingPanel = function(args) {
-    var entryId = args.entryId;
+    //var entryId = args.entryId;
     var partName = args.partName;
     var $rateRoot = $('<div id="rate-root"></div>');
     $rateRoot.append($('<div class="rate-panel-title">Vote For '+partName+'</div>'));
@@ -273,22 +272,53 @@
       }
       var $input = $('<input type="radio" name="rating" value="'+i+'" id="'+id+'" value="'+i+'" />');
       $input.bind('click', function() {
-      if ($('input[name="rating"]:checked').val() === '0') {
-	$("#rating-rating-1").attr('checked','checked');
-	$("#rating-rating-1").button('refresh');
-      } else if ($('input[name="rating"]:checked').val() === '11') {
-	$("#rating-rating-10").attr('checked','checked');
-	$("#rating-rating-10").button('refresh');
-      } else {
+        if ($('input[name="rating"]:checked').val() === '0') {
+          $("#rating-rating-1").attr('checked','checked');
+          $("#rating-rating-1").button('refresh');
+        } else if ($('input[name="rating"]:checked').val() === '11') {
+          $("#rating-rating-10").attr('checked','checked');
+          $("#rating-rating-10").button('refresh');
+        } 
         alert($('input[name="rating"]:checked').val() + " was clicked");
-      }     
-    });
+        var obj = {};
+        obj['op'] = 'save_vote';
+        obj['eid'] = $("#entry-id").val();
+        obj['voterid'] = za.userFbId;
+        obj['vote'] = $('input[name="rating"]:checked').val();
+        alert("obj being passed is " + JSON.stringify(obj));
+        $.post( za.getServerUri(), obj, 
+            function(data) {
+                alert('response received ' + JSON.stringify(data));
+                var rows = data['result'];
+                var vote_count = 0;
+                var vote_average = 0;
+                if (rows.length === 1) {
+                  $.each(rows, function(i, row) {
+                    vote_count = row.num_votes;
+                    vote_average = row.vote_average;
+                  });
+                  za.showRatingInfo('gallery1', vote_count, vote_average, 1, '');
+                  $("#rate-root").hide();
+                }
+            }, "json");
+      });
       $rateRoot.append($input);
     }
     
     return $rateRoot;
   };
   
+  za.showRatingInfo = function(galleryid, voteCount, score, rank, trend) {
+    rank = 3;
+    if ($(".rating-info")) $(".rating-info").remove();
+    var $div = $('<div class="rating-info"></div>');
+    $div.append($('<div class="votes"></div>'));
+    $div.append($('<span class="avg-score">'+score+'</span>'));
+    $div.append($('<span class="vote-count">'+voteCount+' votes</span>'));
+    $div.append($('<div class="rank">#'+rank+'</div>'));
+    $div.append($('<div class="img-trend"></div>'));
+    $(za.jq(galleryid)).parent().append($div);
+  };
   za.addSrc = function(element) {
     if (element.attr('src') === '') {
       var newsrc = element.attr('data-src');
@@ -376,6 +406,23 @@
           } );
     //probably not necessary to store app invites?
   };
+  
+  za.getUserInfo = function(resonse) {
+    var data = 'op=get_user_info';
+    $.ajax({                                      
+      url: za.getServerUri(),       
+      data: data,                        //you can insert url argumnets here to pass to api.php
+                                       //for example "id=5&parent=6"
+      dataType: 'json',                //data format      
+      success: function(serverdata)          //on recieve of reply
+      {
+        // the following line is temporarily commented. for now it will use the hardcoded value of za.userFbId
+        //za.userFbId = serverdata['id'];
+        za.userFbName = serverdata['name'];
+        za.MenuTabs();
+      }
+    });
+  }
   za.tempvars = {
     entryid: '',
     contestsub: 'browse',

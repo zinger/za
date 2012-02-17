@@ -76,9 +76,9 @@
 </head>
 <body>
   <div id="fb-root"></div>
-	 
-
   <script type="text/javascript">
+    //za.userFbId = <?php echo $_GET["userFbId"] ?>;
+   // alert("user fb id is " + $("#userFbId").val());
     window.fbAsyncInit = function() {
       FB.init({
         //appId      : '188092504602584', // App ID
@@ -145,7 +145,12 @@
     
   <script type="text/javascript">
     $(document).ready(function() {
-      za.MenuTabs();
+      /*
+      za.userFbId = <?php echo json_encode($_GET['userFbId']); ?>;
+      alert("user fb id is " + za.userFbId);
+      */
+      za.getUserInfo();
+      //za.MenuTabs();
       //alert(" appId " + za.getAppId() + " redirectUri " + za.getRedirectUri() + " configType ");
 		/*$('#imagearea').jqUploader({
 						debug:0

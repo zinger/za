@@ -7,6 +7,7 @@
     var $parentdiv = $( za.jq(args.parentid) );
     var attrs = za.contestattrs;
     var entrytypes = za.entrytypes;
+    alert("fb user id is " + za.userFbId);
     /*
     za.contestattrs = {
     title: {id: 'name', label: 'Title', type: 'input'},
@@ -139,6 +140,12 @@
             break;
           case 'details':
             jsonobject[attr.id] = tinyMCE.get(attr.id).getContent();
+            break;
+          case 'fbpartid':
+            jsonobject[attr.id] = za.userFbId;
+            break;
+          case 'fbpartname':
+            jsonobject[attr.id] = za.userFbName;
             break;
           default:
             jsonobject[attr.id] = $( za.jq(attr.id)).val();
