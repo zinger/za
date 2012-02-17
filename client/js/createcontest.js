@@ -7,7 +7,9 @@
     var $parentdiv = $( za.jq(args.parentid) );
     var attrs = za.contestattrs;
     var entrytypes = za.entrytypes;
+    var contestData = args.contestData;
     alert("fb user id is " + za.userFbId);
+    alert("contestData in createContest is " + JSON.stringify(contestData));
     /*
     za.contestattrs = {
     title: {id: 'name', label: 'Title', type: 'input'},
@@ -24,8 +26,9 @@
     tags: {id: 'tags', label: 'Tags', type: 'input'}
   };
     */
-    if (contestid !== undefined) {
-      var data = 'op=get_contest_by_id&id=' + contestid;
+    if (contestData === undefined && contestid !== undefined) {
+      alert("coming in contestData is undefined");
+      var data = 'op=get_contest_by_id&id='+contestid;
       $.ajax({                                      
         url: za.getServerUri(),       
         data: data,                        //you can insert url argumnets here to pass to api.php
@@ -36,7 +39,7 @@
       });
     };
     
-    var contestData;
+    
     var populateContestData = function(contest) {
         contestData = {name: contest.name, tagl: contest.tag_line, sd: contest.start_date, ed: contest.end_date, sed: contest.submission_end_date,
         ctype: contest.contest_type, etype: contest.entry_type, whocan: contest.who_can_participate, inviteothers: contest.invite_others,
@@ -209,7 +212,7 @@
       }     
     });
 
-    if (contestid !== undefined) { // if contest id is passed in populate fields like in edit mode
+    if (contestData !== undefined) { // if contest id is passed in populate fields like in edit mode
       $.each(attrs, function(idx, attr) {
           switch (idx) {
             case 'entrytype':

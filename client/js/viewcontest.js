@@ -72,7 +72,7 @@
       var $editbutton = $('<button id="edit-button" />') ;
       $editbutton.bind('click', function() {
         $parentdiv.empty();
-        za.CreateContest({parentid: parentid});
+        za.CreateContest({parentid: parentid, contestData: contestData});
       });
       $editbutton.button({label: 'Edit Contest'});
       $parentdiv.append($editbutton);
