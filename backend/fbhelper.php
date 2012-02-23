@@ -386,6 +386,16 @@ class FBHelper {
 	return $friends;
   }
   
+  public function getFriendsUsingApp()
+  {
+    $fb = self::getFacebook();
+    $my_friends_using_this_app = $fb->api(array('method' => 'friends.getAppUsers',
+                                                'callback' => ''
+                                            ));
+    //print_r($my_friends_using_this_app);
+    return $my_friends_using_this_app;
+  }
+  
   public function setInvite($contestId='')
   {
 	if($contestId=='')

@@ -5,9 +5,10 @@
     var parentid = args.parentid;
     var $parentdiv = $( za.jq(parentid));
     
+    var data = 'op=get_contests_by_creation_date&status='+za.conteststatus['final'].id;
     $.ajax({                                      
       url: za.getServerUri(),       
-      data: "op=get_contests_by_creation_date",                        //you can insert url argumnets here to pass to api.php
+      data: data,                        //you can insert url argumnets here to pass to api.php
                                        //for example "id=5&parent=6"
       dataType: 'json',                //data format      
       success: function(data)          //on recieve of reply

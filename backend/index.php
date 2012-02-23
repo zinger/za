@@ -100,7 +100,8 @@ switch($op) {
     $sd = $_REQUEST['sd'];
     $ed = $_REQUEST['ed'];
     $limit = $_REQUEST['limit'];
-    $result = ContestService::instance()->getContestsByCreationDate($sd, $ed, $limit);
+    $status = $_REQUEST['status'];
+    $result = ContestService::instance()->getContestsByCreationDate($sd, $ed, $limit, $status);
     break;
   case "get_contests_by_deadline":
     $sd = $_REQUEST['sd'];
@@ -139,6 +140,9 @@ switch($op) {
     break;
   case "save_vote":
     $result = EntryService::instance()->saveVote();
+    break;
+  case "get_friends_using_app":
+    $result['friends'] = $fbobj->getFriendsUsingApp();
     break;
   default:
     $logger->info("Invalid Operator");

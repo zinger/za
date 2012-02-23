@@ -82,7 +82,7 @@
     if (menuid === 'hall') { za.Hall({parentid: menuid}); };
     if (menuid === 'coins') { za.Coins({parentid: menuid}); };
     if (menuid === 'invite') { za.Invite({parentid: menuid}); };
-	if (menuid === 'vote') { za.Vote({parentid: menuid}); };
+    if (menuid === 'vote') { za.Vote({parentid: menuid}); };
   };
   
 
@@ -125,7 +125,13 @@
     tags: {id: 'tags', label: 'Tags', type: 'input'},
     numparts: {id: 'numparts'},
     fbpartid: {id: 'fbpid'},
-    fbpartname: {id: 'fbpname'}
+    fbpartname: {id: 'fbpname'},
+    status: {id: 'status'}
+  };
+  
+  za.conteststatus = {
+    draft: {id: 0},
+    final: {id: 1}
   };
   
   za.entryattrs = { //used for contests gallery as well as contest details gallery

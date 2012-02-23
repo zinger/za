@@ -124,8 +124,8 @@
     var $finishbutton = $('<button id="'+za.buttons['finishcontest'].id+'" />') ;
     $finishbutton.button({label: za.buttons['finishcontest'].label});
     
-    $finishbutton.bind('click', function() {
-       var jsonobject = {};
+    var buildServerObject = function(status) {
+      var jsonobject = {};
        jsonobject['op'] = 'create_contest';
        $.each(attrs, function(idx, attr) {
         switch (idx) {
@@ -150,15 +150,20 @@
           case 'fbpartname':
             jsonobject[attr.id] = za.userFbName;
             break;
+          case 'status':
+            jsonobject[attr.id] = status;
+            break;
           default:
             jsonobject[attr.id] = $( za.jq(attr.id)).val();
             break;
         }
-        
-        $('#obj').val(JSON.stringify(jsonobject));
-
        });
-
+       return jsonobject;
+    }
+    
+    $finishbutton.bind('click', function() {
+       var jsonobject = buildServerObject(za.conteststatus['final'].id);
+       $('#obj').val(JSON.stringify(jsonobject));
        alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
        fileUpload(this.form,za.getServerUri(),'upload', true);
     });
@@ -169,8 +174,15 @@
         var to = response.request_ids; 
         alert(" response is " + JSON.stringify(response));
       };
+      
     var $savebutton = $('<button id="'+za.buttons['savecontest'].id+'" />') ;
     $savebutton.button({label: za.buttons['savecontest'].label});
+    $savebutton.bind('click', function() {
+       var jsonobject = buildServerObject(za.conteststatus['draft'].id);
+       $('#obj').val(JSON.stringify(jsonobject));
+       alert("JSON Object thats being passed is " + JSON.stringify(jsonobject));
+       fileUpload(this.form,za.getServerUri(),'upload', false);
+    });
     $createcontestform.append($savebutton);
     
     $parentdiv.append($createcontestform);

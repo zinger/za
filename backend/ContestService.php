@@ -84,6 +84,7 @@ class ContestService {
   }
 
   //range is on creation date
+  /* old getContestsByCreationDate 
   public function getContestsByCreationDate($sd, $ed, $limit) {
 
     //todo: return specific columns
@@ -96,6 +97,25 @@ class ContestService {
     $sql .= (!empty($ed) === TRUE) ? "date_created <= " . $ed : "";
     $sql .= " ORDER BY date_created DESC";
     $sql .= (!empty($limit) === TRUE) ? " LIMIT " . $limit : ""; 
+    
+    $result = $this->queryDB($sql, $dbc = null, "getContestByCreationDate");
+    return $result;
+  }
+  */
+  
+  public function getContestsByCreationDate($sd, $ed, $limit, $status) {
+    //todo: return specific columns
+    $sql = "SELECT * FROM contest WHERE 1 = 1";
+    if (!empty($sd) === TRUE)
+      $sql .= " AND date_created >= " . $sd;
+    if (!empty($ed) === TRUE)
+      $sql .= " AND date_created <= " . $ed;
+    if (!empty($status) === TRUE)
+      $sql .= " AND status = " . $status;
+
+    $sql .= " ORDER BY date_created DESC ";
+    if (!empty($limit) === TRUE) 
+      $sql .= " LIMIT " . $limit;
     
     $result = $this->queryDB($sql, $dbc = null, "getContestByCreationDate");
     return $result;
