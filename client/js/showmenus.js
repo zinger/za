@@ -26,7 +26,7 @@
       $(".panels").empty();
       za.showPanel(ui.panel.id);
     });
-    
+    // TODO: Set default panel
     $("#tabs").tabs("option", "selected", 0);
   };
   za.MenuTabs = MenuTabs;

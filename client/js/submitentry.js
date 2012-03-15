@@ -9,7 +9,7 @@
     
     var entrytypes = za.entrytypes;
     
-    
+    //show current entries
     var data = 'op=get_entries&cid=' + contestid + '&fbpid='+za.userFbId;
     $.ajax({                                      
       url: za.getServerUri(),       
@@ -79,4 +79,5 @@
     $parentdiv.append($submitEntryDiv);
   };
   za.SubmitEntry = SubmitEntry;
+  //TODO: show uploaded entry after the entry has been submitted
 }(jQuery));

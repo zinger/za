@@ -26,6 +26,7 @@
     tags: {id: 'tags', label: 'Tags', type: 'input'}
   };
     */
+    //if contest id is set, render in edit mode (contest data is set when navigating from view contest on clicking edit contest)
     if (contestData === undefined && contestid !== undefined) {
       alert("coming in contestData is undefined");
       var data = 'op=get_contest_by_id&id='+contestid;
@@ -269,6 +270,8 @@
           };
       });
     };
+    
+    //TODO: setup spell checker
         tinyMCE.init({
             mode : "textareas",
             theme : "advanced",   //(n.b. no trailing comma, this will be critical as you experiment later)
@@ -286,5 +289,6 @@
     });
           za.buildCreateContestTooltip();
   };
+  //TODO: where should the user be navigated to after submitting contest? is it to browse contests?
   za.CreateContest = CreateContest;
 }(jQuery));

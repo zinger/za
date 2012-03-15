@@ -338,7 +338,7 @@
     var newsrc = element.attr('data-src');
     if (newsrc !== '') { element.attr('src', newsrc); element.attr('data-src', ''); }
   };
-    
+  //TODO: Validate that blanking and populating src per slide is ok ; evaluate other performant ways to do this
   za.removeSrcOnSliderInit = function(slider) {
     var start = slider.options.startPanel;
       slider.$el.find('.panel').eq(start).siblings(':not(.activePage)').find('img').each(function(){ za.removeSrc($(this)); });
@@ -364,6 +364,8 @@
     };
   };
   
+  //TODO: can inviteToContest & inviteToApp be merged?
+  //TODO: cleanup after invite has been acted upon - check fb docs
   za.inviteToContest = function() {
     var message = 'Participate in my exciting new contest: Zing of the Month';
     alert("Inviting for " + za.tempvars['contestid']);

@@ -10,6 +10,8 @@ require_once('backend/common/constants.php');
 
 global $logger;
 
+// NOT BEING USED 2/28/12 - go thru section for saving images to local folder and move to other code
+
 $fb = FBHelper::getFacebook();
 $user = $fb->getUser();
 $logger->info("fb user " . $user);

@@ -8,7 +8,7 @@ require_once('backend/facebook.php');
 require_once('backend/fbhelper.php');
 require_once('backend/common/Config.php');
 require_once('backend/common/constants.php');
-
+// NOT BEING USED NOW -
 $fbobj = new FBHelper();
 $ufrnd = $fbobj->getFriends();
 ?>

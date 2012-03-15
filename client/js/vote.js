@@ -1,6 +1,7 @@
 'use strict';
   
 (function($){
+  //NOT BEING USED 2/28/12
   var Vote = function(args) {
     var parentid = args.parentid;
     var $parentdiv = $( za.jq(parentid) );    

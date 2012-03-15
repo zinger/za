@@ -54,6 +54,7 @@
     
     $parentdiv.append($('<div>Fetching Contest Data</div>'));
     
+    //TODO: group is covering one section - need to add other - just concluded, my contests, etc.,
     var renderContestGroup = function(data, group) {
       var pictureEntries = [];
       $.each(data['result'], function(i, row) {
@@ -81,7 +82,7 @@
 	  onSlideInit: function(e, slider) { za.addSrcOnSlideInit(slider); },
 	  onSlideComplete: function(slider) { za.removeSrcOnSlideComplete(slider); }
       });
-      
+      // gallery-div, entry-id , etc., being set in buildAnythingSliderGallery
       $(za.jq(galleryid)).find('.gallery-div').click(function() {
 	var entryid = $(this).find('.entry-id').first().val();
 	var contestid = $(this).find('.contest-id').first().val();

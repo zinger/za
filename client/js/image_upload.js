@@ -22,6 +22,7 @@ function fileUpload(form, action_url, div_id, performInvite) {
  
             var content;
             // Message from server...
+            //TODO: evaluate when the else if and else blocks get invoked; also set result correctly for these 
             if (iframeId.contentDocument) {
                 alert("came in 1");
                 content = iframeId.contentDocument.body.innerHTML;
@@ -33,7 +34,7 @@ function fileUpload(form, action_url, div_id, performInvite) {
             } else if (iframeId.contentWindow) {
                 alert("came in 2");
                 content = iframeId.contentWindow.document.body.innerHTML;
-                var result = content.split(",");
+                var result = content.split(","); 
                         //        var result = [].slice.call(content);
 
             } else if (iframeId.document) {
