@@ -54,7 +54,6 @@
     
     $parentdiv.append($('<div>Fetching Contest Data</div>'));
     
-    //TODO: group is covering one section - need to add other - just concluded, my contests, etc.,
     var renderContestGroup = function(data, group) {
       var pictureEntries = [];
       $.each(data['result'], function(i, row) {
@@ -72,7 +71,7 @@
     categories.push({text: 'New Contests'});
     categories.push({text: 'Recently Concluded'});
 
-var buildGallery = function(pictureEntries, i) {
+    var buildGallery = function(pictureEntries, i) {
       $parentdiv.append($('<div class="contest-category">'+categories[i].text+'</div>'));
       var galleryid = 'gallery'+i;
       $parentdiv.append(za.buildAnythingSliderGallery(galleryid, za.galleryTypes['contests'], pictureEntries));
@@ -89,7 +88,7 @@ var buildGallery = function(pictureEntries, i) {
 	var type = $(this).find('.contest-type').first().val();
 	var title = $(this).find('.contest-title').first().val();
 	$parentdiv.empty();
-	alert("title is " + title + " and type is " + type);
+	alert("title is " + title);
 	if (type === za.entrytypes['picture'].value) PictureContestDetail({parentid: parentid, contestid: contestid, contestTitle: title});
 	else if (type === za.entrytypes['text'].value) {
 	  var url = $(this).find('.main-img').first().attr('src');

@@ -96,6 +96,14 @@ switch($op) {
     $logger->info("objid = $objid");
     $result = InviteService::instance()->createInvite();
     break;
+  case "submit_text_entry":
+    $logger->info("op = $op");
+    $cid = $_POST['cid'];
+    $logger->info("cid = $cid");
+    $fbpid = $_REQUEST['fbpid'];
+    $tentry = $_REQUEST['tentry'];
+    $result = EntryService::instance()->submitTextEntry($cid, $fbpid, $tentry);
+    break;
   case "get_contests_by_creation_date":
     $sd = $_REQUEST['sd'];
     $ed = $_REQUEST['ed'];

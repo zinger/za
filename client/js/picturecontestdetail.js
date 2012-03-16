@@ -61,6 +61,7 @@
     
     var displayEntries = function(entries) {
       if (entries.length === 0) {
+	$("#rate-root").hide();
 	$parentdiv.append($('<div><span>There are no entries for this contest. Be the first one and get 50 bonus Zing Coins!</span></div>'));
       } else {
 	var pictureEntries = [];

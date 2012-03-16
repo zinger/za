@@ -82,6 +82,38 @@ class EntryService {
     return $result;
   }
   
+  public function createTextEntry() {
+    global $logger;
+    //$logger->info("EntryService::createEntry photo " . print_r($ph));
+
+    $dbc = DbUtil::getDbConnection();
+    $entry = $this->populate();
+    
+    $sql = "INSERT INTO entry (id, name, description, entry_type, fb_object_id, big_url, med_url, small_url, fb_pname, ";
+    $sql .= "fb_pid, text_entry_id, tags, status, category, contest_id) VALUES ";
+    $sql .= "('', '$entry->name', '$entry->description', '$entry->entry_type', '', '', ";
+    $sql .= "'', '', '$entry->fb_pname', '$entry->fb_pid', ";
+    $sql .= "'$entry->text_entry_id', '$entry->tags', '$entry->status', '$entry->category', '$entry->contest_id')"; 
+
+    $result = $this->queryDB($sql, $dbc, "createTextEntry");
+
+    if ($result['result'][0] === TRUE) {
+      $res = mysql_query('SELECT LAST_INSERT_ID()');
+      $row = mysql_fetch_array($res);
+      $lastInsertId = $row[0];
+      $sql = "INSERT INTO entry_stats (id, entry_id) VALUES ('', '$lastInsertId')";
+      $result = $this->queryDB($sql, $dbc, "insertEntryStats");
+      if ($result['result'][0] === TRUE) {
+        if ($_POST['newpart'] === TRUE) $new_part = 1;
+        else $new_part = 0;
+        $sql = "UPDATE contest SET num_entries = num_entries+1, num_parts = num_parts + '$new_part'";
+        $sql .= " WHERE id = '$entry->contest_id'";
+        $result = $this->queryDB($sql, $dbc, "updateContest");
+      }
+    }
+    return $result;
+  }
+  
   public function saveVote() {
     global $logger;
 
