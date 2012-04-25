@@ -90,7 +90,7 @@ var buildGallery = function(pictureEntries, i) {
 	var title = $(this).find('.contest-title').first().val();
 	$parentdiv.empty();
 	alert("title is " + title + " and type is " + type);
-	if (type === za.entrytypes['picture'].value) PictureContestDetail({parentid: parentid, contestid: contestid, contestTitle: title});
+	if (type === za.entrytypes['picture'].value) za.PictureContestDetail({parentid: parentid, contestid: contestid, contestTitle: title});
 	else if (type === za.entrytypes['text'].value) {
 	  var url = $(this).find('.main-img').first().attr('src');
 	  za.TextContestDetail({parentid: parentid, contestid: contestid, contestTitle: title});

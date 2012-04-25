@@ -32,8 +32,10 @@
       var obj = {};
       obj['op'] = 'submit_text_entry';
       obj['fbpid'] = za.userFbId;
+      obj['fbpname'] = za.userFbName;
       obj['cid'] = contestid;
-      obj['tentry'] = $("#tentry").val();'contest_invite';
+      obj['type'] = za.entrytypes['text'].value;
+      obj['desc'] = $("#tentry").val();
       alert("obj being passed is " + JSON.stringify(obj));
       $.post( za.getServerUri(), obj,
           function(data) {
@@ -73,7 +75,7 @@
 	var gotoslide = 0;
 	$.each(entries, function(i, row) {
 	    if (entryid !== undefined && row.entryid === entryid) gotoslide = i;
-	    textEntries.push({eid: row.id, title: row.name, fbpid: row.fb_pid, fbpname: row.fb_pname, cid: row.contest_id, name: row.name, etype: row.entry_type, fbpurl: '../../samplecontent/images/thumbnails/1.jpg', myvote: 5, voteCount: 20, likeCount: 15, commentCount: 25, giftCount: 10, booCount: 5, score: 7, rank: 8, trend: 1 });
+	    textEntries.push({eid: row.id, title: row.name, description: row.description, fbpid: row.fb_pid, fbpname: row.fb_pname, cid: row.contest_id, name: row.name, etype: row.entry_type, fbpurl: '../../samplecontent/images/thumbnails/1.jpg', myvote: 5, voteCount: 20, likeCount: 15, commentCount: 25, giftCount: 10, booCount: 5, score: 7, rank: 8, trend: 1 });
 	  });
 	$parentdiv.append($('<img src="'+contestUrl+'" style="width:600px; height:400px;" />'));
 	var $entriesdiv = $('<div id="text-entries"></div>');
@@ -83,7 +85,7 @@
 	  $li.append($('<div class="part-pic"><img src="'+entry.fbpurl+'" style="width:40px; height:40px;"/></div>'));
 	  var $divinfo = $('<div class="text-div-info"></div>');
 	  $divinfo.append($('<span class="part-name">'+entry.fbpname+'</span>'));
-	  $divinfo.append($('<div class="text-entry">'+entry.title+'</div>'));
+	  $divinfo.append($('<span class="text-entry">'+entry.description+'</span>'));
 	  $li.append($divinfo);
 	  $li.append(showRatingInfo(entry));
 	  $ul.append($li);	

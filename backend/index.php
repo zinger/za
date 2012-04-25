@@ -98,11 +98,11 @@ switch($op) {
     break;
   case "submit_text_entry":
     $logger->info("op = $op");
-    $cid = $_POST['cid'];
-    $logger->info("cid = $cid");
-    $fbpid = $_REQUEST['fbpid'];
-    $tentry = $_REQUEST['tentry'];
-    $result = EntryService::instance()->submitTextEntry($cid, $fbpid, $tentry);
+    //$cid = $_POST['cid'];
+    //$logger->info("cid = $cid");
+    //$fbpid = $_REQUEST['fbpid'];
+    //$tentry = $_REQUEST['tentry'];
+    $result = EntryService::instance()->createTextEntry();
     break;
   case "get_contests_by_creation_date":
     $sd = $_REQUEST['sd'];
@@ -135,7 +135,7 @@ switch($op) {
   case "get_user_info":
     $result = $fbobj->getFBUserInfo();
     break;
-  case "get_entries":
+  case "get_entries": // not passing in contest type since we are passing in contest id
     $cid = $_REQUEST['cid'];
     $fbpid = $_REQUEST['fbpid'];
     $result = EntryService::instance()->getEntries($cid, $fbpid);
