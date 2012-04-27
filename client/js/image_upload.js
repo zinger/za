@@ -1,4 +1,4 @@
-function fileUpload(form, action_url, div_id, performInvite) {
+function fileUpload(form, action_url, div_id, performInvite, isEntry) {
     // Create the iframe...
     var iframe = document.createElement("iframe");
     iframe.setAttribute("id", "upload_iframe");
@@ -43,7 +43,7 @@ function fileUpload(form, action_url, div_id, performInvite) {
                 var result = content.split(",");
 
             }
-            alert("result array is " + result);
+            alert("result array is " + JSON.stringify(result));
             var contestId = result['cid'];
             alert("contest ID is " + contestId);
             za.tempvars['contestid'] = contestId;

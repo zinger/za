@@ -35,7 +35,9 @@ switch($op) {
                   $photo = $fbobj->getPictureById($id);
                   //$logger->info("index.php photo " . print_r($photo));
 
-                  $result = EntryService::instance()->createEntry($photo);
+                  $output = EntryService::instance()->createEntry($photo);
+                  $result['eid'] = $output;
+                  $result = EntryService::instance()->getEntry($output);
                 } else { $response = "Error Submitting Photo. Please try again"; }
 	} else {
 		$response = "Invalid image. Please use JPG, GIF or PNG image type";
@@ -43,7 +45,7 @@ switch($op) {
     } else {
 	$response = "Image not found";
     }
-    echo $response;
+    //echo $response;
     break;
   case "submit_entry_old": 
     mysql_connect('localhost', 'root', 'root') or die(mysql_error());
@@ -143,8 +145,9 @@ switch($op) {
   case "get_vote_and_stats":
     $eid = $_REQUEST['eid'];
     $fbpid = $_REQUEST['fbpid'];
-    $result['myvote'] = EntryService::instance()->getVote($eid, $fbpid);
-    $result['stats'] = EntryService::instance()->getEntryStats($eid);
+    $cid = $_REQUEST['cid'];
+    $result['myvote'] = EntryService::instance()->getVote($eid, $fbpid, $cid);
+    $result['stats'] = EntryService::instance()->getEntryStats($eid, $cid);
     break;
   case "save_vote":
     $result = EntryService::instance()->saveVote();

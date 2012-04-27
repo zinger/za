@@ -72,7 +72,7 @@
     $checkboxdiv.append($('<input id="read-terms" type="checkbox" />')) ;
     var $finishbutton = $('<button id="'+za.buttons['finishentrysubmit'].id+'" />') ;
     $finishbutton.button({label: za.buttons['finishentrysubmit'].label});
-    $finishbutton.bind('click', function() { fileUpload(this.form,za.getServerUri(),'upload'); });
+    $finishbutton.bind('click', function() { fileUpload(this.form,za.getServerUri(),'upload', false, true); });
 	$frm.append($checkboxdiv);
 	$frm.append($finishbutton);
 	$submitEntryDiv.append($frm);

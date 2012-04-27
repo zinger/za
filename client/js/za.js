@@ -217,14 +217,17 @@
     var $divinfo = $('<div style="width:200px; height:50px; z-index: 99999;"></div>');
     if (galleryType === za.galleryTypes['entrydetail']) {
       $divinfo.append($('<input class="entry-id" type="hidden" value="'+entry[attrs.id.id]+'" />'));
+      //alert("Entry id that is being set is " + entry[attrs.id.id]);
     } else if (galleryType === za.galleryTypes['contests']) {
       attrs = za.contestattrs;
       $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.title.id]+'</span>'));
-      $divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.numparts.id]+'</span>'));
+      var $nextDiv = $('<div></div>');
+      $nextDiv.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;">'+entry[attrs.numparts.id]+' entries</span>'));
+      $nextDiv.append($('<a href="#" style="font-size: 0.8em; padding-right: 0; float: right;">Submit Your Entry</a>'));
+      $divinfo.append($nextDiv);
       $divinfo.append($('<input class="contest-title" type="hidden" value="'+entry[attrs.title.id]+'" />'));
       $divinfo.append($('<input class="contest-id" type="hidden" value="'+entry[attrs.id.id]+'" />'));
       $divinfo.append($('<input class="contest-type" type="hidden" value="'+entry[attrs.entrytype.id]+'" />'));
-      $divinfo.append($('<a href="#">Submit Entry</a>'));
     }
     $divinfo.append($('<input class="fbuser-id" type="hidden" value="'+entry[attrs.fbpartid.id]+'" />'));
     return $divinfo;
@@ -288,13 +291,14 @@
         alert($('input[name="rating"]:checked').val() + " was clicked");
         var obj = {};
         obj['op'] = 'save_vote';
+        obj['cid'] = $("#contest-id").val();
         obj['eid'] = $("#entry-id").val();
         obj['voterid'] = za.userFbId;
         obj['vote'] = $('input[name="rating"]:checked').val();
-        alert("obj being passed is " + JSON.stringify(obj));
+        //alert("obj being passed is " + JSON.stringify(obj));
         $.post( za.getServerUri(), obj, 
             function(data) {
-                alert('response received ' + JSON.stringify(data));
+                //alert('response received ' + JSON.stringify(data));
                 var rows = data['result'];
                 var vote_count = 0;
                 var vote_average = 0;

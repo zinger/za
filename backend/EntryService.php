@@ -69,7 +69,7 @@ class EntryService {
       $res = mysql_query('SELECT LAST_INSERT_ID()');
       $row = mysql_fetch_array($res);
       $lastInsertId = $row[0];
-      $sql = "INSERT INTO entry_stats (id, entry_id) VALUES ('', '$lastInsertId')";
+      $sql = "INSERT INTO entry_stats (id, contest_id, entry_id) VALUES ('', '$entry->contest_id', '$lastInsertId')";
       $result = $this->queryDB($sql, $dbc, "insertEntryStats");
       if ($result['result'][0] === TRUE) {
         if ($_POST['newpart'] === TRUE) $new_part = 1;
@@ -79,7 +79,8 @@ class EntryService {
         $result = $this->queryDB($sql, $dbc, "updateContest");
       }
     }
-    return $result;
+    //return $result;
+    return $lastInsertId;
   }
   
   public function createTextEntry() {
@@ -101,7 +102,7 @@ class EntryService {
       $res = mysql_query('SELECT LAST_INSERT_ID()');
       $row = mysql_fetch_array($res);
       $lastInsertId = $row[0];
-      $sql = "INSERT INTO entry_stats (id, entry_id) VALUES ('', '$lastInsertId')";
+      $sql = "INSERT INTO entry_stats (id, contest_id, entry_id) VALUES ('', '$entry->contest_id', '$lastInsertId')";
       $result = $this->queryDB($sql, $dbc, "insertEntryStats");
       if ($result['result'][0] === TRUE) {
         if ($_POST['newpart'] === TRUE) $new_part = 1;
@@ -121,18 +122,26 @@ class EntryService {
     $entry_id = $_REQUEST['eid'];
     $voter_fb_pid = $_REQUEST['voterid'];
     $vote = $_REQUEST['vote'];
+    $cid = $_REQUEST['cid'];
     
-    $sql = "INSERT INTO entry_vote_details (id, entry_id, voter_fb_pid, vote) VALUES ";
-    $sql .= "('', '$entry_id', '$voter_fb_pid', '$vote') ";
+    $sql = "INSERT INTO entry_vote_details (id, contest_id, entry_id, voter_fb_pid, vote) VALUES ";
+    $sql .= "('', '$cid', '$entry_id', '$voter_fb_pid', '$vote') ";
 
     $result = $this->queryDB($sql, $dbc, "saveVote");
     if ($result['result'][0] === TRUE) {
-       $sql = "UPDATE entry_stats SET num_votes = num_votes+1, vote_total = vote_total+$vote, vote_average = ";
-       $sql .= "((num_votes*vote_average)+$vote)/(num_votes+1) WHERE entry_id = '$entry_id'";
+       $sql = "UPDATE entry_stats SET num_votes = num_votes+1, vote_total = vote_total+'$vote' WHERE entry_id = '$entry_id'";
        $result = $this->queryDB($sql, $dbc, "updateEntryStats");
        if ($result['result'][0] === TRUE) {
-          $sql = "SELECT * FROM entry_stats WHERE entry_id = '$entry_id'";
-          $result = $this->queryDB($sql, $dbc, "fetchUpdatedEntryStats");
+          $sql = "UPDATE entry_stats SET vote_average = vote_total/num_votes WHERE entry_id = '$entry_id'";
+          $result = $this->queryDB($sql, $dbc, "updateVoteAverage");
+
+      // TODO for some reason the following does not work.. look at later ... low priority
+       //$sql .= "((num_votes*vote_average)+'$vote')/(num_votes+1) WHERE entry_id = '$entry_id'";
+
+          if ($result['result'][0] === TRUE) {
+             $sql = "SELECT * FROM entry_stats WHERE entry_id = '$entry_id'";
+             $result = $this->queryDB($sql, $dbc, "fetchUpdatedEntryStats");
+          }
        }
     }
     return $result;
@@ -152,10 +161,20 @@ class EntryService {
     return $result;
   }
   
-  public function getVote($eid, $fbpid) {
+  public function getEntry($eid) {
+    $sql = "SELECT * FROM entry WHERE id = '$eid'";
+    $result = $this->queryDB($sql, $dbc = null, "getEntries");
+    return $result;
+  }
+  
+  public function getVote($eid, $fbpid, $cid) {
     $sql = "SELECT * FROM entry_vote_details WHERE 1=1";
     if (!empty($eid) === TRUE) {
       $sql .= " AND entry_id = " . $eid;
+    } else { // if entry id is provided then fetch vote(s) just for that entry and don't use contest id
+      if (!empty($cid) === TRUE) {
+        $sql .= " AND contest_id = " . $cid;
+      }
     }
     if (!empty($fbpid) === TRUE) {
       $sql .= " AND voter_fb_pid = " . $fbpid;
@@ -166,10 +185,14 @@ class EntryService {
     return $result;
   }
 
-  public function getEntryStats($eid) {
+  public function getEntryStats($eid, $cid) {
     $sql = "SELECT * FROM entry_stats WHERE 1=1";
     if (!empty($eid) === TRUE) {
       $sql .= " AND entry_id = " . $eid;
+    } else { // if entry id is provided then fetch stats just for that entry and don't use contest id
+      if (!empty($cid) === TRUE) {
+        $sql .= " AND contest_id = " . $cid;
+      }
     }
     
     $result = $this->queryDB($sql, $dbc = null, "getEntryStats");

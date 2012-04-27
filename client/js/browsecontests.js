@@ -62,7 +62,7 @@
 	if (row.small_url === undefined || row.small_url === '') {
 	  small_url = '../../images/no-img-contest.png';
 	} else small_url = row.small_url;
-	pictureEntries.push({url: small_url, thumb: small_url, fbpid: row.fb_pid, cid: row.id, name: row.name, etype: row.entry_type});
+	pictureEntries.push({url: small_url, thumb: small_url, fbpid: row.fb_pid, cid: row.id, name: row.name, etype: row.entry_type, numparts: row.num_entries});
       });
       buildGallery(pictureEntries, group);
     }
@@ -72,7 +72,7 @@
     categories.push({text: 'New Contests'});
     categories.push({text: 'Recently Concluded'});
 
-var buildGallery = function(pictureEntries, i) {
+  var buildGallery = function(pictureEntries, i) {
       $parentdiv.append($('<div class="contest-category">'+categories[i].text+'</div>'));
       var galleryid = 'gallery'+i;
       $parentdiv.append(za.buildAnythingSliderGallery(galleryid, za.galleryTypes['contests'], pictureEntries));

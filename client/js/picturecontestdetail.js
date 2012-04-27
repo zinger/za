@@ -37,7 +37,10 @@
     
     var $divinfo = $('<div class="entry-info" style="width:200px; height:50px; z-index: 99999;"></div>');
     $divinfo.append($('<img class="user-pic" src="" style="width:40px; height:40px; z-index: 99999;"/>'));
-    $divinfo.append($('<input type="text" id="entry-id" style="z-index: 99999;" value="'+entryid+'"/>'));
+    // TODO: Hide the 2 input elements below and remove span... this is just for debugging
+    $divinfo.append($('<span>entry id</span><input type="text" id="entry-id" style="z-index: 99999;" value="'+entryid+'"/>'));
+    $divinfo.append($('<span>contest id</span><input type="text" id="contest-id" style="z-index: 99999;" value="'+contestid+'"/>'));
+
     $parentdiv.append($divinfo);
     //$divinfo.append($('<span style="color: #000000; z-index: 99999; font-size: 0.8em;padding-left: 4px;">'+entry[attrs.partname.id]+'</span>'));
     //$divinfo.append($('<input id="myvote" type="hidden" value="'+entry[attrs.myvote.id]+'" />'));
@@ -68,7 +71,7 @@
 	var thumbnailEntries = [];
 	var gotoslide = 0;
 	$.each(entries, function(i, row) {
-	    if (entryid !== undefined && row.entryid === entryid) gotoslide = i;
+	    if (entryid !== undefined && row.entryid === entryid) gotoslide = i; 
 	    pictureEntries.push({eid: row.id, url: row.small_url, thumb: row.small_url, title: row.name, fbpid: row.fb_pid, fbpname: row.fb_pname, cid: row.contest_id, name: row.name, etype: row.entry_type});
 	    thumbnailEntries.push({id: row.id, url: row.small_url, thumb: row.small_url, fbpid: row.fb_pid, fbpname: row.fb_pname, fb_purl: row.small_url});
 	  });
@@ -84,19 +87,21 @@
     	// TODO move like button to show misc info... this needs to be displayed for each main entry
 	var $likebtn = $('<div style="margin-top:25px;margin-left:50px;"></div>');
 	$likebtn.append($('<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fphoto.php%3Ffbid%3D225872857487883%26amp%3Bset%3Da.225872854154550.56156.100001955114352&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=30&amp;appId=211738135569277" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:30px;" allowTransparency="true"></iframe>'));
-	$col2.append($likebtn);
 	
+	/**** temp comment
     // TODO move comment button to show misc info... this needs to be displayed for each main entry
 	var $comment = $('<div style="margin-top:5px;margin-left:50px;"></div>');
 	
 	//$comment.append($('<fb:comments href="http://www.facebook.com/photo.php?pid=515490&amp;id=100001955114352" num_posts="4" width="600"></fb:comments>'));
 	//$comment.append($('<div class="fb-comments" data-href="http://www.facebook.com/photo.php?fbid=225872857487883&amp;set=a.225872854154550.56156.100001955114352" data-num-posts="2" data-width="500"></div>'));
 	$comment.append($('<iframe src="comment.html" width="600" height="100%" frameborder=0><p>Your browser does not support IFrame.</p></iframe>'));
-
-	$col2.append($comment);
+       end of temp comment *****/
+	
 	  buildMainGallery(pictureEntries, gotoslide);
 	  buildHorizThumbGallery(thumbnailEntries);
 	  buildVertThumbGallery(thumbnailEntries);
+	  $col2.append($likebtn);
+	//  $col2.append($comment);
       }
     };
 
@@ -114,10 +119,12 @@
 */
     
     var showMiscInfo = function(slider, invokedByInit) {
+      //alert("coming in show misc info");
       if (invokedByInit) var $base = slider.$el.find('.panel').eq(slider.options.startPanel);
       else var $base = slider.$targetPage;
       var entryid;
-      $base.find('.entry-id').each(function() { entryid = $(this).val();
+      // TODO there is something wierd going on regarding setting of entry id for the slide if there is one and only 1 submission
+      $base.find('.entry-id').each(function() { entryid = $(this).val(); 
 				   $("#entry-id").attr('value',entryid);});
       var data = 'op=get_vote_and_stats&fbpid='+za.userFbId+'&eid='+$("#entry-id").val();
       $.ajax({                                      
@@ -131,7 +138,7 @@
 	  var score = 0;
 	  var rank = -1;
 	  var trend = 1;
-	  alert("data is " + JSON.stringify(data));
+	  //alert("data is " + JSON.stringify(data));
 	  var myvoterows = data['myvote']; var rows = myvoterows['result'];
 	  if (rows.length > 0) {
 	    $.each(rows, function(i, row) {
@@ -155,7 +162,7 @@
 		//trend = row.trend;
 	      });
 	  };
-	  if (myvote === -1) $("#rate-root").show(); else $("#rate-root").hide();
+	  if (myvote === -1 || myvote === undefined) $("#rate-root").show(); else $("#rate-root").hide();
 	  za.showRatingInfo('gallery1', voteCount, score, rank, trend);
 	  }
       });

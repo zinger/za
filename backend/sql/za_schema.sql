@@ -141,6 +141,7 @@ DROP TABLE IF EXISTS `entry_vote_details`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `entry_vote_details` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `contest_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `entry_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `voter_fb_pid` bigint(20) unsigned NOT NULL,  
   `vote` tinyint(3) unsigned NOT NULL,
@@ -160,6 +161,7 @@ DROP TABLE IF EXISTS `entry_stats`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `entry_stats` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `contest_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `entry_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `num_fb_likes` int(10) unsigned NOT NULL DEFAULT '0',
   `num_shares` int(10) unsigned NOT NULL DEFAULT '0',
