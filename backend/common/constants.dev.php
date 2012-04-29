@@ -1,7 +1,8 @@
 <?php
 //FB  
 define('FB_APP_ID', '318117531546857');
-define('FB_SECRET', '0dc38cff3266191035acec36518bc069');
+//define('FB_SECRET', '0dc38cff3266191035acec36518bc069');
+define('FB_SECRET', 'cfeca130a7545d932a529e2558cceaef');
 define('FB_APP_BASE_URL', 'http://localhost:8888/client/html/');
 define('FB_REDIRECT_URL', 'http://localhost:8888/za/');
 define('FB_GRAPH_URL', 'https://graph.facebook.com/');
