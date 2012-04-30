@@ -10,6 +10,6 @@ define('FB_SCOPE', 'email,publish_stream,read_friendlists,user_photos,user_video
 //DB
 define('DB_HOST', 'localhost:/var/lib/mysql/mysql.sock');
 define('DB_USER', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'root');
 
 ?>
