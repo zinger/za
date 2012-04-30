@@ -44,7 +44,7 @@ CREATE TABLE `contest` (
   `tags` varchar(1025) DEFAULT NULL,
   `who_can_participate` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `invite_others` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `status` tinyint(3) unsigned NOT NULL DEFAULT '0', // 0 = draft, 1 = final
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0', -- 0 = draft, 1 = final
   `cause_id` int(10) unsigned DEFAULT NULL,
   `fb_object_id` varchar(255) DEFAULT NULL,
   `big_url` varchar(255) DEFAULT NULL,
